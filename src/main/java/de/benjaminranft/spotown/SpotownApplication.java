@@ -1,13 +1,13 @@
-package de.benjaminranft.finalproject;
+package de.benjaminranft.spotown;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FinalprojectApplication {
+public class SpotownApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FinalprojectApplication.class, args);
+        SpringApplication.run(SpotownApplication.class, args);
     }
 
 }
