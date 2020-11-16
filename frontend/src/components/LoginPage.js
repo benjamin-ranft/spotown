@@ -1,12 +1,17 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
+import UserContext from "../contexts/UserContext";
+import { useHistory } from 'react-router-dom';
 
 const initialState = {
-    username: '',
-    password: '',
+    username: "",
+    password: "",
 };
 
 export default function LoginPage() {
+    const { postLogin } = useContext(UserContext);
     const [loginData, setLoginData] = useState(initialState);
+    const [error, setError] = useState("");
+    const history = useHistory();
 
     return (
         <>
@@ -29,6 +34,7 @@ export default function LoginPage() {
                         type="password"
                     />
                 </label>
+                {error && <p>{error}</p>}
                 <button>Login</button>
             </form>
         </>
@@ -40,11 +46,10 @@ function handleChange(event) {
 
 function handleSubmit(event) {
     event.preventDefault();
-    return (
-        <div>
-            Success!
-        </div>
-    )
+    postLogin(loginData)
+        .then(() => history.push("/"))
+        .catch(() => setError("Unknown username or password."));
 }
+
 }
 

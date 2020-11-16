@@ -1,18 +1,21 @@
 import React from "react";
-import LoginPage from "./Components/LoginPage";
+import LoginPage from "./components/LoginPage";
 import {Redirect , Route, Switch} from "react-router-dom";
+import ProtectedRoute from "./routing/ProtectedRoute";
+import UserContextProvider from "./contexts/UserContextProvider";
+import DiscoveriesPage from "./discoveries/DiscoveriesPage";
 
 function App() {
   return (
-    <div>
-      Welcome
+    <UserContextProvider>
         <Switch>
             <Route path="/login" component={LoginPage}/>
+            <ProtectedRoute path="/discoveries" component={DiscoveriesPage}/>
             <Route path="/">
-                <Redirect to="/login"/>
+                <Redirect to="/discoveries"/>
             </Route>
         </Switch>
-    </div>
+    </UserContextProvider>
   );
 }
 
