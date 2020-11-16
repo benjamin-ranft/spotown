@@ -1,4 +1,4 @@
-name: run build frontend
+name: Build frontend
 on: push
 jobs:
   build:

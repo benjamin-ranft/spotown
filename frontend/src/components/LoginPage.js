@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export default function LoginPage() {
-    const { postLogin } = useContext(UserContext);
+    const { loginWithUserCredentials } = useContext(UserContext);
     const [loginData, setLoginData] = useState(initialState);
     const [error, setError] = useState("");
     const history = useHistory();
@@ -46,7 +46,7 @@ function handleChange(event) {
 
 function handleSubmit(event) {
     event.preventDefault();
-    postLogin(loginData)
+    loginWithUserCredentials(loginData)
         .then(() => history.push("/"))
         .catch(() => setError("Unknown username or password."));
 }
