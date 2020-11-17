@@ -27,8 +27,8 @@ public class LoginController {
     @PostMapping
     public String login(@RequestBody LoginDto loginDto) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
-            return jwtUtils.createJwtToken(loginDto.getUsername(), new HashMap<>());
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
+            return jwtUtils.createJwtToken(loginDto.getEmail(), new HashMap<>());
         } catch (Exception e){
             throw new UsernameNotFoundException("user does not exist");
         }

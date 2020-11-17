@@ -13,6 +13,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class SpotownUser {
 
     @Id
-    private String username;
+    private String email;
     private String password;
 }

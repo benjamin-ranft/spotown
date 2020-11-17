@@ -21,11 +21,11 @@ public class MongoDbUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<SpotownUser> user = userDao.findById(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<SpotownUser> user = userDao.findById(email);
 
         if (user.isPresent()) {
-            return new User(user.get().getUsername(), user.get().getPassword(), List.of()) {
+            return new User(user.get().getEmail(), user.get().getPassword(), List.of()) {
             };
         }
         throw new UsernameNotFoundException("User does not exist");
