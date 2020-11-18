@@ -17,10 +17,10 @@ public class JwtUtils {
 
     @Value("${jwt.secretkey}")
     private String key;
-    public String createJwtToken(String email, HashMap<String, Object> claims) {
+    public String createJwtToken(String username, HashMap<String, Object> claims) {
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(email)
+                .setSubject(username)
                 .setIssuedAt((Date.from(Instant.now())))
                 .setExpiration(Date.from(Instant.now().plus(Duration.ofHours(1))))
                 .signWith(SignatureAlgorithm.HS256,key)

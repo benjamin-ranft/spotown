@@ -2,7 +2,9 @@ package de.benjaminranft.spotown.controller;
 
 import de.benjaminranft.spotown.dao.UserDao;
 import de.benjaminranft.spotown.dto.LoginDto;
-import de.benjaminranft.spotown.model.SpotownUser;
+import de.benjaminranft.spotown.model.Discovery;
+import de.benjaminranft.spotown.model.User;
+import de.benjaminranft.spotown.seeder.DiscoverySeeder;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +18,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -43,7 +47,10 @@ class LoginControllerTest {
     public void setupUser() {
         userDao.deleteAll();
         String password = new BCryptPasswordEncoder().encode("password");
-        userDao.save(new SpotownUser("ben@test.com", password));
+
+        List<Discovery> discoveries = DiscoverySeeder.getDiscoveries();
+
+        userDao.save(new User("ben@test.com", password, discoveries));
     }
 
 

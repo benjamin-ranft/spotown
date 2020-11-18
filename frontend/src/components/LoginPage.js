@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import styled from "styled-components/";
 
 const initialState = {
-    email: "",
+    username: "",
     password: "",
 };
 
@@ -23,9 +23,9 @@ export default function LoginPage() {
                 <h2>Login</h2>
                 <label>
                     <input
-                        name="email"
-                        placeholder="Email"
-                        value={loginData.email}
+                        name="username"
+                        placeholder="Username"
+                        value={loginData.username}
                         onChange={handleChange}
                         type="text"
                     />
@@ -53,7 +53,7 @@ function handleSubmit(event) {
     event.preventDefault();
     loginWithUserCredentials(loginData)
         .then(() => history.push("/"))
-        .catch(() => setError("Unknown email or password."));
+        .catch(() => setError("Unknown username or password."));
 }
 
 }

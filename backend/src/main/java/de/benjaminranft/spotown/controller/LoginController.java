@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/auth/login")
+@RequestMapping("auth/login")
 public class LoginController {
 
     private final AuthenticationManager authenticationManager;
@@ -27,10 +27,10 @@ public class LoginController {
     @PostMapping
     public String login(@RequestBody LoginDto loginDto) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
-            return jwtUtils.createJwtToken(loginDto.getEmail(), new HashMap<>());
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
+            return jwtUtils.createJwtToken(loginDto.getUsername(), new HashMap<>());
         } catch (Exception e){
-            throw new UsernameNotFoundException("user does not exist");
+            throw new UsernameNotFoundException("User does not exist");
         }
     }
 }
