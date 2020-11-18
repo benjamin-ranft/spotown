@@ -16,6 +16,8 @@ export default createGlobalStyle`
    --size-xl: 24px;
    --size-xxl: 32px;
    
+   --size-icon: 20px;
+   
   }
 
   * {
@@ -25,6 +27,10 @@ export default createGlobalStyle`
   html, body {
     margin: 0;
     font-family: 'Open Sans', sans-serif;
+    
+    h1 {
+    margin: 0;
+    }
   }
   
   body {
