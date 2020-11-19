@@ -5,16 +5,16 @@ import {
 import UserContext from './UserContext';
 import DiscoveriesContext from "./DiscoveriesContext";
 
-export default function IdeasContextProvider({ children }) {
+export default function DiscoveriesContextProvider({ children }) {
     const [discoveries, setDiscoveries] = useState([]);
     const { token, tokenIsValid } = useContext(UserContext);
 
     useEffect(() => {
-        tokenIsValid() && getDiscoveries(token).then(setDiscoveries()).catch(console.log);
+        tokenIsValid() && getDiscoveries(token).then(data => setDiscoveries(data)).catch(console.log);
     }, [token, tokenIsValid]);
 
     return (
-        <DiscoveriesContext.Provider value={{ discoveries }}>
+        <DiscoveriesContext.Provider value={{discoveries}}>
             {children}
         </DiscoveriesContext.Provider>
     );

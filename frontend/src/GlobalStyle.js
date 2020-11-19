@@ -13,10 +13,11 @@ export default createGlobalStyle`
    --size-s: 8px;
    --size-m: 12px;
    --size-l: 16px;
+   --size-lplus: 20px;
    --size-xl: 24px;
    --size-xxl: 32px;
    
-   --size-icon: 20px;
+   --center-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.37);
    
   }
 
@@ -28,7 +29,7 @@ export default createGlobalStyle`
     margin: 0;
     font-family: 'Open Sans', sans-serif;
     
-    h1 {
+    h1,h2,h3,h4,h5,p {
     margin: 0;
     }
   }

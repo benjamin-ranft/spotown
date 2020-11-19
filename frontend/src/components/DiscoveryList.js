@@ -4,10 +4,11 @@ import Discovery from "./Discovery";
 import DiscoveriesContext from "../contexts/DiscoveriesContext";
 
 export default function DiscoveryList() {
-    const { discoveries } = useContext(DiscoveriesContext);
+    const {discoveries} = useContext(DiscoveriesContext);
 
     return (
         <StyledList>
+            {console.log(discoveries)}
             {discoveries?.map((discovery) => (
                 <li key={discovery.id}>
                     <Discovery
@@ -21,13 +22,15 @@ export default function DiscoveryList() {
 
 const StyledList = styled.ul`
   overflow: scroll;
-  margin: 0;
+  margin-top: 70px;
   padding: var(--size-l);
+  width: 100%;
 
   list-style: none;
+  marker: none;
 
   display: grid;
   grid-auto-rows: min-content;
   gap: var(--size-l);
-  
+
 `;

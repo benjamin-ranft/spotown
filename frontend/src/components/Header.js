@@ -41,9 +41,8 @@ grid-template-columns: repeat(3,33%);
 align-items: center;
 `
 
-
 const SearchIcon = styled(FaSearch)`
-font-size: var(--size-icon);
+font-size: var(--size-lplus);
 color: var(--dark-grey);
 `
 const FilterIcon = styled(BsFilter)`
