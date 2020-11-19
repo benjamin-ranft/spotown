@@ -2,6 +2,7 @@ import React, {useContext, useState} from "react";
 import UserContext from "../contexts/UserContext";
 import { useHistory } from 'react-router-dom';
 import styled from "styled-components/";
+import InputField from "./uiElements/InputField";
 
 const initialState = {
     username: "",
@@ -22,7 +23,7 @@ export default function LoginPage() {
             <StyledForm onSubmit={handleSubmit}>
                 <h2>Login</h2>
                 <label>
-                    <input
+                    <InputField
                         name="username"
                         placeholder="Username"
                         value={loginData.username}
@@ -31,7 +32,7 @@ export default function LoginPage() {
                     />
                 </label>
                 <label>
-                    <input
+                    <InputField
                         name="password"
                         placeholder="password"
                         value={loginData.password}
@@ -72,6 +73,10 @@ grid-column-start: 2;
   grid-row-start: 3;
   grid-row-end: 3;
   
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  row-gap: 10px;
+  
   button{
   display: block;
   color: white;
@@ -83,21 +88,8 @@ grid-column-start: 2;
   font-weight: bold;
   font-size: var(--size-l); 
   }
-  
-  input{
-  margin: 10px 0;
-  display: block;
-  background-color: var(--light-grey);
-  border-radius: 100px;
-  padding: var(--size-l);
-  width: 100%;
-  border: none;
-  color: var(--dark-grey);
- 
-  }
-  
-  
 `
+
 const StyledSplashSection = styled.div`
 grid-column-start: 2;
   grid-column-end: 3;
