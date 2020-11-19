@@ -1,6 +1,6 @@
 import React from "react";
 import LoginPage from "./components/LoginPage";
-import {Redirect , Route, Switch} from "react-router-dom";
+import Router, {Redirect , Route, Switch} from "react-router-dom";
 import ProtectedRoute from "./routing/ProtectedRoute";
 import UserContextProvider from "./contexts/UserContextProvider";
 import Discoveries from "./components/Discoveries";

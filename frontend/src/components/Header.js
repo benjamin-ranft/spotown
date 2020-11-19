@@ -1,6 +1,5 @@
 import React from "react";
-import { FaSearch } from 'react-icons/fa';
-import {BiUserCircle, BsFilter} from "react-icons/all";
+import {FaSearch, BiUserCircle, BsFilter} from "react-icons/all";
 import styled from "styled-components/macro";
 
 export default function Header(){
