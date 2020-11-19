@@ -1,25 +1,18 @@
-package de.benjaminranft.spotown.model;
+package de.benjaminranft.spotown.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class Discovery {
+public class AddDiscoveryDto {
     private String id;
     private String timestamp;
     private String name;
     private String address;
-    private String thumbnail;
-    private String openingHours;
-    private String phoneNumber;
     private String webUrl;
-    private String directions;
+    private String phoneNumber;
     private String notes;
 }
