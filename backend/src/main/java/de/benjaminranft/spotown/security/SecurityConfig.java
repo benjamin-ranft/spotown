@@ -25,11 +25,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure (AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
-    }
-
-    @Override
     @Bean
     protected AuthenticationManager authenticationManager () throws Exception{
         return super.authenticationManager();

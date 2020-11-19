@@ -1,8 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
 
-xtest('renders Welcome', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Welcome/i);
+import LoginPage from "./components/LoginPage";
+import {MemoryRouter as Router} from "react-router-dom";
+
+test('Login', () => {
+  render(<Router><LoginPage /></Router>);
+  const linkElement = screen.getByPlaceholderText('Username');
   expect(linkElement).toBeInTheDocument();
 });

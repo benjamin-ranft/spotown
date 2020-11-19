@@ -1,8 +1,7 @@
 package de.benjaminranft.spotown.security;
 
 import de.benjaminranft.spotown.dao.UserDao;
-import de.benjaminranft.spotown.model.SpotownUser;
-import org.springframework.security.core.userdetails.User;
+import de.benjaminranft.spotown.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,10 +21,10 @@ public class MongoDbUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<SpotownUser> user = userDao.findById(username);
+        Optional<User> user = userDao.findById(username);
 
         if (user.isPresent()) {
-            return new User(user.get().getUsername(), user.get().getPassword(), List.of()) {
+            return new org.springframework.security.core.userdetails.User(user.get().getUsername(), user.get().getPassword(), List.of()) {
             };
         }
         throw new UsernameNotFoundException("User does not exist");
