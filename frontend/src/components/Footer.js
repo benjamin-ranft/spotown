@@ -1,12 +1,15 @@
 import React from "react";
-import {MdAddLocation, MdList, MdExplore} from "react-icons/all";
+import {MdList, MdExplore} from "react-icons/all";
 import styled from "styled-components/macro";
+import AddIcon from "./icons/AddIcon";
 
 export default function Footer(){
     return(
         <StyledFooter>
             <StyledListIcon/>
-            <StyledAddIcon/>
+            <StyledDiv>
+                <AddIcon/>
+            </StyledDiv>
             <StyledMapIcon/>
         </StyledFooter>
     )
@@ -14,11 +17,10 @@ export default function Footer(){
 
 const StyledFooter = styled.div`
 display: grid;
-grid-template-columns: 1fr 1fr 1fr;
+grid-gap: 30px;
+position: relative;
+grid-template-columns: 1fr 1fr;
 grid-template-rows: 50px;
-width: 100%;
-position: fixed;
-bottom: 0;
 background-color: var(--white);
 align-items: center;
 justify-items: center;
@@ -30,10 +32,11 @@ font-size: 35px;
 color: var(--dark-grey);
 `
 
-const StyledAddIcon = styled(MdAddLocation)`
-font-size: 80px;
-color: var(--accent-red);
-margin-bottom: 35px;
+const StyledDiv = styled.div`
+position: absolute;
+bottom: 5px;
+left: auto;
+right: auto;
 `
 
 const StyledMapIcon = styled(MdExplore)`

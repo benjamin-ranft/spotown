@@ -22,7 +22,6 @@ export default function DiscoveryList() {
 
 const StyledList = styled.ul`
   overflow: scroll;
-  margin-top: 70px;
   padding: var(--size-l);
   width: 100%;
 
@@ -32,5 +31,13 @@ const StyledList = styled.ul`
   display: grid;
   grid-auto-rows: min-content;
   gap: var(--size-l);
+  
+  margin: 0;
+  
+  li:last-child:after {
+  content: '';
+  display: block;
+  height: 40px;
+}
 
 `;

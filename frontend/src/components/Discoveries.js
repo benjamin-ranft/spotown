@@ -16,4 +16,6 @@ export default function Discoveries(){
 
 const PageLayout = styled.div`
 display: grid;
+grid-template-rows: min-content 1fr min-content;
+height: 100vh;
 `

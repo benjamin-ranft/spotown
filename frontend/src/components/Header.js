@@ -19,15 +19,12 @@ export default function Header(){
 const StyledHeader = styled.div`
 justify-items: start;
 padding: 10px;
-position: fixed;
-  top: 0;
-  width: 100%;
+grid-template-rows: 50px;
 background-color: var(--white);
 color: var(--darkest-grey);
 font-weight: bold;
 display: grid;
 grid-template-columns: 55% 45%;
-grid-template-rows: 50px;
 align-items: center;
 box-shadow: 0px 1px 9px 0px rgba(0,0,0,0.37);
 `
