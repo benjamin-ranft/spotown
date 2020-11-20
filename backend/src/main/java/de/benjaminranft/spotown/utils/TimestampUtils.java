@@ -6,7 +6,7 @@ import java.time.Instant;
 
 @Component
 public class TimestampUtils {
-    public String generateTimestampEpochSeconds() {
+    public Instant generateTimestampEpochSeconds() {
         return Instant.ofEpochSecond(Instant.now().getEpochSecond());
     }
 }

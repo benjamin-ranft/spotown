@@ -10,7 +10,7 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/discoveries")
+@RequestMapping("/api/discoveries")
 public class DiscoveryController {
 
     private final UserService userService;
@@ -27,7 +27,7 @@ public class DiscoveryController {
     }
 
     @PostMapping
-    public Discovery add(@RequestBody AddDiscoveryDto dto){
-        return this.userService.add(dto);
+    public Discovery add(@RequestBody AddDiscoveryDto dto, Principal principal){
+        return this.userService.add(dto, principal.getName());
     }
 }
