@@ -1,6 +1,7 @@
 package de.benjaminranft.spotown.controller;
 
 import de.benjaminranft.spotown.dao.UserDao;
+import de.benjaminranft.spotown.dto.AddDiscoveryDto;
 import de.benjaminranft.spotown.dto.LoginDto;
 import de.benjaminranft.spotown.model.Discovery;
 import de.benjaminranft.spotown.model.User;
@@ -21,9 +22,11 @@ import org.springframework.test.context.TestPropertySource;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = {"jwt.secretkey=somesecrettoken"})
@@ -48,7 +51,7 @@ public class DiscoveryControllerIntegrationTest {
     public void setUpDb() {
         Instant timestamp = Instant.parse("2020-11-18T18:35:24.00Z");
         String passwordBenjamin = new BCryptPasswordEncoder().encode("password");
-        String passwordHeinz = new BCryptPasswordEncoder().encode("kunz");
+        String passwordHeinz = "$2a$10$0HZGmicEH786L.HeSIjhOuvIK3ixlYij4luVHBNAUtXqKus79t/FS";
         userDao.deleteAll();
         userDao.saveAll(List.of(
                 new User(
@@ -79,7 +82,7 @@ public class DiscoveryControllerIntegrationTest {
 
         private String login(){
             ResponseEntity<String> response = testRestTemplate.postForEntity("http://localhost:" + port + "/auth/login", new LoginDto(
-                    "heinz", "kunz"
+                    "heinz", "password"
             ), String.class);
 
             return response.getBody();
@@ -114,7 +117,52 @@ public void  getDiscoveriesTest(){
 
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody(), is(expectedList.toArray()));
+    }
 
+    @Test
+    @DisplayName("The add method should add a Discovery to User and return the added Discovery Object")
+    public void add(){
+
+        //GIVEN
+        String url = backendAccessLink();
+
+        AddDiscoveryDto addDiscoveryDto = new AddDiscoveryDto(
+                "Fun Discovery", "Fun address Str. 12, 20253 Hamburg", "https://google.com", "345678976543", "Fun notes fun notes fun notes fun notes", new ArrayList<>(
+                        List.of("restaurant","art"))
+        );
+
+        //WHEN
+        when(idUtils.generateId()).thenReturn("1234");
+        when(timestampUtils.generateTimestampEpochSeconds()).thenReturn(Instant.parse("2020-11-18T18:35:24.00Z"));
+
+        HttpEntity<AddDiscoveryDto> entity = getValidAuthorizationEntity(addDiscoveryDto);
+        ResponseEntity<Discovery> response = testRestTemplate.exchange(url, HttpMethod.POST, entity, Discovery.class);
+
+        Instant expectedTimestamp = Instant.parse("2020-11-18T18:35:24.00Z");
+        Object updatedUser = userDao.findById("heinz");
+        Object expectedUser = Optional.of(new User(
+                "heinz",
+                "$2a$10$0HZGmicEH786L.HeSIjhOuvIK3ixlYij4luVHBNAUtXqKus79t/FS",
+                new ArrayList<>(List.of(
+                        new Discovery("123", expectedTimestamp, "Pizza Place", "Sample Street 3", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
+                                new ArrayList<>(List.of("nature", "art"))),
+                        new Discovery("456", expectedTimestamp, "Sushi Place", "Sample Street 4", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
+                                new ArrayList<>(List.of("drink", "nature"))),
+                        new Discovery(
+                                "1234", expectedTimestamp, "Fun Discovery", "Fun address Str. 12, 20253 Hamburg",null, null, "345678976543", "https://google.com", null, "Fun notes fun notes fun notes fun notes", new ArrayList<>(
+                                List.of("restaurant","art"))
+
+        )))));
+
+        Discovery expectedDiscovery = new Discovery(
+                "1234", expectedTimestamp, "Fun Discovery", "Fun address Str. 12, 20253 Hamburg",null, null, "345678976543", "https://google.com", null, "Fun notes fun notes fun notes fun notes", new ArrayList<>(
+                List.of("restaurant","art"))
+        );
+
+        //THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(response.getBody(), is(expectedDiscovery));
+        assertThat(updatedUser, is(expectedUser));
     }
 }
 
