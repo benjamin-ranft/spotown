@@ -44,7 +44,7 @@ public class UserService {
     public Discovery add(AddDiscoveryDto discoveryToBeAdded, String principalName) {
         Discovery discoveryObjectToBeSaved = Discovery.builder()
                 .id( idUtils.generateId() )
-                .timestamp(timestampUtils.generateTimestampEpochSeconds() )
+                .timestamp(timestampUtils.generateTimestampEpochSeconds())
                 .name(discoveryToBeAdded.getName())
                 .address(discoveryToBeAdded.getAddress())
                 .webUrl(discoveryToBeAdded.getWebUrl())

@@ -31,7 +31,7 @@ public class JwtUtils {
         return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
     }
 
-    public boolean isValid(Claims claims) {
-        return claims.getExpiration().after(new Date());
+    public boolean isExpired(Claims claims) {
+        return claims.getExpiration().before(new Date());
     }
 }
