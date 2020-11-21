@@ -82,7 +82,7 @@ public class DiscoveryControllerIntegrationTest {
 
         private String login(){
             ResponseEntity<String> response = testRestTemplate.postForEntity("http://localhost:" + port + "/auth/login", new LoginDto(
-                    "heinz", "password"
+                    "heinz", "kunz"
             ), String.class);
 
             return response.getBody();

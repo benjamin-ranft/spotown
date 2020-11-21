@@ -43,7 +43,7 @@ public class UserService {
 
     public Discovery add(AddDiscoveryDto discoveryToBeAdded, String principalName) {
         Discovery discoveryObjectToBeSaved = Discovery.builder()
-                .id( idUtils.generateId() )
+                .id(idUtils.generateId())
                 .timestamp(timestampUtils.generateTimestampEpochSeconds())
                 .name(discoveryToBeAdded.getName())
                 .address(discoveryToBeAdded.getAddress())
