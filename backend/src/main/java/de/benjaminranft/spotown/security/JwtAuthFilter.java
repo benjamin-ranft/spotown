@@ -36,17 +36,17 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         // validate token
         String token = authorization.replace("Bearer ", "").trim();
-        Claims claims = jwtUtils.parseToken(token);
         try {
-            if (jwtUtils.isValid(claims)) {
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                        claims.getSubject(),
-                        "",
-                        Collections.emptyList());
-                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-                System.out.println(usernamePasswordAuthenticationToken);
+            Claims claims = jwtUtils.parseToken(token);
+            if(!jwtUtils.isExpired(claims)){
+                SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+                                claims.getSubject(),
+                                "",
+                                Collections.emptyList()
+                        )
+                );
             }
-        } catch (Exception e) {
+        }catch (Exception e){
             System.out.println(e);
         }
 

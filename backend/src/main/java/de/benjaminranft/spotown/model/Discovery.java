@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+import java.util.List;
+
 
 @Data
 @Builder
@@ -12,6 +15,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class Discovery {
+    private String id;
+    private Instant timestamp;
     private String name;
     private String address;
     private String thumbnail;
@@ -20,4 +25,5 @@ public class Discovery {
     private String webUrl;
     private String directions;
     private String notes;
+    private List<String> tags;
 }
