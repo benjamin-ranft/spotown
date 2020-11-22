@@ -11,13 +11,13 @@ export default function AddDiscoveryPage() {
     const history = useHistory();
 
     return(
-        <>
-            <div>
+        <StyledDiscoveryPage>
+            <StyledAddHeader>
                 <StyledBackButton onClick={handleGoBack}/>
-                <h1>ADJUST</h1>
-            </div>
+                <h1>Add</h1>
+            </StyledAddHeader>
             <DiscoveryForm onSave={handleSave}/>
-        </>
+        </StyledDiscoveryPage>
     )
 
     function handleGoBack(){
@@ -33,5 +33,22 @@ export default function AddDiscoveryPage() {
 }
 
 const StyledBackButton = styled(MdKeyboardArrowLeft)`
-color: white;
+color: var(--darkest-grey);
+font-size: 40px;
+`
+
+const StyledDiscoveryPage = styled.div`
+display: grid;
+grid-template-rows: min-content 1fr 1fr;
+height: 100vh;
+
+grid-template-columns: 23px auto 23px;
+`
+
+const StyledAddHeader = styled.div`
+display:grid;
+grid-template-columns: 1fr 1fr 1fr;
+justify-items: center;
+grid-column-start: 2;
+  grid-column-end: 2;
 `
