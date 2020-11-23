@@ -17,7 +17,6 @@ export default function DiscoveriesContextProvider({ children }) {
     const create = (name, address, webUrl, phoneNumber, notes, tags) =>
         addDiscovery(name, address, webUrl, phoneNumber, notes, tags, token)
             .then((newDiscovery) => setDiscoveries([...discoveries, newDiscovery]))
-            .catch(console.log);
 
     return (
         <DiscoveriesContext.Provider value={{discoveries,create}}>

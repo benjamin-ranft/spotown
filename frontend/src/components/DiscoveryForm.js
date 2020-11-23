@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components/macro";
 import InputField from "./uiElements/InputField";
+import AddDiscoveryTags from "./AddDiscoveryTags";
 
 const initialState = {
     name: "",
@@ -14,10 +15,10 @@ const initialState = {
 export default function DiscoveryForm({onSave, discovery = initialState}) {
 
     const [discoveryData, setDiscoveryData] = useState(discovery);
-    const [tag, setTag] = useState("")
 
     return(
         <StyledForm onSubmit={handleSubmit}>
+            <AddDiscoveryTags tags={discoveryData.tags} setTags={(tags) => setDiscoveryData({...discoveryData, tags})}/>
             <label>
                 <InputField
                 name="name"
@@ -58,14 +59,6 @@ export default function DiscoveryForm({onSave, discovery = initialState}) {
                     onChange={handleChange}
                     />
             </label>
-            <label>
-                <InputField
-                    name="tags"
-                    placeholder="Tags"
-                    value={discoveryData.tags}
-                    onChange={handleTags}
-                    type="text"/>
-            </label>
             <button>Save</button>
         </StyledForm>
 
@@ -75,10 +68,10 @@ export default function DiscoveryForm({onSave, discovery = initialState}) {
         setDiscoveryData({ ...discoveryData, [event.target.name]:event.target.value})
     }
 
-    function handleTags(){
+    /*function handleTags(){
         setDiscoveryData({...discoveryData, tags: [...discoveryData.tags, tag]});
         setTag("");
-    }
+    }*/
 
     function handleSubmit(event){
         event.preventDefault();
@@ -88,10 +81,13 @@ export default function DiscoveryForm({onSave, discovery = initialState}) {
 
 const StyledForm = styled.form`
   display: grid;
-  grid-template-rows: repeat(7, 1fr);
+  grid-template-rows: repeat(7, min-content);
   row-gap: 10px;
   grid-column-start: 2;
   grid-column-end: 2;
+  grid-row-start: 4;
+  grid-row-end: 4;
+  
   
   button{
   display: block;
@@ -103,6 +99,10 @@ const StyledForm = styled.form`
   border: none;
   font-weight: bold;
   font-size: var(--size-l); 
+  }
+  
+  label{
+  padding: 0;
   }
 `
 
@@ -116,4 +116,5 @@ display: block;
   border-width: thin;
   border-style: solid;
   border-color: lightgrey;
+  resize: none;
 `

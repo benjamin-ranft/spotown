@@ -39,7 +39,8 @@ font-size: 40px;
 
 const StyledDiscoveryPage = styled.div`
 display: grid;
-grid-template-rows: min-content 1fr 1fr;
+grid-template-rows: 23px min-content 1fr min-content 23px;
+
 height: 100vh;
 
 grid-template-columns: 23px auto 23px;
@@ -48,7 +49,13 @@ grid-template-columns: 23px auto 23px;
 const StyledAddHeader = styled.div`
 display:grid;
 grid-template-columns: 1fr 1fr 1fr;
-justify-items: center;
+
+align-items: center;
 grid-column-start: 2;
   grid-column-end: 2;
+grid-row-start: 2;
+
+h1{
+justify-self: center;
+}
 `
