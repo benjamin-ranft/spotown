@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {useHistory} from "react-router-dom";
 import styled from "styled-components/macro";
 import InputField from "./uiElements/InputField";
 
@@ -16,7 +15,6 @@ export default function DiscoveryForm({onSave, discovery = initialState}) {
 
     const [discoveryData, setDiscoveryData] = useState(discovery);
     const [tag, setTag] = useState("")
-    const history = useHistory();
 
     return(
         <StyledForm onSubmit={handleSubmit}>
