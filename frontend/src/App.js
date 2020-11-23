@@ -5,6 +5,7 @@ import ProtectedRoute from "./routing/ProtectedRoute";
 import UserContextProvider from "./contexts/UserContextProvider";
 import Discoveries from "./components/Discoveries";
 import DiscoveriesContextProvider from "./contexts/DiscoveriesContextProvider";
+import AddDiscoveryPage from "./components/AddDiscoveryPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
             <Switch>
                 <Route path="/login" component={LoginPage}/>
                 <ProtectedRoute path="/discoveries" component={Discoveries}/>
+                <ProtectedRoute path="/new" component={AddDiscoveryPage}/>
                 <Route path="/">
                     <Redirect to="/discoveries"/>
                 </Route>

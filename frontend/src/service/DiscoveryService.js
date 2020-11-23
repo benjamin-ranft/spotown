@@ -8,3 +8,7 @@ const header = (token) => ({
 
 export const getDiscoveries = (token) =>
     axios.get('/api/discoveries', header(token)).then((response) => response.data);
+
+export const addDiscovery = (name, address, webUrl, phoneNumber, notes, tags, token) =>
+    axios.post("/api/discoveries", {name, address, webUrl, phoneNumber, notes, tags}, header(token))
+        .then((response) => response.data);
