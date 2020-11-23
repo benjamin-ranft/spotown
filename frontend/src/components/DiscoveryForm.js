@@ -116,4 +116,5 @@ display: block;
   border-width: thin;
   border-style: solid;
   border-color: lightgrey;
+  resize: none;
 `
