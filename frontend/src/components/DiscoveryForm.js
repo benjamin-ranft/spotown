@@ -73,10 +73,6 @@ export default function DiscoveryForm({onSave, discovery = initialState}) {
 
     )
 
-    function onCancel(){
-        history.goBack();
-    }
-
     function handleChange(event){
         setDiscoveryData({ ...discoveryData, [event.target.name]:event.target.value})
     }
