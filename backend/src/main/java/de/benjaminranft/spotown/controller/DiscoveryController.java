@@ -15,7 +15,6 @@ public class DiscoveryController {
 
     private final UserService userService;
 
-
     @Autowired
     public DiscoveryController(UserService userService) {
         this.userService = userService;
