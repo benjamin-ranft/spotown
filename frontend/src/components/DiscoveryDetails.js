@@ -147,7 +147,7 @@ const StyledNotesSection = styled.div`
 display: block;
 grid-column-start: 1;
 grid-column-end: 2;
-grid-row: 5;
+grid-row: 4;
 `
 
 
