@@ -8,9 +8,10 @@ import DirectionsButton from "./buttons/DirectionsButton";
 import CallButton from "./buttons/CallButton";
 import WebsiteButton from "./buttons/WebsiteButton";
 import {VscLocation} from "react-icons/all";
+import {removeDiscovery, updateDiscovery} from "../service/DiscoveryService";
 
 export default function DiscoveryDetails(){
-    const {discoveries} = useContext(DiscoveriesContext);
+    const {discoveries, updateDiscovery, removeDiscovery} = useContext(DiscoveriesContext);
     const {id} = useParams();
     const history = useHistory();
     const discovery = discoveries.find((discovery)=> discovery.id === id);
@@ -30,7 +31,7 @@ export default function DiscoveryDetails(){
                         <StyledLocationIcon/>
                         <StyledAddress>{discovery.address}</StyledAddress>
                     </StyledAddressSection>
-                    <StyledActionButtons/>
+                    <StyledActionButtons onUpdate={handleEdit} onDelete={handleDelete}/>
                 </AddressAndActionButtons>
                 <StyledTitleHoursSection>
                     <StyledDiscoveryName>{discovery.name}</StyledDiscoveryName>
@@ -58,6 +59,12 @@ export default function DiscoveryDetails(){
     function handleCancel(){
         history.goBack();
     }
+
+    function handleDelete() {
+        removeDiscovery(id);
+        history.goBack();
+    }
+
 }
 
 const StyledDetailsPage = styled.div`

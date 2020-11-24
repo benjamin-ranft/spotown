@@ -29,4 +29,16 @@ public class DiscoveryController {
     public Discovery add(@RequestBody AddDiscoveryDto dto, Principal principal){
         return this.userService.add(dto, principal.getName());
     }
+
+    @PutMapping
+    public Discovery updateDiscovery (@RequestBody Discovery discovery, Principal principal){
+        return this.userService.update(discovery, principal.getName());
+    }
+
+    @DeleteMapping("{discoveryId}")
+    public void deleteDiscovery (@PathVariable String discoveryId, Principal principal){
+        userService.remove(discoveryId, principal.getName());
+    }
+
+
 }

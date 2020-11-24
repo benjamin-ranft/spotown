@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {
     getDiscoveries,
-    addDiscovery
+    addDiscovery,
+    updateDiscovery,
+    removeDiscovery
 } from '../service/DiscoveryService';
 import UserContext from './UserContext';
 import DiscoveriesContext from "./DiscoveriesContext";
@@ -18,8 +20,18 @@ export default function DiscoveriesContextProvider({ children }) {
         addDiscovery(name, address, webUrl, phoneNumber, notes, tags, token)
             .then((newDiscovery) => setDiscoveries([...discoveries, newDiscovery]))
 
+    const update = (id, timestamp, name, address, webUrl, phoneNumber, notes, tags) => {
+        updateDiscovery(id, timestamp, name, address, webUrl, phoneNumber, notes, tags, token)
+            .then((updateDiscovery) => setDiscoveries([...discoveries.filter((discovery) => discovery.id !== updateDiscovery.id),updateDiscovery]));
+    }
+
+    const remove = (id) =>
+        removeDiscovery(id, token)
+            .then(() => setDiscoveries(discoveries.filter((discovery) => discovery.id !== id)));
+
+
     return (
-        <DiscoveriesContext.Provider value={{discoveries,create}}>
+        <DiscoveriesContext.Provider value={{discoveries,create, update, remove}}>
             {children}
         </DiscoveriesContext.Provider>
     );

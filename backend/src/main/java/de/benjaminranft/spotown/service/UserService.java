@@ -1,5 +1,6 @@
 package de.benjaminranft.spotown.service;
 
+import com.mongodb.BasicDBObject;
 import de.benjaminranft.spotown.dao.UserDao;
 import de.benjaminranft.spotown.dto.AddDiscoveryDto;
 import de.benjaminranft.spotown.model.Discovery;
@@ -11,8 +12,10 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
+
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -62,6 +65,43 @@ public class UserService {
         mongoTemplate.updateFirst(query,update,User.class);
 
         return discoveryObjectToBeSaved;
+    }
+
+    public Discovery update (Discovery discovery, String principalName){
+        Discovery discoveryToBeUpdated = Discovery.builder()
+                .id(discovery.getId())
+                .timestamp(discovery.getTimestamp())
+                .name(discovery.getName())
+                .address(discovery.getAddress())
+                .webUrl(discovery.getWebUrl())
+                .phoneNumber(discovery.getPhoneNumber())
+                .notes(discovery.getNotes())
+                .tags(discovery.getTags())
+                .build();
+
+        Query query = new Query(new Criteria().andOperator(
+                Criteria.where("username").is(principalName),
+                Criteria.where("discoveries").elemMatch(Criteria.where("_id").is(discovery.getId()))
+        ));
+
+        Update update = new Update();
+        update.set("discoveries.$", discoveryToBeUpdated);
+
+        mongoTemplate.updateFirst(query, update, User.class);
+
+        return discoveryToBeUpdated;
+    }
+
+    public void remove (String discoveryId, String principalName){
+        Query query = new Query(new Criteria().andOperator(
+                Criteria.where("username").is(principalName),
+                Criteria.where("discoveries").elemMatch(Criteria.where("_id").is(discoveryId))
+        ));
+
+        Update update = new Update();
+        update.pull("discoveries", new BasicDBObject("_id", discoveryId));
+
+        mongoTemplate.updateFirst(query, update, User.class);
 
     }
 
