@@ -29,7 +29,7 @@ box-shadow: 0px -1px 9px 0px rgba(0,0,0,0.37);
 
 const StyledListIcon = styled(MdList)`
 font-size: 35px;
-color: var(--dark-grey);
+color: var(--accent-red);
 `
 
 const StyledDiv = styled.div`

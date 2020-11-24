@@ -12,17 +12,19 @@ export default function ActionButtons(){
 }
 
 const StyledActionButtons = styled.div`
-display: grid;
-grid-template-columns: 1fr 1fr;
-justify-items: right;
+justify-self: end;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+gap: 8px;
 `
 
 const StyledEditButton = styled(MdModeEdit)`
 color: var(--dark-grey);
-font-size: 40px;
+font-size: 25px;
 `
 
 const StyledDeleteButton = styled(MdDelete)`
 color: var(--dark-grey);
-font-size: 40px;
+font-size: 25px;
 `

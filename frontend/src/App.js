@@ -6,6 +6,7 @@ import UserContextProvider from "./contexts/UserContextProvider";
 import Discoveries from "./components/Discoveries";
 import DiscoveriesContextProvider from "./contexts/DiscoveriesContextProvider";
 import AddDiscoveryPage from "./components/AddDiscoveryPage";
+import DiscoveryDetails from "./components/DiscoveryDetails";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
                 <Route path="/login" component={LoginPage}/>
                 <ProtectedRoute path="/discoveries" component={Discoveries}/>
                 <ProtectedRoute path="/new" component={AddDiscoveryPage}/>
+                <ProtectedRoute path="/discovery/:id" component={DiscoveryDetails}/>
                 <Route path="/">
                     <Redirect to="/discoveries"/>
                 </Route>
