@@ -13,9 +13,9 @@ export const addDiscovery = (name, address, webUrl, phoneNumber, notes, tags, to
     axios.post("/api/discoveries", {name, address, webUrl, phoneNumber, notes, tags}, header(token))
         .then((response) => response.data);
 
-export const updateDiscovery = (id, timestamp, name, address, webUrl, phoneNumber, notes, tags, token) =>
+export const updateDiscovery = (id, timestamp, name, address, thumbnail, openingHours, phoneNumber, webUrl, directions, notes, tags, token) =>
     axios
-        .put("api/discoveries", {id, timestamp, name, address, webUrl, phoneNumber, notes, tags, token}, header(token))
+        .put("/api/discoveries/" + id, {id, timestamp, name, address, thumbnail, openingHours, phoneNumber, webUrl, directions, notes, tags, token}, header(token))
         .then((response)=>response.data);
 
 export const removeDiscovery = (id, token) =>

@@ -20,8 +20,8 @@ export default function DiscoveriesContextProvider({ children }) {
         addDiscovery(name, address, webUrl, phoneNumber, notes, tags, token)
             .then((newDiscovery) => setDiscoveries([...discoveries, newDiscovery]))
 
-    const update = (id, timestamp, name, address, webUrl, phoneNumber, notes, tags) => {
-        updateDiscovery(id, timestamp, name, address, webUrl, phoneNumber, notes, tags, token)
+    const update = (id, timestamp, name, address, thumbnail, openingHours, phoneNumber, webUrl, directions, notes, tags) => {
+        updateDiscovery(id, timestamp, name, address, thumbnail, openingHours, phoneNumber, webUrl, directions, notes, tags, token)
             .then((updateDiscovery) => setDiscoveries([...discoveries.filter((discovery) => discovery.id !== updateDiscovery.id),updateDiscovery]));
     }
 

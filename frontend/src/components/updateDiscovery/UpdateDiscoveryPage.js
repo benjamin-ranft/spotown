@@ -1,16 +1,17 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import DiscoveriesContext from "../../contexts/DiscoveriesContext";
 import {useHistory, useParams} from "react-router-dom";
 import DiscoveryForm from "../DiscoveryForm";
 import styled from "styled-components/macro";
 import {MdKeyboardArrowLeft} from "react-icons/md";
 
-export default function AddDiscoveryPage() {
+export default function UpdateDiscoveryPage() {
 
     const {discoveries, update} = useContext(DiscoveriesContext);
     const history = useHistory();
     const {id} = useParams();
     const discovery = discoveries.find((discovery) => discovery.id === id)
+    const [discoveryData, setDiscoveryData] = useState(discovery);
 
 
     return(
@@ -22,7 +23,7 @@ export default function AddDiscoveryPage() {
                     </StyledAddHeader>
             </StyledThumbnailSection>
             <StyledFormSection>
-                <DiscoveryForm onSave={handleSave} discovery={discovery}/>
+                <DiscoveryForm onSave={handleSave} discovery={discoveryData} setDiscovery={setDiscoveryData}/>
             </StyledFormSection>
         </StyledDiscoveryPage>
     )
@@ -32,9 +33,9 @@ export default function AddDiscoveryPage() {
     }
 
     function handleSave(discovery){
-        const {name, address, webUrl, phoneNumber, notes, tags} = discovery;
-        update(name, address, webUrl, phoneNumber, notes, tags);
-        history.push("/discoveries");
+        const {id, timestamp, name, address, thumbnail, openingHours, phoneNumber, webUrl, directions, notes, tags} = discovery;
+        update(id, timestamp, name, address, thumbnail, openingHours, phoneNumber, webUrl, directions, notes, tags);
+        history.goBack();
     }
 
 }

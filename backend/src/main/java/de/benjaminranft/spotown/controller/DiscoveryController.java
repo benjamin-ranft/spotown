@@ -1,10 +1,13 @@
 package de.benjaminranft.spotown.controller;
 
 import de.benjaminranft.spotown.dto.AddDiscoveryDto;
+import de.benjaminranft.spotown.dto.UpdateDiscoveryDto;
 import de.benjaminranft.spotown.model.Discovery;
 import de.benjaminranft.spotown.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
@@ -30,9 +33,12 @@ public class DiscoveryController {
         return this.userService.add(dto, principal.getName());
     }
 
-    @PutMapping
-    public Discovery updateDiscovery (@RequestBody Discovery discovery, Principal principal){
-        return this.userService.update(discovery, principal.getName());
+    @PutMapping("{discoveryId}")
+    public Discovery updateDiscovery (@RequestBody UpdateDiscoveryDto updateDiscoveryDto, @PathVariable String discoveryId, Principal principal){
+        if (!discoveryId.equals(updateDiscoveryDto.getId())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        return userService.update(updateDiscoveryDto, principal.getName());
     }
 
     @DeleteMapping("{discoveryId}")

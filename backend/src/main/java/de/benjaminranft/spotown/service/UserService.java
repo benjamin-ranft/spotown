@@ -3,6 +3,7 @@ package de.benjaminranft.spotown.service;
 import com.mongodb.BasicDBObject;
 import de.benjaminranft.spotown.dao.UserDao;
 import de.benjaminranft.spotown.dto.AddDiscoveryDto;
+import de.benjaminranft.spotown.dto.UpdateDiscoveryDto;
 import de.benjaminranft.spotown.model.Discovery;
 import de.benjaminranft.spotown.model.User;
 import de.benjaminranft.spotown.utils.IdUtils;
@@ -67,14 +68,17 @@ public class UserService {
         return discoveryObjectToBeSaved;
     }
 
-    public Discovery update (Discovery discovery, String principalName){
+    public Discovery update (UpdateDiscoveryDto discovery, String principalName){
         Discovery discoveryToBeUpdated = Discovery.builder()
                 .id(discovery.getId())
-                .timestamp(discovery.getTimestamp())
+                .timestamp(timestampUtils.generateTimestampEpochSeconds())
                 .name(discovery.getName())
                 .address(discovery.getAddress())
-                .webUrl(discovery.getWebUrl())
+                .thumbnail(discovery.getThumbnail())
+                .openingHours(discovery.getOpeningHours())
                 .phoneNumber(discovery.getPhoneNumber())
+                .webUrl(discovery.getWebUrl())
+                .directions(discovery.getDirections())
                 .notes(discovery.getNotes())
                 .tags(discovery.getTags())
                 .build();
