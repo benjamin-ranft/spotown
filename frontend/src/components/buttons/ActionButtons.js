@@ -1,19 +1,18 @@
 import React, {useContext} from "react";
-import {useHistory, useParams} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import styled from "styled-components/macro";
 import {MdDelete, MdModeEdit} from "react-icons/all";
 import DiscoveriesContext from "../../contexts/DiscoveriesContext";
 
-export default function ActionButtons(handleEdit, handleDelete){
+
+export default function ActionButtons({id}){
 
     const history = useHistory();
-    const {discoveries} = useContext(DiscoveriesContext);
-    const {id} = useParams();
-    const discovery = discoveries.find((discovery)=> discovery.id === id);
+    const {remove} = useContext(DiscoveriesContext);
 
     return(
         <StyledActionButtons>
-            <div onClick={() => history.push(`/discovery/${discovery.id}`)}>
+            <div onClick={() => history.push(`/edit/${id}`)}>
                 <StyledEditButton/>
             </div>
             <div onClick={handleDelete}>
@@ -21,7 +20,14 @@ export default function ActionButtons(handleEdit, handleDelete){
             </div>
         </StyledActionButtons>
     )
+
+    function handleDelete() {
+        remove(id);
+        history.goBack();
+    }
+
 }
+
 
 const StyledActionButtons = styled.div`
 justify-self: end;

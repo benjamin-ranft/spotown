@@ -16,7 +16,7 @@ export default function AddDiscoveryPage() {
                 <StyledBackButton onClick={handleGoBack}/>
                 <h1>Add</h1>
             </StyledAddHeader>
-            <DiscoveryForm onSave={handleSave}/>
+            <DiscoveryForm onSave={handleSave()}/>
         </StyledDiscoveryPage>
     )
 

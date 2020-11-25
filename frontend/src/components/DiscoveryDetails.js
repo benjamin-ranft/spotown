@@ -8,10 +8,9 @@ import DirectionsButton from "./buttons/DirectionsButton";
 import CallButton from "./buttons/CallButton";
 import WebsiteButton from "./buttons/WebsiteButton";
 import {VscLocation} from "react-icons/all";
-import {removeDiscovery, updateDiscovery} from "../service/DiscoveryService";
 
 export default function DiscoveryDetails(){
-    const {discoveries, updateDiscovery, removeDiscovery} = useContext(DiscoveriesContext);
+    const {discoveries} = useContext(DiscoveriesContext);
     const {id} = useParams();
     const history = useHistory();
     const discovery = discoveries.find((discovery)=> discovery.id === id);
@@ -31,7 +30,7 @@ export default function DiscoveryDetails(){
                         <StyledLocationIcon/>
                         <StyledAddress>{discovery.address}</StyledAddress>
                     </StyledAddressSection>
-                    <StyledActionButtons onUpdate={handleEdit} onDelete={handleDelete}/>
+                    <StyledActionButtons id={id}/>
                 </AddressAndActionButtons>
                 <StyledTitleHoursSection>
                     <StyledDiscoveryName>{discovery.name}</StyledDiscoveryName>
@@ -57,11 +56,6 @@ export default function DiscoveryDetails(){
     )
 
     function handleCancel(){
-        history.goBack();
-    }
-
-    function handleDelete() {
-        removeDiscovery(id);
         history.goBack();
     }
 
@@ -93,10 +87,10 @@ const StyledDetailsCard = styled.div`
 display: grid;
 grid-template-rows: repeat(4 1fr);
 grid-row-gap: 12px;
+grid-row-start: 2;
 background-color: var(--white);
 border-radius: 25px 25px 0 0;
 box-shadow: var(--center-box-shadow);
-grid-row-start: 2;
 padding: 20px;
 min-height: 40vh;
 `
