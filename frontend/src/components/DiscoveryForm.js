@@ -1,29 +1,19 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components/macro";
 import InputField from "./uiElements/InputField";
 import AddDiscoveryTags from "./AddDiscoveryTags";
 
-const initialState = {
-    name: "",
-    address: "",
-    webUrl: "",
-    phoneNumber: "",
-    notes: "",
-    tags: [],
-}
 
-export default function DiscoveryForm({onSave, discovery = initialState}) {
-
-    const [discoveryData, setDiscoveryData] = useState(discovery);
+export default function DiscoveryForm({onSave, discovery, setDiscovery}) {
 
     return(
         <StyledForm onSubmit={handleSubmit}>
-            <AddDiscoveryTags tags={discoveryData.tags} setTags={(tags) => setDiscoveryData({...discoveryData, tags})}/>
+            <AddDiscoveryTags tags={discovery.tags} setTags={(tags) => setDiscovery({...discovery, tags})}/>
             <label>
                 <InputField
                 name="name"
                 placeholder="Name"
-                value={discoveryData.name}
+                value={discovery.name}
                 onChange={handleChange}
                 type="text"/>
             </label>
@@ -31,7 +21,7 @@ export default function DiscoveryForm({onSave, discovery = initialState}) {
                 <InputField
                     name="address"
                     placeholder="Address"
-                    value={discoveryData.address}
+                    value={discovery.address}
                     onChange={handleChange}
                     type="text"/>
             </label>
@@ -39,7 +29,7 @@ export default function DiscoveryForm({onSave, discovery = initialState}) {
                 <InputField
                     name="webUrl"
                     placeholder="Link"
-                    value={discoveryData.webUrl}
+                    value={discovery.webUrl}
                     onChange={handleChange}
                     type="text"/>
             </label>
@@ -47,7 +37,7 @@ export default function DiscoveryForm({onSave, discovery = initialState}) {
                 <InputField
                     name="phoneNumber"
                     placeholder="Phone"
-                    value={discoveryData.phoneNumber}
+                    value={discovery.phoneNumber}
                     onChange={handleChange}
                     type="text"/>
             </label>
@@ -55,7 +45,7 @@ export default function DiscoveryForm({onSave, discovery = initialState}) {
                 <StyledTextArea
                     name="notes"
                     placeholder="Notes"
-                    value={discoveryData.notes}
+                    value={discovery.notes}
                     onChange={handleChange}
                     />
             </label>
@@ -65,17 +55,12 @@ export default function DiscoveryForm({onSave, discovery = initialState}) {
     )
 
     function handleChange(event){
-        setDiscoveryData({ ...discoveryData, [event.target.name]:event.target.value})
+        setDiscovery({ ...discovery, [event.target.name]:event.target.value})
     }
-
-    /*function handleTags(){
-        setDiscoveryData({...discoveryData, tags: [...discoveryData.tags, tag]});
-        setTag("");
-    }*/
 
     function handleSubmit(event){
         event.preventDefault();
-        onSave(discoveryData);
+        onSave(discovery);
     }
 }
 

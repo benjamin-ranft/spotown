@@ -1,14 +1,27 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {useHistory} from "react-router-dom";
 import DiscoveriesContext from "../contexts/DiscoveriesContext";
 import {MdKeyboardArrowLeft} from "react-icons/md";
 import styled from "styled-components/macro";
 import DiscoveryForm from "./DiscoveryForm";
 
+const initialState = {
+    name: "",
+    address: "",
+    thumbnail: "",
+    openingHours: "",
+    phoneNumber: "",
+    webUrl: "",
+    directions: "",
+    notes: "",
+    tags: [],
+}
+
 export default function AddDiscoveryPage() {
 
     const {create} = useContext(DiscoveriesContext);
     const history = useHistory();
+    const [discoveryData, setDiscoveryData] = useState(initialState);
 
     return(
         <StyledDiscoveryPage>
@@ -16,7 +29,7 @@ export default function AddDiscoveryPage() {
                 <StyledBackButton onClick={handleGoBack}/>
                 <h1>Add</h1>
             </StyledAddHeader>
-            <DiscoveryForm onSave={handleSave}/>
+            <DiscoveryForm onSave={handleSave} discovery={discoveryData} setDiscovery={setDiscoveryData}/>
         </StyledDiscoveryPage>
     )
 

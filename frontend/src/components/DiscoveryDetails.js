@@ -30,7 +30,7 @@ export default function DiscoveryDetails(){
                         <StyledLocationIcon/>
                         <StyledAddress>{discovery.address}</StyledAddress>
                     </StyledAddressSection>
-                    <StyledActionButtons/>
+                    <StyledActionButtons id={id}/>
                 </AddressAndActionButtons>
                 <StyledTitleHoursSection>
                     <StyledDiscoveryName>{discovery.name}</StyledDiscoveryName>
@@ -58,6 +58,7 @@ export default function DiscoveryDetails(){
     function handleCancel(){
         history.goBack();
     }
+
 }
 
 const StyledDetailsPage = styled.div`
@@ -86,10 +87,10 @@ const StyledDetailsCard = styled.div`
 display: grid;
 grid-template-rows: repeat(4 1fr);
 grid-row-gap: 12px;
+grid-row-start: 2;
 background-color: var(--white);
 border-radius: 25px 25px 0 0;
 box-shadow: var(--center-box-shadow);
-grid-row-start: 2;
 padding: 20px;
 min-height: 40vh;
 `
@@ -145,9 +146,8 @@ a {
 
 const StyledNotesSection = styled.div`
 display: block;
-grid-column-start: 1;
-grid-column-end: 2;
-grid-row: 5;
+grid-column: 1/2;
+grid-row: 4;
 `
 
 

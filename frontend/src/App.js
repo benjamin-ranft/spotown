@@ -7,6 +7,7 @@ import Discoveries from "./components/Discoveries";
 import DiscoveriesContextProvider from "./contexts/DiscoveriesContextProvider";
 import AddDiscoveryPage from "./components/AddDiscoveryPage";
 import DiscoveryDetails from "./components/DiscoveryDetails";
+import UpdateDiscoveryPage from "./components/updateDiscovery/UpdateDiscoveryPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
                 <ProtectedRoute path="/discoveries" component={Discoveries}/>
                 <ProtectedRoute path="/new" component={AddDiscoveryPage}/>
                 <ProtectedRoute path="/discovery/:id" component={DiscoveryDetails}/>
+                <ProtectedRoute path="/edit/:id" component={UpdateDiscoveryPage}/>
                 <Route path="/">
                     <Redirect to="/discoveries"/>
                 </Route>
