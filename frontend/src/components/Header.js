@@ -1,6 +1,7 @@
 import React from "react";
 import {FaSearch, BiUserCircle, BsFilter} from "react-icons/all";
 import styled from "styled-components/macro";
+import UserIcon from "./icons/UserIcon";
 
 export default function Header(){
     return(
@@ -43,9 +44,5 @@ color: var(--dark-grey);
 `
 const FilterIcon = styled(BsFilter)`
 font-size: var(--size-xxl);
-color: var(--dark-grey);
-`
-const UserIcon = styled(BiUserCircle)`
-font-size: 30px;
 color: var(--dark-grey);
 `

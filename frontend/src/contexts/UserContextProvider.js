@@ -36,6 +36,7 @@ export default function UserContextProvider({ children }) {
         <UserContext.Provider
             value={{
                 token,
+                setToken,
                 tokenIsValid,
                 loginWithUserCredentials,
                 userData,
