@@ -164,6 +164,35 @@ public void  getDiscoveriesTest(){
         assertThat(response.getBody(), is(expectedDiscovery));
         assertThat(updatedUser, is(expectedUser));
     }
+
+    @Test
+    @DisplayName("The delete method should delete discovery by id")
+    public void deleteByIdTest(){
+
+        //GIVEN
+        String url = backendAccessLink() + "/123";
+
+        //WHEN
+        Instant expectedTimestamp = Instant.parse("2020-11-18T18:35:24.00Z");
+        HttpEntity<Void> entity = getValidAuthorizationEntity(null);
+        ResponseEntity<Void> response = testRestTemplate.exchange(url, HttpMethod.DELETE, entity, Void.class);
+
+        Object updatedUser = userDao.findById("heinz");
+        Object expectedUser = Optional.of(new User(
+                "heinz",
+                "$2a$10$0HZGmicEH786L.HeSIjhOuvIK3ixlYij4luVHBNAUtXqKus79t/FS",
+                new ArrayList<>(List.of(
+                        new Discovery("456", expectedTimestamp, "Sushi Place", "Sample Street 4", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
+                                new ArrayList<>(List.of("drink", "nature")))
+                        ))));
+
+        //THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        boolean discoveryPresent = userDao.findById("123").isPresent();
+        assertThat(discoveryPresent, is(false));
+        assertThat(updatedUser, is(expectedUser));
+    }
+
 }
 
 
