@@ -3,6 +3,7 @@ package de.benjaminranft.spotown.controller;
 import de.benjaminranft.spotown.dao.UserDao;
 import de.benjaminranft.spotown.dto.AddDiscoveryDto;
 import de.benjaminranft.spotown.dto.LoginDto;
+import de.benjaminranft.spotown.dto.UpdateDiscoveryDto;
 import de.benjaminranft.spotown.model.Discovery;
 import de.benjaminranft.spotown.model.User;
 import de.benjaminranft.spotown.utils.IdUtils;
@@ -166,7 +167,47 @@ public void  getDiscoveriesTest(){
     }
 
     @Test
-    @DisplayName("The delete method should delete discovery by id")
+    @DisplayName("The update method should update a Discovery for indicated User and return the updated Discovery Object")
+    public void updateDiscovery(){
+
+        //GIVEN
+        String url = backendAccessLink() + "/123";
+
+        UpdateDiscoveryDto updatedDiscovery = new UpdateDiscoveryDto("123", "Pizza Place 99", "Sample Street 3", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
+                new ArrayList<>(List.of("nature", "art")));
+
+        //WHEN
+        when(timestampUtils.generateTimestampEpochSeconds()).thenReturn(Instant.parse("2020-11-18T18:35:24.00Z"));
+
+        HttpEntity<UpdateDiscoveryDto> entity = getValidAuthorizationEntity(updatedDiscovery);
+        ResponseEntity<Discovery> response = testRestTemplate.exchange(url, HttpMethod.PUT, entity, Discovery.class);
+
+        Instant expectedTimestamp = Instant.parse("2020-11-18T18:35:24.00Z");
+        Object updatedUser = userDao.findById("heinz");
+        Object expectedUser = Optional.of(new User(
+                "heinz",
+                "$2a$10$0HZGmicEH786L.HeSIjhOuvIK3ixlYij4luVHBNAUtXqKus79t/FS",
+                new ArrayList<>(List.of(
+                        new Discovery("123", expectedTimestamp, "Pizza Place 99", "Sample Street 3", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
+                                new ArrayList<>(List.of("nature", "art"))),
+                        new Discovery("456", expectedTimestamp, "Sushi Place", "Sample Street 4", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
+                                new ArrayList<>(List.of("drink", "nature")))
+                        ))));
+
+        Discovery expectedDiscovery = new Discovery(
+                "123", expectedTimestamp, "Pizza Place 99", "Sample Street 3", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
+                new ArrayList<>(List.of("nature", "art"))
+        );
+
+
+        //THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(response.getBody(), is(expectedDiscovery));
+        assertThat(updatedUser, is(expectedUser));
+    }
+
+    @Test
+    @DisplayName("The delete method should delete discovery by id and return status code 200")
     public void deleteByIdTest(){
 
         //GIVEN
