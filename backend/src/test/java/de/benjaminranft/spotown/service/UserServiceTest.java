@@ -1,5 +1,6 @@
 package de.benjaminranft.spotown.service;
 
+import com.mongodb.BasicDBObject;
 import de.benjaminranft.spotown.dao.UserDao;
 import de.benjaminranft.spotown.dto.AddDiscoveryDto;
 import de.benjaminranft.spotown.dto.UpdateDiscoveryDto;
@@ -70,7 +71,7 @@ class UserServiceTest {
 
     @Test
     @DisplayName("The add method should add Discovery object to discovery List and return the added Discovery")
-    void add() {
+    void addTest() {
 
         //GIVEN
         String principalName = "benjamin";
@@ -103,7 +104,7 @@ class UserServiceTest {
 
     @Test
     @DisplayName("The update method should update Discovery object by Id return the added Discovery")
-    void update() {
+    void updateTest() {
 
         //GIVEN
         String principalName = "benjamin";
@@ -132,5 +133,27 @@ class UserServiceTest {
         //THEN
         assertThat(updatedDiscovery, is(expectedDiscovery));
         verify(mongoTemplate).updateFirst(query, update.set("discoveries.$", expectedDiscovery), User.class);
+    }
+
+    @Test
+    @DisplayName("The delete method should delete Discovery object of the desired Id")
+    void deleteTest() {
+
+        //GIVEN
+        String idToDelete = "1234";
+        String principalName = "benjamin";
+        Query query = new Query(new Criteria().andOperator(
+                Criteria.where("username").is("benjamin"),
+                Criteria.where("discoveries").elemMatch(Criteria.where("_id").is("1234")))
+        );
+
+        Update update = new Update();
+
+        //WHEN
+        userService.remove(idToDelete, principalName);
+
+        //THEN
+        verify(mongoTemplate).updateFirst(query, update.pull("discoveries", new BasicDBObject("_id", idToDelete)), User.class);
+
     }
 }
