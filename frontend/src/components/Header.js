@@ -2,20 +2,60 @@ import React from "react";
 import {FaSearch, BsFilter} from "react-icons/all";
 import styled from "styled-components/macro";
 import UserIcon from "./icons/UserIcon";
+import SearchBar from "./SearchBar";
+import FilterBar from "./FilterBar";
 
-export default function Header(){
+export default function Header({headerAction, setHeaderAction, setSearchTerm, setFilters, filters}){
+
     return(
-        <StyledHeader>
-            <h1>Discoveries</h1>
-            <StyledIcons>
-                <SearchIcon/>
-                <FilterIcon/>
-                <UserIcon/>
-            </StyledIcons>
-        </StyledHeader>
+        <StyledHeaderLayout>
+            <StyledHeader>
+                <h1>Discoveries</h1>
+                <StyledIcons>
+                    <SearchIcon onClick={handleSearchClick} color={headerAction}/>
+                    <FilterIcon onClick={handleFilterClick} color={headerAction}/>
+                    <UserIcon/>
+                </StyledIcons>
+            </StyledHeader>
+            {headerAction === "search" && <StyledActionSection>
+                <SearchBar setSearchTerm={setSearchTerm} handleClose={handleSearchClick}/>
+            </StyledActionSection>}
+            {headerAction === "filter" && <StyledActionSection>
+                <FilterBar filters={filters} setFilters={setFilters} handleClose={handleFilterClick}/>
+            </StyledActionSection>}
+        </StyledHeaderLayout>
     )
+
+    function handleSearchClick(){
+        if (headerAction !== "search"){
+            setHeaderAction("search");
+
+        } else {
+            setHeaderAction("")
+        }
+    }
+
+    function handleFilterClick(){
+        if (headerAction !== "filter"){
+            console.log(headerAction);
+             setHeaderAction("filter");
+
+        } else {
+             setHeaderAction("")
+        }
+
+    }
 }
 
+const StyledHeaderLayout = styled.div`
+display: grid;
+grid-template-rows: min-content min-content;
+`
+
+const StyledActionSection = styled.div`
+height: 50px;
+padding: 5px;
+`
 
 const StyledHeader = styled.div`
 justify-items: start;
@@ -40,9 +80,10 @@ align-items: center;
 
 const SearchIcon = styled(FaSearch)`
 font-size: var(--size-lplus);
-color: var(--dark-grey);
+color: ${props => props.headerAction === 'filter' && "var(--accent-red)"};
 `
 const FilterIcon = styled(BsFilter)`
 font-size: var(--size-xxl);
-color: var(--dark-grey);
+
+color: ${(props) => props.headerAction === 'filter' && "var(--accent-red)"};
 `

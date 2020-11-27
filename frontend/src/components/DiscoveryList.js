@@ -5,12 +5,12 @@ import Discovery from "./Discovery";
 import DiscoveriesContext from "../contexts/DiscoveriesContext";
 
 export default function DiscoveryList() {
+
     const {discoveries} = useContext(DiscoveriesContext);
     const history = useHistory();
 
     return (
         <StyledList>
-            {console.log(discoveries)}
             {discoveries?.map((discovery) => (
                 <li key={discovery.id}>
                     <div onClick={() => history.push(`/discovery/${discovery.id}`)}>

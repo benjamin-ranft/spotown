@@ -15,9 +15,13 @@ export default function SelectableChipList({selectedChips, chips, setSelectedChi
     return(
         <>
             {chips?.map((chip) => (
-                <Chip key={chip.value} label={chip.name} value={chip.value} color={selectedChips.includes(chip.value)?"primary":"secondary"} onClick={()=>handleClick(chip.value)}/>
+                <Chip
+                    key={chip.value}
+                    label={chip.name}
+                    value={chip.value}
+                    color={selectedChips.includes(chip.value)?"primary":"secondary"}
+                    onClick={()=>handleClick(chip.value)}/>
             ))}
         </>
-
     )
 }
