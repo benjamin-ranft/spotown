@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import styled from "styled-components/macro";
-import {BiUserCircle} from "react-icons/all";
 import UserProfilePopup from "../UserProfilePopup";
 
 export default function UserIcon(){
@@ -13,13 +12,18 @@ export default function UserIcon(){
 
     return(
         <>
-            <UserIconStyled onClick={togglePopup}/>
+            <UserIconStyled placeholder={"./images/spotown_user_placeHolder_grey.png"} onClick={togglePopup}/>
             {isOpen && <UserProfilePopup handleClose={togglePopup}/>}
         </>
     )
 }
 
-const UserIconStyled = styled(BiUserCircle)`
-font-size: 30px;
-color: var(--dark-grey);
+const UserIconStyled = styled.div`
+background-image: url(${(props) => props.placeholder});
+background-repeat: no-repeat;
+background-size: cover;
+height: 30px;
+width: 30px;
+border-radius: 30px;
+
 `

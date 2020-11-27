@@ -6,14 +6,14 @@ import {MdClose} from "react-icons/all";
 
 export default function UserProfilePopup ({handleClose}){
 
-    const {setToken, userData} = useContext(UserContext);
+    const {userData, logout} = useContext(UserContext);
     const history = useHistory();
 
     return(
         <StyledPopUpBox onClick={handleClose}>
             <StyledBox>
                 <StyledCloseIcon onClick={handleClose}/>
-                    <StyledProfileImage profileImage="https://benjaminranft.com/wp-content/uploads/2020/06/Benjamin_Ranft_Profile_5-1.jpg"/>
+                    <StyledProfileImage profileImage="./images/spotown_user_placeHolder_red.png"/>
                     <StyledUsername>{userData.sub}</StyledUsername>
                     <StyledLogoutButton onClick={handleLogout}>Log out</StyledLogoutButton>
             </StyledBox>
@@ -21,7 +21,7 @@ export default function UserProfilePopup ({handleClose}){
     )
 
     function handleLogout (){
-        setToken("");
+        logout();
         history.push("/login")
     }
 }
