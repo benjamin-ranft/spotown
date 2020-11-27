@@ -1,5 +1,5 @@
 import React from "react";
-import {FaSearch, BiUserCircle, BsFilter} from "react-icons/all";
+import {FaSearch, BsFilter} from "react-icons/all";
 import styled from "styled-components/macro";
 import UserIcon from "./icons/UserIcon";
 
