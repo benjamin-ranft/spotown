@@ -102,4 +102,7 @@ display: block;
   border-style: solid;
   border-color: lightgrey;
   resize: none;
+  :focus {
+    outline: none;
+}
 `
