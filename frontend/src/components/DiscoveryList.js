@@ -3,10 +3,14 @@ import {useHistory} from "react-router-dom";
 import styled from 'styled-components/macro';
 import Discovery from "./Discovery";
 
-export default function DiscoveryList({filteredDiscoveries}) {
+export default function DiscoveryList({searchedDiscoveries, filters}) {
 
     const history = useHistory();
+    const discoveries = searchedDiscoveries;
+    const tags = filters;
+    const filteredDiscoveries = discoveries.filter(d => d.tags.some(t => tags.includes(t)))
 
+    console.log(filteredDiscoveries);
     return (
         <StyledList>
             {filteredDiscoveries?.map((discovery) => (

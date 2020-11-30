@@ -17,9 +17,10 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 @Service
 public class UserService {
@@ -58,7 +59,7 @@ public class UserService {
                 .build();
 
         Query query = new Query();
-        query.addCriteria(Criteria.where("username").is(principalName));
+        query.addCriteria(where("username").is(principalName));
 
         Update update = new Update();
         update.addToSet("discoveries",discoveryObjectToBeSaved);
@@ -84,8 +85,8 @@ public class UserService {
                 .build();
 
         Query query = new Query(new Criteria().andOperator(
-                Criteria.where("username").is(principalName),
-                Criteria.where("discoveries").elemMatch(Criteria.where("_id").is(discovery.getId()))
+                where("username").is(principalName),
+                where("discoveries").elemMatch(where("_id").is(discovery.getId()))
         ));
 
         Update update = new Update();
@@ -98,8 +99,8 @@ public class UserService {
 
     public void remove (String discoveryId, String principalName){
         Query query = new Query(new Criteria().andOperator(
-                Criteria.where("username").is(principalName),
-                Criteria.where("discoveries").elemMatch(Criteria.where("_id").is(discoveryId))
+                where("username").is(principalName),
+                where("discoveries").elemMatch(where("_id").is(discoveryId))
         ));
 
         Update update = new Update();
@@ -108,6 +109,4 @@ public class UserService {
         mongoTemplate.updateFirst(query, update, User.class);
 
     }
-
-
 }

@@ -14,19 +14,20 @@ export default function Discoveries(){
     const [filters, setFilters] = useState([]);
     const [footerAction, setFooterAction] = useState("list");
 
-    //Live Search Filtering Logic
+    //Live Search Logic
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
-    const filteredDiscoveries = discoveries.filter((term) =>
+    const searchedDiscoveries = discoveries.filter((term) =>
         (term.name.toLowerCase().includes(lowerCaseSearchTerm)) ||
         (term.address.toLowerCase().includes(lowerCaseSearchTerm)) ||
         (term.phoneNumber.toLowerCase().includes(lowerCaseSearchTerm)) ||
         (term.notes.toLowerCase().includes(lowerCaseSearchTerm))
     )
+    console.log(searchedDiscoveries);
 
     return(
         <PageLayout>
             <Header headerAction={headerAction} setHeaderAction={setHeaderAction} searchTerm={searchTerm} setSearchTerm={setSearchTerm} setFilters={setFilters} filters={filters}/>
-            <DiscoveriesBody filteredDiscoveries={filteredDiscoveries} footerAction={footerAction} searchTerm={searchTerm} filters={filters}/>
+            <DiscoveriesBody searchedDiscoveries={searchedDiscoveries} footerAction={footerAction} searchTerm={searchTerm} filters={filters}/>
             <Footer footerAction={footerAction} setFooterAction={setFooterAction}/>
         </PageLayout>
     )
