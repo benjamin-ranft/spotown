@@ -13,7 +13,7 @@ export default function UserProfilePopup ({handleClose}){
         <StyledPopUpBox onClick={handleClose}>
             <StyledBox>
                 <StyledCloseIcon onClick={handleClose}/>
-                    <StyledProfileImage profileImage="./images/spotown_user_placeHolder_red.png"/>
+                    <StyledProfileImage profileImage="/images/spotown_user_placeHolder_red.png"/>
                     <StyledUsername>{userData.sub}</StyledUsername>
                     <StyledLogoutButton onClick={handleLogout}>Log out</StyledLogoutButton>
             </StyledBox>

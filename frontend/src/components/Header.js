@@ -12,8 +12,8 @@ export default function Header({headerAction, setHeaderAction, setSearchTerm, se
             <StyledHeader>
                 <h1>Discoveries</h1>
                 <StyledIcons>
-                    <SearchIcon onClick={handleSearchClick} headerAction={headerAction}/>
-                    <FilterIcon onClick={handleFilterClick} headerAction={headerAction}/>
+                    <SearchIcon onClick={handleSearchClick} className={headerAction}/>
+                    <FilterIcon onClick={handleFilterClick} className={headerAction}/>
                     <UserIcon/>
                 </StyledIcons>
             </StyledHeader>
@@ -34,7 +34,6 @@ export default function Header({headerAction, setHeaderAction, setSearchTerm, se
             setHeaderAction("")
         }
 
-        console.log(headerAction);
     }
 
     function handleFilterClick(){
@@ -82,9 +81,17 @@ align-items: center;
 
 const SearchIcon = styled(FaSearch)`
 font-size: var(--size-lplus);
-color: ${(props) => props.headerAction === 'search' ? "var(--accent-red)" : "var(--dark-grey)"};
+color: var(--dark-grey);
+
+&.search{
+color: var(--accent-red);
+}
 `
 const FilterIcon = styled(BsFilter)`
 font-size: var(--size-xxl);
-color: ${(props) => props.headerAction === 'filter' ? "var(--accent-red)" : "var(--dark-grey)"};
+color: var(--dark-grey);
+
+&.filter{
+color: var(--accent-red);
+}
 `

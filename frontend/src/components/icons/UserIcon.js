@@ -12,7 +12,7 @@ export default function UserIcon(){
 
     return(
         <>
-            <UserIconStyled placeholder={"./images/spotown_user_placeHolder_grey.png"} onClick={togglePopup}/>
+            <UserIconStyled placeholder={"/images/spotown_user_placeHolder_grey.png"} onClick={togglePopup}/>
             {isOpen && <UserProfilePopup handleClose={togglePopup}/>}
         </>
     )
