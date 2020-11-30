@@ -7,7 +7,7 @@ export default function FilterBar({filters, setFilters, handleClose}) {
 
     return(
         <StyledFilterBar>
-            <FilterTags filters={filters} setFilters={setFilters} handleClose={handleClose}/>
+            <StyledFilterTags filters={filters} setFilters={setFilters} handleClose={handleClose}/>
             <StyledCloseIcon onClick={handleClose}/>
         </StyledFilterBar>
     )
@@ -15,13 +15,17 @@ export default function FilterBar({filters, setFilters, handleClose}) {
 
 const StyledFilterBar = styled.div`
 display: grid;
-grid-template-rows: 1fr;
-grid-template-columns: min-content min-content;
-width: 100%;
-padding: 5px;
+grid-template-columns:  1fr min-content 2%;
+align-items: center;
+`
+
+const StyledFilterTags = styled(FilterTags)`
+grid-column: 2;
+display: inline-flex;
 `
 
 const StyledCloseIcon = styled(MdClose)`
+  grid-column: 2;
   padding: 5px;
   justify-self: end;
   color: var(--dark-grey);

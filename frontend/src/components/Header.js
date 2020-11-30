@@ -12,8 +12,8 @@ export default function Header({headerAction, setHeaderAction, setSearchTerm, se
             <StyledHeader>
                 <h1>Discoveries</h1>
                 <StyledIcons>
-                    <SearchIcon onClick={handleSearchClick} color={headerAction}/>
-                    <FilterIcon onClick={handleFilterClick} color={headerAction}/>
+                    <SearchIcon onClick={handleSearchClick} headerAction={headerAction}/>
+                    <FilterIcon onClick={handleFilterClick} headerAction={headerAction}/>
                     <UserIcon/>
                 </StyledIcons>
             </StyledHeader>
@@ -33,16 +33,19 @@ export default function Header({headerAction, setHeaderAction, setSearchTerm, se
         } else {
             setHeaderAction("")
         }
+
+        console.log(headerAction);
     }
 
     function handleFilterClick(){
         if (headerAction !== "filter"){
-            console.log(headerAction);
              setHeaderAction("filter");
 
         } else {
              setHeaderAction("")
         }
+
+        console.log(headerAction);
 
     }
 }
@@ -50,11 +53,11 @@ export default function Header({headerAction, setHeaderAction, setSearchTerm, se
 const StyledHeaderLayout = styled.div`
 display: grid;
 grid-template-rows: min-content min-content;
+box-shadow: 0px 1px 9px 0px rgba(0,0,0,0.37);
 `
 
 const StyledActionSection = styled.div`
 height: 50px;
-padding: 5px;
 `
 
 const StyledHeader = styled.div`
@@ -67,7 +70,6 @@ font-weight: bold;
 display: grid;
 grid-template-columns: 55% 45%;
 align-items: center;
-box-shadow: 0px 1px 9px 0px rgba(0,0,0,0.37);
 `
 
 const StyledIcons = styled.div`
@@ -80,10 +82,9 @@ align-items: center;
 
 const SearchIcon = styled(FaSearch)`
 font-size: var(--size-lplus);
-color: ${props => props.headerAction === 'filter' && "var(--accent-red)"};
+color: ${(props) => props.headerAction === 'search' ? "var(--accent-red)" : "var(--dark-grey)"};
 `
 const FilterIcon = styled(BsFilter)`
 font-size: var(--size-xxl);
-
-color: ${(props) => props.headerAction === 'filter' && "var(--accent-red)"};
+color: ${(props) => props.headerAction === 'filter' ? "var(--accent-red)" : "var(--dark-grey)"};
 `
