@@ -8,20 +8,19 @@ export default function DiscoveryList({searchedDiscoveries, filters}) {
     const history = useHistory();
     const discoveries = searchedDiscoveries;
     const tags = filters;
-    const filteredDiscoveries = discoveries.filter(d => d.tags.some(t => tags.includes(t)))
+    const filteredDiscoveries =  discoveries.filter(d => d.tags.some(t => tags.includes(t)))
 
-    console.log(filteredDiscoveries);
     return (
-        <StyledList>
-            {filteredDiscoveries?.map((discovery) => (
-                <li key={discovery.id}>
-                    <div onClick={() => history.push(`/discovery/${discovery.id}`)}>
-                        <Discovery discovery={discovery}/>
-                    </div>
-                </li>
-            ))}
-        </StyledList>
-    );
+            <StyledList>
+                {filteredDiscoveries?.map((discovery) => (
+                    <li key={discovery.id}>
+                        <div onClick={() => history.push(`/discovery/${discovery.id}`)}>
+                            <Discovery discovery={discovery}/>
+                        </div>
+                    </li>
+                ))}
+            </StyledList>
+        );
 }
 
 const StyledList = styled.ul`

@@ -11,7 +11,7 @@ export default function Discoveries(){
 
     const [headerAction, setHeaderAction] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
-    const [filters, setFilters] = useState([]);
+    const [filters, setFilters] = useState([""]);
     const [footerAction, setFooterAction] = useState("list");
 
     //Live Search Logic

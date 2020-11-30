@@ -42,6 +42,7 @@ export default function Header({headerAction, setHeaderAction, searchTerm, setSe
 
         } else {
              setHeaderAction("");
+             setFilters("");
         }
     }
 }
