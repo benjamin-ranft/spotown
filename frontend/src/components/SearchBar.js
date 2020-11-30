@@ -3,13 +3,13 @@ import InputField from "./uiElements/InputField";
 import styled from "styled-components/macro";
 import {MdClose} from "react-icons/all";
 
-export default function SearchBar({setSearchTerm, handleClose}){
+export default function SearchBar({searchTerm, setSearchTerm, handleClose}){
     return(
         <StyledDiv>
         <StyledInputField
             name="search"
             placeholder="Search"
-            value={""}
+            value={searchTerm}
             onChange={handleChange}
             type="text"
         />

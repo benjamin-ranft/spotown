@@ -5,7 +5,7 @@ import UserIcon from "./icons/UserIcon";
 import SearchBar from "./SearchBar";
 import FilterBar from "./FilterBar";
 
-export default function Header({headerAction, setHeaderAction, setSearchTerm, setFilters, filters}){
+export default function Header({headerAction, setHeaderAction, searchTerm, setSearchTerm, setFilters, filters}){
 
     return(
         <StyledHeaderLayout>
@@ -18,7 +18,7 @@ export default function Header({headerAction, setHeaderAction, setSearchTerm, se
                 </StyledIcons>
             </StyledHeader>
             {headerAction === "search" && <StyledActionSection>
-                <SearchBar setSearchTerm={setSearchTerm} handleClose={handleSearchClick}/>
+                <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleClose={handleSearchClick}/>
             </StyledActionSection>}
             {headerAction === "filter" && <StyledActionSection>
                 <FilterBar filters={filters} setFilters={setFilters} handleClose={handleFilterClick}/>
@@ -31,9 +31,9 @@ export default function Header({headerAction, setHeaderAction, setSearchTerm, se
             setHeaderAction("search");
 
         } else {
-            setHeaderAction("")
+            setHeaderAction("");
+            setSearchTerm("");
         }
-
     }
 
     function handleFilterClick(){
@@ -41,11 +41,8 @@ export default function Header({headerAction, setHeaderAction, setSearchTerm, se
              setHeaderAction("filter");
 
         } else {
-             setHeaderAction("")
+             setHeaderAction("");
         }
-
-        console.log(headerAction);
-
     }
 }
 

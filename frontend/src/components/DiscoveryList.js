@@ -1,17 +1,15 @@
-import React, { useContext} from 'react';
+import React from 'react';
 import {useHistory} from "react-router-dom";
 import styled from 'styled-components/macro';
 import Discovery from "./Discovery";
-import DiscoveriesContext from "../contexts/DiscoveriesContext";
 
-export default function DiscoveryList() {
+export default function DiscoveryList({filteredDiscoveries}) {
 
-    const {discoveries} = useContext(DiscoveriesContext);
     const history = useHistory();
 
     return (
         <StyledList>
-            {discoveries?.map((discovery) => (
+            {filteredDiscoveries?.map((discovery) => (
                 <li key={discovery.id}>
                     <div onClick={() => history.push(`/discovery/${discovery.id}`)}>
                         <Discovery discovery={discovery}/>
