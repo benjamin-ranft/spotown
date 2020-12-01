@@ -4,15 +4,17 @@ import styled from "styled-components/macro";
 import AddIcon from "./icons/AddIcon";
 
 export default function Footer({footerAction, setFooterAction}){
+
     return(
         <StyledFooter>
-            <StyledListIcon onClick={handleListClick} footerAction={footerAction}/>
+            <StyledListIcon onClick={handleListClick} className={footerAction}/>
             <StyledDiv>
                 <AddIcon/>
             </StyledDiv>
-            <StyledMapIcon onClick={handleMapClick} footerAction={footerAction}/>
+            <StyledMapIcon onClick={handleMapClick} className={footerAction}/>
         </StyledFooter>
     )
+
     function handleListClick(){
         setFooterAction("list")
     }
@@ -37,7 +39,11 @@ box-shadow: 0px -1px 9px 0px rgba(0,0,0,0.37);
 
 const StyledListIcon = styled(MdList)`
 font-size: 35px;
-color: ${(props) => props.footerAction === 'list' ? "var(--accent-red)" : "var(--dark-grey)"};
+color: var(--dark-grey);
+
+&.list{
+color: var(--accent-red);
+}
 `
 
 const StyledDiv = styled.div`
@@ -49,5 +55,9 @@ right: auto;
 
 const StyledMapIcon = styled(MdExplore)`
 font-size: 35px;
-color: ${(props) => props.footerAction === 'map' ? "var(--accent-red)" : "var(--dark-grey)"};
+color: var(--dark-grey);
+
+&.map{
+color: var(--accent-red);
+}
 `

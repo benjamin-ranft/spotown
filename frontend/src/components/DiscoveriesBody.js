@@ -2,15 +2,15 @@ import React from "react";
 import DiscoveryList from "./DiscoveryList";
 import DiscoveryMap from "./discoveryMap/DiscoveryMap";
 
-export default function DiscoveriesBody ({footerAction, searchTerm, filters}){
+export default function DiscoveriesBody ({searchedDiscoveries, footerAction, searchTerm, filters}){
 
     return (
         <>
             {footerAction === "list" &&
-            <DiscoveryList searchTerm={searchTerm} filters={filters}/>
+            <DiscoveryList searchedDiscoveries={searchedDiscoveries} filters={filters}/>
             }
             {footerAction === "map" &&
-            <DiscoveryMap searchTerm={searchTerm} filters={filters}/>
+            <DiscoveryMap searchedDiscoveries={searchedDiscoveries} searchTerm={searchTerm} filters={filters}/>
             }
         </>
     )

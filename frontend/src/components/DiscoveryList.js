@@ -1,25 +1,32 @@
-import React, { useContext} from 'react';
+import React from 'react';
 import {useHistory} from "react-router-dom";
 import styled from 'styled-components/macro';
 import Discovery from "./Discovery";
-import DiscoveriesContext from "../contexts/DiscoveriesContext";
 
-export default function DiscoveryList() {
+export default function DiscoveryList({searchedDiscoveries, filters}) {
 
-    const {discoveries} = useContext(DiscoveriesContext);
     const history = useHistory();
+    const discoveries = searchedDiscoveries;
+    const tags = filters;
+    const filteredDiscoveries = discoveries.filter(d => d.tags.some(t => tags.includes(t)))
 
     return (
-        <StyledList>
-            {discoveries?.map((discovery) => (
-                <li key={discovery.id}>
-                    <div onClick={() => history.push(`/discovery/${discovery.id}`)}>
-                        <Discovery discovery={discovery}/>
-                    </div>
-                </li>
-            ))}
-        </StyledList>
-    );
+            <StyledList>
+                {filters? filteredDiscoveries?.map((discovery) => (
+                    <li key={discovery.id}>
+                        <div onClick={() => history.push(`/discovery/${discovery.id}`)}>
+                            <Discovery discovery={discovery}/>
+                        </div>
+                    </li>
+                )) : discoveries?.map((discovery) => (
+                        <li key={discovery.id}>
+                            <div onClick={() => history.push(`/discovery/${discovery.id}`)}>
+                                <Discovery discovery={discovery}/>
+                            </div>
+                        </li>
+                    ))}
+            </StyledList>
+        );
 }
 
 const StyledList = styled.ul`
