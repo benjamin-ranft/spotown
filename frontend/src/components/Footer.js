@@ -4,6 +4,7 @@ import styled from "styled-components/macro";
 import AddIcon from "./icons/AddIcon";
 
 export default function Footer({footerAction, setFooterAction}){
+
     return(
         <StyledFooter>
             <StyledListIcon onClick={handleListClick} className={footerAction}/>
@@ -13,6 +14,7 @@ export default function Footer({footerAction, setFooterAction}){
             <StyledMapIcon onClick={handleMapClick} className={footerAction}/>
         </StyledFooter>
     )
+
     function handleListClick(){
         setFooterAction("list")
     }

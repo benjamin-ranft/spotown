@@ -11,7 +11,7 @@ export default function Discoveries(){
 
     const [headerAction, setHeaderAction] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
-    const [filters, setFilters] = useState([""]);
+    const [filters, setFilters] = useState([]);
     const [footerAction, setFooterAction] = useState("list");
 
     //Live Search Logic
@@ -22,7 +22,6 @@ export default function Discoveries(){
         (term.phoneNumber.toLowerCase().includes(lowerCaseSearchTerm)) ||
         (term.notes.toLowerCase().includes(lowerCaseSearchTerm))
     )
-    console.log(searchedDiscoveries);
 
     return(
         <PageLayout>
