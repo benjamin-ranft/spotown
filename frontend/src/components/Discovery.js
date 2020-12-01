@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import TimeAgo from "react-timeago/lib";
 
 export default function Discovery({ discovery }) {
+
     return (
         <DiscoveryStyled>
             <StyledThumbnail>
@@ -13,7 +15,9 @@ export default function Discovery({ discovery }) {
                     <p>{discovery.address}</p>
                 </NameAndAddress>
                 <CreationDate>
-                    <p>3 days ago</p>
+                    <p>
+                        <TimeAgo date={discovery.timestamp}/>
+                    </p>
                 </CreationDate>
             </StyledDiscoveryContentShort>
         </DiscoveryStyled>
