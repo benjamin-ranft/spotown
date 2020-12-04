@@ -8,6 +8,7 @@ import DiscoveriesContextProvider from "./contexts/DiscoveriesContextProvider";
 import AddDiscoveryPage from "./components/AddDiscoveryPage";
 import DiscoveryDetails from "./components/DiscoveryDetails";
 import UpdateDiscoveryPage from "./components/updateDiscovery/UpdateDiscoveryPage";
+import AddDiscoveryPreSelect from "./components/AddDiscoveryPreSelect";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
             <Switch>
                 <Route path="/login" component={LoginPage}/>
                 <ProtectedRoute path="/discoveries" component={Discoveries}/>
-                <ProtectedRoute path="/new" component={AddDiscoveryPage}/>
+                <ProtectedRoute path="/new" component={AddDiscoveryPreSelect}/>
+                <ProtectedRoute path="/new/confirm" component={AddDiscoveryPage}/>
                 <ProtectedRoute path="/discovery/:id" component={DiscoveryDetails}/>
                 <ProtectedRoute path="/edit/:id" component={UpdateDiscoveryPage}/>
                 <Route path="/">
