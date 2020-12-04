@@ -17,7 +17,7 @@ function App() {
             <Switch>
                 <Route path="/login" component={LoginPage}/>
                 <ProtectedRoute path="/discoveries" component={Discoveries}/>
-                <ProtectedRoute path="/new" component={AddDiscoveryPreSelect}/>
+                <ProtectedRoute path="/new/select" component={AddDiscoveryPreSelect}/>
                 <ProtectedRoute path="/new/confirm" component={AddDiscoveryPage}/>
                 <ProtectedRoute path="/discovery/:id" component={DiscoveryDetails}/>
                 <ProtectedRoute path="/edit/:id" component={UpdateDiscoveryPage}/>

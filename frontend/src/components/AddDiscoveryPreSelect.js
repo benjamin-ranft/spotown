@@ -33,8 +33,6 @@ export default function AddDiscoveryPreSelect(){
     function handleGoBack(){
         history.goBack();
     }
-
-
 }
 
 const StyledDiscoveryPage = styled.div`
@@ -115,5 +113,6 @@ grid-row: 2;
 
 h1{
 justify-self: center;
+font-size: var(--size-xl);
 }
 `
