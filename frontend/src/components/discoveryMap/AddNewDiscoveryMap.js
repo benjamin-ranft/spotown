@@ -214,7 +214,7 @@ border-radius: 100px;
 background-color: var(--light-grey);
 color: var(--dark-grey);
 justify-self: center;
-padding: 10px;
+padding: 8px 16px;
 width: 100%;
 border: none;
 
