@@ -66,87 +66,63 @@ export default function AddNewDiscoveryMap(){
     if (!isLoaded) return "Loading Maps";
 
     return(
-        <MapLayout>
-            <MapControls>
-                <Search panTo={panTo} />
-                <Locate panTo={panTo} />
-            </MapControls>
-            <MapCanvas>
-                <GoogleMap
-                    mapContainerStyle={mapContainerStyle}
-                    zoom={14}
-                    center={center}
-                    options={options}
-                    onClick={onMapClick}
-                    onLoad={onMapLoad}
-                >
-                    {markers.map((marker) => (
-                    <Marker
+        <>
+            <Search panTo={panTo} />
+            <Locate panTo={panTo} />
+            <GoogleMap
+                mapContainerStyle={mapContainerStyle}
+                zoom={14}
+                center={center}
+                options={options}
+                onClick={onMapClick}
+                onLoad={onMapLoad}
+            >
+                {markers.map((marker) => (<Marker
                         key={marker.time.toISOString()}
                         position={{lat:marker.lat, lng: marker.lng}}
                     />
                 ))}
-                </GoogleMap>
-            </MapCanvas>
-        </MapLayout>
+            </GoogleMap>
+        </>
     )
 }
-
-const MapLayout = styled.div`
-display: grid;
-grid-template-columns: 23px 1fr 23px;
-grid-template-rows: min-content 1fr;
-row-gap: 16px;
-height: 100%;
-`
-
-const MapControls = styled.div`
-display: grid;
-margin-top: 8px;
-grid-column: 2;
-grid-template-columns: 1fr min-content;
-grid-row: 1;
-`
-
-const MapCanvas = styled.div`
-display: block;
-grid-row: 2;
-grid-column-start: 1;
-grid-column-end: 4;
-`
 
 
 function Locate({ panTo }) {
     return (
-        <StyledLocateButton
-            onClick={() => {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        panTo({
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude,
-                        });
-                    },
-                    () => null
-                );
-            }}
-        >
-            <StyledLocatorIcon/>
-        </StyledLocateButton>
+        <LocateLayout>
+            <StyledButton
+                onClick={() => {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            panTo({
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude,
+                            });
+                        },
+                        () => null
+                    );
+                }}
+            >
+                <StyledLocatorIcon/>
+            </StyledButton>
+        </LocateLayout>
     );
 }
 
-const StyledLocateButton = styled.button`
+const LocateLayout = styled.div`
+position: absolute;
+z-index: 10;
+right: 0;
+`
+
+const StyledButton = styled.button`
 background-color: transparent;
 border-color: transparent;
-margin-left: 6px;
-:focus{
-display: none;
-}
 `
 
 const StyledLocatorIcon = styled(MdMyLocation)`
-font-size: 36px;
+font-size: 40px;
 background-color: white;
 border-width: thin;
 border-color: var(--light-grey);
@@ -154,6 +130,7 @@ border-style: solid;
 padding: 5px;
 color: var(--accent-red);
 border-radius: 100px;
+box-shadow: var(--center-box-shadow);
 `
 
 function Search({panTo}) {
@@ -165,8 +142,8 @@ function Search({panTo}) {
         clearSuggestions,
     } = usePlacesAutocomplete({
         requestOptions: {
-            location: {lat: () => 43.6532, lng: () => -79.3832},
-            radius: 100 * 1000,
+            location: {lat: () => 53.551086, lng: () => 9.993682},
+            radius: 1000,
         },
     });
 
@@ -188,9 +165,10 @@ function Search({panTo}) {
     };
 
     return (
-        <>
+        <StyledDiv>
+        <ComboboxLayout>
             <Combobox onSelect={handleSelect}>
-                <StyledComboboxInput
+                <ComboboxInput
                     value={value}
                     onChange={handleInput}
                     disabled={!ready}
@@ -205,21 +183,17 @@ function Search({panTo}) {
                     </ComboboxList>
                 </ComboboxPopover>
             </Combobox>
-        </>
+        </ComboboxLayout>
+        </StyledDiv>
     );
 }
 
-const StyledComboboxInput = styled(ComboboxInput)`
-border-radius: 100px;
-background-color: var(--light-grey);
-color: var(--dark-grey);
+const StyledDiv = styled.div`
+display: grid;
+grid-template-columns: 23px 1fr 23px;
+`
+
+const ComboboxLayout = styled.div`
+grid-column: 2;
 justify-self: center;
-padding: 8px 16px;
-width: 100%;
-border: none;
-
-:focus{
-display: none;
-}
-
 `
