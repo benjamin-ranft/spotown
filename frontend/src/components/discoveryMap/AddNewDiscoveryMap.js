@@ -57,7 +57,7 @@ export default function AddNewDiscoveryMap(){
         mapRef.current = map;
     }, [])
 
-    const panTo = React.useCallback(({ lat, lng }) => {
+    const panTo = useCallback(({ lat, lng }) => {
         mapRef.current.panTo({ lat, lng });
         mapRef.current.setZoom(14);
     }, []);
