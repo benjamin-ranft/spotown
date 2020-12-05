@@ -1,4 +1,4 @@
-import React, {useCallback, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {GoogleMap, Marker, useLoadScript} from "@react-google-maps/api";
 import MapStyles from "./MapStyles";
 import styled from "styled-components/macro";
@@ -6,7 +6,7 @@ import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
 } from "use-places-autocomplete";
-
+import axios from 'axios';
 import {
     Combobox,
     ComboboxInput,
@@ -34,23 +34,55 @@ const options = {
 
 export default function AddNewDiscoveryMap(){
 
+    const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        googleMapsApiKey: key,
         libraries,
     });
 
-    const [markers, setMarkers] = useState([])
+    const [marker, setMarker] = useState({});
+    const [placeId, setPlaceId] = useState("");
+    const [placeDetails, setPlaceDetails] = useState([]);
+
+
+//Gets PlaceId from latLng
+    useEffect(() => {
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${marker.lat},${marker.lng}&key=${key}`;
+        axios
+            .get(url)
+            .then((response) => response.data)
+            .then((data) => {
+                const getPlaceId = data.results[0].place_id;
+                setPlaceId(getPlaceId);
+            })
+            .catch(console.error);
+    },[marker]);
+
+    //Gets PlaceDetails from PlaceId  TODO FIX NOT WORKING REQUEST
+    useEffect(() => {
+        const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,formatted_phone_number&key=${key}`;
+        axios
+            .get(url)
+            .then((response) => response.data)
+            .then((data) => {
+                console.log(data);
+                setPlaceDetails(data);
+                console.log(placeDetails);
+            })
+            .catch(console.error);
+    },[placeId])
+
 
     const onMapClick = useCallback((e) => {
-        setMarkers((current) => [
-            ...current,
+        setMarker(
             {
                 lat: e.latLng.lat(),
-                lng: e.latLng.lng(),
-                time: new Date(),
+                lng: e.latLng.lng()
             },
-        ]);
+        );
     }, []);
+
 
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
@@ -77,11 +109,10 @@ export default function AddNewDiscoveryMap(){
                 onClick={onMapClick}
                 onLoad={onMapLoad}
             >
-                {markers.map((marker) => (<Marker
-                        key={marker.time.toISOString()}
+                <Marker
+                        marker={marker}
                         position={{lat:marker.lat, lng: marker.lng}}
                     />
-                ))}
             </GoogleMap>
         </>
     )
@@ -110,28 +141,6 @@ function Locate({ panTo }) {
     );
 }
 
-const LocateLayout = styled.div`
-position: absolute;
-z-index: 10;
-right: 0;
-`
-
-const StyledButton = styled.button`
-background-color: transparent;
-border-color: transparent;
-`
-
-const StyledLocatorIcon = styled(MdMyLocation)`
-font-size: 40px;
-background-color: white;
-border-width: thin;
-border-color: var(--light-grey);
-border-style: solid;
-padding: 5px;
-color: var(--accent-red);
-border-radius: 100px;
-box-shadow: var(--center-box-shadow);
-`
 
 function Search({panTo}) {
     const {
@@ -160,7 +169,7 @@ function Search({panTo}) {
             const { lat, lng } = await getLatLng(results[0]);
             panTo({ lat, lng });
         } catch (error) {
-            console.log("😱 Error: ", error);
+            console.log("Error: ", error);
         }
     };
 
@@ -196,4 +205,27 @@ grid-template-columns: 23px 1fr 23px;
 const ComboboxLayout = styled.div`
 grid-column: 2;
 justify-self: center;
+`
+
+const LocateLayout = styled.div`
+position: absolute;
+z-index: 10;
+right: 0;
+`
+
+const StyledButton = styled.button`
+background-color: transparent;
+border-color: transparent;
+`
+
+const StyledLocatorIcon = styled(MdMyLocation)`
+font-size: 40px;
+background-color: white;
+border-width: thin;
+border-color: var(--light-grey);
+border-style: solid;
+padding: 5px;
+color: var(--accent-red);
+border-radius: 100px;
+box-shadow: var(--center-box-shadow);
 `
