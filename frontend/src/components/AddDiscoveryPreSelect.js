@@ -12,7 +12,7 @@ export default function AddDiscoveryPreSelect(){
         <StyledDiscoveryPage>
             <StyledAddHeader>
                 <StyledBackButton onClick={handleGoBack}/>
-                <h1>SELECT</h1>
+                <h1>NEAR YOU</h1>
             </StyledAddHeader>
             <StyledMapContainer>
                 <AddNewDiscoveryMap/>
@@ -113,6 +113,6 @@ grid-row: 2;
 
 h1{
 justify-self: center;
-font-size: var(--size-xl);
+font-size: 20px;
 }
 `

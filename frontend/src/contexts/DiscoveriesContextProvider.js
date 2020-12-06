@@ -31,7 +31,7 @@ export default function DiscoveriesContextProvider({ children }) {
 
 
     return (
-        <DiscoveriesContext.Provider value={{discoveries,create, update, remove}}>
+        <DiscoveriesContext.Provider value={{discoveries, setDiscoveries, create, update, remove}}>
             {children}
         </DiscoveriesContext.Provider>
     );

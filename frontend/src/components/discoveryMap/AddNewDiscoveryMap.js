@@ -1,10 +1,11 @@
-import React, {useCallback, useRef, useState} from "react";
+import React, {useCallback, useContext, useRef, useState} from "react";
 import {GoogleMap, Marker, useLoadScript} from "@react-google-maps/api";
 import MapStyles from "./MapStyles";
 import styled from "styled-components/macro";
 import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
+    getDetails,
 } from "use-places-autocomplete";
 import {
     Combobox,
@@ -15,6 +16,7 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 import {MdMyLocation} from "react-icons/all";
+import DiscoveriesContext from "../../contexts/DiscoveriesContext";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -41,6 +43,7 @@ export default function AddNewDiscoveryMap(){
     });
 
     const [center, setCenter] = useState(centerHamburg)
+    const {discoveries, setDiscoveries} = useContext(DiscoveriesContext);
 
 //Gets PlaceId from latLng
     /*useEffect(() => {
@@ -72,7 +75,7 @@ export default function AddNewDiscoveryMap(){
 
     return(
         <>
-            <Search panTo={panTo} center={center}/>
+            <Search panTo={panTo} center={center} setCenter={setCenter} setDiscoveries={setDiscoveries}/>
             <Locate panTo={panTo} setCenter={setCenter} />
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
@@ -115,7 +118,7 @@ function Locate({ panTo, setCenter }) {
 }
 
 
-function Search({panTo, center}) {
+function Search({panTo, center, setCenter, setDiscoveries}) {
     const {
         ready,
         value,
@@ -140,8 +143,12 @@ function Search({panTo, center}) {
 
         try {
             const results = await getGeocode({ address });
+            const placeId = results[0].place_id;
+            const placeDetails = await getDetails({placeId: placeId, fields: ["name"]})
             const { lat, lng } = await getLatLng(results[0]);
             panTo({ lat, lng });
+            console.log(placeDetails.name);
+
         } catch (error) {
             console.log("Error: ", error);
         }
@@ -174,6 +181,7 @@ function Search({panTo, center}) {
 const StyledDiv = styled.div`
 display: grid;
 grid-template-columns: 23px 1fr 23px;
+margin: 15px 0;
 `
 
 const ComboboxLayout = styled.div`
