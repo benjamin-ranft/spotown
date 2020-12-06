@@ -1,4 +1,5 @@
 import React, {useCallback, useContext, useRef, useState} from "react";
+import {useHistory} from "react-router-dom";
 import {GoogleMap, Marker, useLoadScript} from "@react-google-maps/api";
 import MapStyles from "./MapStyles";
 import styled from "styled-components/macro";
@@ -36,6 +37,7 @@ const options = {
 export default function AddNewDiscoveryMap(){
 
     const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+    const history = useHistory();
 
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: key,
@@ -75,7 +77,7 @@ export default function AddNewDiscoveryMap(){
 
     return(
         <>
-            <Search panTo={panTo} center={center} setCenter={setCenter} setDiscoveries={setDiscoveries}/>
+            <Search panTo={panTo} center={center} setCenter={setCenter} setDiscoveries={setDiscoveries} history={history}/>
             <Locate panTo={panTo} setCenter={setCenter} />
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
@@ -118,7 +120,7 @@ function Locate({ panTo, setCenter }) {
 }
 
 
-function Search({panTo, center, setCenter, setDiscoveries}) {
+function Search({panTo, center, setCenter, setDiscoveries, history}) {
     const {
         ready,
         value,
@@ -144,10 +146,12 @@ function Search({panTo, center, setCenter, setDiscoveries}) {
         try {
             const results = await getGeocode({ address });
             const placeId = results[0].place_id;
-            const placeDetails = await getDetails({placeId: placeId, fields: ["name"]})
+            const placeDetails = await getDetails({placeId: placeId, fields: ["name", "formatted_address", "photos", "website", "international_phone_number",]})
             const { lat, lng } = await getLatLng(results[0]);
             panTo({ lat, lng });
-            console.log(placeDetails.name);
+            history.push("/new/confirm")
+
+            //console.log(placeDetails.photos[0].getUrl({maxWidth: 400, maxHeight: 400}));
 
         } catch (error) {
             console.log("Error: ", error);
