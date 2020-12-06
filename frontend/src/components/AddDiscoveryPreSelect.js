@@ -37,7 +37,7 @@ export default function AddDiscoveryPreSelect(){
 
 const StyledDiscoveryPage = styled.div`
 display: grid;
-grid-template-rows: 23px min-content 1fr 1fr 23px;
+grid-template-rows: 23px min-content 1fr min-content 23px;
 height: 100vh;
 grid-template-columns: 23px 1fr 23px;
 `
@@ -45,19 +45,17 @@ grid-template-columns: 23px 1fr 23px;
 const StyledMapContainer = styled.div`
 grid-column-start: 1;
 grid-column-end: 4;
-grid-row: 3;
+grid-row: 3/5;
 `
 
 const StyledOverlappingCard = styled.div`
-background-color: var(--white);
 grid-row-start: 4;
 grid-row-end: 6;
 grid-column-start: 1;
 grid-column-end: 4;
-box-shadow: var(--center-box-shadow);
 display: grid;
 grid-template-columns: 23px 1fr 23px;
-grid-template-rows: 1fr min-content 23px;
+grid-template-rows: min-content min-content 23px;
 z-index: 10;
 `
 
@@ -69,8 +67,10 @@ const StyledManualAddButton = styled.a`
 grid-column: 2;
 grid-row: 2;
 justify-self: center;
+background-color: white;
 padding: 10px;
 border-color: var(--dark-grey);
+box-shadow: var(--center-box-shadow);
 border-style: solid;
 border-width: 2px;
 border-radius: 10px;

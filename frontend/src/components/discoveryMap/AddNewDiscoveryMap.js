@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useCallback, useRef, useState} from "react";
 import {GoogleMap, Marker, useLoadScript} from "@react-google-maps/api";
 import MapStyles from "./MapStyles";
 import styled from "styled-components/macro";
@@ -6,7 +6,6 @@ import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
 } from "use-places-autocomplete";
-import axios from 'axios';
 import {
     Combobox,
     ComboboxInput,
@@ -22,9 +21,9 @@ const mapContainerStyle = {
     width: "100vw",
     height: "100%",
 };
-const center = {
+const centerHamburg = {
     lat: 53.551086,
-    lng: 9.993682,
+    lng: 9.993682
 }
 
 const options = {
@@ -41,47 +40,21 @@ export default function AddNewDiscoveryMap(){
         libraries,
     });
 
-    const [marker, setMarker] = useState({});
-    const [placeId, setPlaceId] = useState("");
-    const [placeDetails, setPlaceDetails] = useState([]);
-
+    const [center, setCenter] = useState(centerHamburg)
 
 //Gets PlaceId from latLng
-    useEffect(() => {
+    /*useEffect(() => {
         const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${marker.lat},${marker.lng}&key=${key}`;
         axios
             .get(url)
             .then((response) => response.data)
             .then((data) => {
-                const getPlaceId = data.results[0].place_id;
+                const getPlaceId = data.results[0].formatted_address;
                 setPlaceId(getPlaceId);
+                console.log(placeId);
             })
             .catch(console.error);
-    },[marker]);
-
-    //Gets PlaceDetails from PlaceId  TODO FIX NOT WORKING REQUEST
-    useEffect(() => {
-        const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,formatted_phone_number&key=${key}`;
-        axios
-            .get(url)
-            .then((response) => response.data)
-            .then((data) => {
-                console.log(data);
-                setPlaceDetails(data);
-                console.log(placeDetails);
-            })
-            .catch(console.error);
-    },[placeId])
-
-
-    const onMapClick = useCallback((e) => {
-        setMarker(
-            {
-                lat: e.latLng.lat(),
-                lng: e.latLng.lng()
-            },
-        );
-    }, []);
+    },[marker]);*/
 
 
     const mapRef = useRef();
@@ -99,27 +72,23 @@ export default function AddNewDiscoveryMap(){
 
     return(
         <>
-            <Search panTo={panTo} />
-            <Locate panTo={panTo} />
+            <Search panTo={panTo} center={center}/>
+            <Locate panTo={panTo} setCenter={setCenter} />
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
                 zoom={14}
                 center={center}
                 options={options}
-                onClick={onMapClick}
                 onLoad={onMapLoad}
             >
-                <Marker
-                        marker={marker}
-                        position={{lat:marker.lat, lng: marker.lng}}
-                    />
+                <Marker position={center}/>
             </GoogleMap>
         </>
     )
 }
 
 
-function Locate({ panTo }) {
+function Locate({ panTo, setCenter }) {
     return (
         <LocateLayout>
             <StyledButton
@@ -128,7 +97,11 @@ function Locate({ panTo }) {
                         (position) => {
                             panTo({
                                 lat: position.coords.latitude,
-                                lng: position.coords.longitude,
+                                lng: position.coords.longitude
+                            });
+                            setCenter({
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
                             });
                         },
                         () => null
@@ -142,7 +115,7 @@ function Locate({ panTo }) {
 }
 
 
-function Search({panTo}) {
+function Search({panTo, center}) {
     const {
         ready,
         value,
@@ -151,8 +124,9 @@ function Search({panTo}) {
         clearSuggestions,
     } = usePlacesAutocomplete({
         requestOptions: {
-            location: {lat: () => 53.551086, lng: () => 9.993682},
-            radius: 1000,
+            location: {lat: () => center.lat, lng: () => center.lng},
+            radius: 500,
+            types: ['establishment']
         },
     });
 
