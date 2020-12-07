@@ -9,13 +9,13 @@ const header = (token) => ({
 export const getDiscoveries = (token) =>
     axios.get('/api/discoveries', header(token)).then((response) => response.data);
 
-export const addDiscovery = (name, address, webUrl, phoneNumber, notes, tags, token) =>
-    axios.post("/api/discoveries", {name, address, webUrl, phoneNumber, notes, tags}, header(token))
+export const addDiscovery = (name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags, token) =>
+    axios.post("/api/discoveries", {name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags}, header(token))
         .then((response) => response.data);
 
-export const updateDiscovery = (id, timestamp, name, address, thumbnail, openingHours, phoneNumber, webUrl, directions, notes, tags, token) =>
+export const updateDiscovery = (id, timestamp, name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags, token) =>
     axios
-        .put("/api/discoveries/" + id, {id, timestamp, name, address, thumbnail, openingHours, phoneNumber, webUrl, directions, notes, tags, token}, header(token))
+        .put("/api/discoveries/" + id, {id, timestamp, name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags, token}, header(token))
         .then((response)=>response.data);
 
 export const removeDiscovery = (id, token) =>
