@@ -59,23 +59,61 @@ public class DiscoveryControllerIntegrationTest {
                         "benjamin",
                         passwordBenjamin,
                         new ArrayList<>(List.of(
-                                new Discovery("5624", timestamp, "Ramen Place", "Sample Street 1", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                                        new ArrayList<>(List.of("food", "art"))),
-                                new Discovery("5634", timestamp, "Pasta Place", "Sample Street 2", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
+                                new Discovery("5624", timestamp, "Sushi Place",
+                                        "GHSF4KIUHKJ",
+                                        "34905480395232",
+                                        "565774534",
+                                        "Sample Street 2",
+                                        "https://google.com",
+                                        "04023457596",
+                                        "https://google.com",
+                                        "https://google.com",
+                                        "Sample notes sample notes sample notes",
+                                        new ArrayList<>(List.of("drinks", "nature"))
+                                ),
+                                new Discovery("5634", timestamp, "Pizza Place",
+                                        "GHSF1KIUHKJ",
+                                        "34905480395232",
+                                        "565774534",
+                                        "Sample Street 1",
+                                        "https://google.com",
+                                        "04023457596",
+                                        "https://google.com",
+                                        "https://google.com",
+                                        "Sample notes sample notes sample notes",
                                         new ArrayList<>(List.of("food", "art")))
-                        ))
-                ),
+                        )
+                )),
+
                 new User(
                         "heinz",
                         passwordHeinz,
                         new ArrayList<>(List.of(
-                                new Discovery("123", timestamp, "Pizza Place", "Sample Street 3", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                                        new ArrayList<>(List.of("nature", "art"))),
-                                new Discovery("456", timestamp, "Sushi Place", "Sample Street 4", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                                        new ArrayList<>(List.of("drink", "nature")))
+                                new Discovery("123", timestamp, "Bread Place",
+                                        "GHSF4KIUHKJ",
+                                        "34905480395232",
+                                        "565774534",
+                                        "Sample Street 2",
+                                        "https://google.com",
+                                        "04023457596",
+                                        "https://google.com",
+                                        "https://google.com",
+                                        "Sample notes sample notes sample notes",
+                                        new ArrayList<>(List.of("drinks", "nature"))
+                                ),
+                                new Discovery("456", timestamp, "Burger Place",
+                                        "GHSF1KIUHKJ",
+                                        "34905480395232",
+                                        "565774534",
+                                        "Sample Street 1",
+                                        "https://google.com",
+                                        "04023457596",
+                                        "https://google.com",
+                                        "https://google.com",
+                                        "Sample notes sample notes sample notes",
+                                        new ArrayList<>(List.of("food", "art")))
                         ))
-                )
-        ));
+        )));
     }
 
         private String backendAccessLink(){
@@ -109,12 +147,32 @@ public void  getDiscoveriesTest(){
         ResponseEntity<Discovery[]> response = testRestTemplate.exchange(url, HttpMethod.GET, entity, Discovery[].class);
 
         List<Discovery> expectedList = new ArrayList<>(List.of(
-                new Discovery("123", Instant.parse("2020-11-18T18:35:24.00Z"), "Pizza Place", "Sample Street 3", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                        new ArrayList<>(List.of("nature", "art"))),
-                new Discovery("456", Instant.parse("2020-11-18T18:35:24.00Z"), "Sushi Place", "Sample Street 4", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                        new ArrayList<>(List.of("drink", "nature")))
-
-        ));
+                new Discovery("123", Instant.parse("2020-11-18T18:35:24.00Z"), "Bread Place",
+                        "GHSF4KIUHKJ",
+                        "34905480395232",
+                        "565774534",
+                        "Sample Street 2",
+                        "https://google.com",
+                        "04023457596",
+                        "https://google.com",
+                        "https://google.com",
+                        "Sample notes sample notes sample notes",
+                        new ArrayList<>(List.of("drinks", "nature"))
+                ),
+                new Discovery("456", Instant.parse("2020-11-18T18:35:24.00Z"), "Burger Place",
+                        "GHSF1KIUHKJ",
+                        "34905480395232",
+                        "565774534",
+                        "Sample Street 1",
+                        "https://google.com",
+                        "04023457596",
+                        "https://google.com",
+                        "https://google.com",
+                        "Sample notes sample notes sample notes",
+                        new ArrayList<>(List.of("food", "art"))
+                )
+        )
+        );
 
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody(), is(expectedList.toArray()));
@@ -128,8 +186,18 @@ public void  getDiscoveriesTest(){
         String url = backendAccessLink();
 
         AddDiscoveryDto addDiscoveryDto = new AddDiscoveryDto(
-                "Fun Discovery", "Fun address Str. 12, 20253 Hamburg", "https://google.com", "345678976543", "Fun notes fun notes fun notes fun notes", new ArrayList<>(
-                        List.of("restaurant","art"))
+                "Sushi Place",
+                "GHSF4KIUHKJ",
+                "34905480395232",
+                "565774534",
+                "Sample Street 2",
+                "https://google.com",
+                "04023457596",
+                "https://google.com",
+                "https://google.com",
+                "Sample notes sample notes sample notes",
+                new ArrayList<>(List.of("restaurant", "gallery"))
+
         );
 
         //WHEN
@@ -145,19 +213,60 @@ public void  getDiscoveriesTest(){
                 "heinz",
                 "$2a$10$0HZGmicEH786L.HeSIjhOuvIK3ixlYij4luVHBNAUtXqKus79t/FS",
                 new ArrayList<>(List.of(
-                        new Discovery("123", expectedTimestamp, "Pizza Place", "Sample Street 3", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                                new ArrayList<>(List.of("nature", "art"))),
-                        new Discovery("456", expectedTimestamp, "Sushi Place", "Sample Street 4", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                                new ArrayList<>(List.of("drink", "nature"))),
+                        new Discovery("123", expectedTimestamp, "Bread Place",
+                                "GHSF4KIUHKJ",
+                                "34905480395232",
+                                "565774534",
+                                "Sample Street 2",
+                                "https://google.com",
+                                "04023457596",
+                                "https://google.com",
+                                "https://google.com",
+                                "Sample notes sample notes sample notes",
+                                new ArrayList<>(List.of("drinks", "nature"))
+                        ),
+                        new Discovery("456", expectedTimestamp, "Burger Place",
+                                "GHSF1KIUHKJ",
+                                "34905480395232",
+                                "565774534",
+                                "Sample Street 1",
+                                "https://google.com",
+                                "04023457596",
+                                "https://google.com",
+                                "https://google.com",
+                                "Sample notes sample notes sample notes",
+                                new ArrayList<>(List.of("food", "art"))
+                        ),
                         new Discovery(
-                                "1234", expectedTimestamp, "Fun Discovery", "Fun address Str. 12, 20253 Hamburg",null, null, "345678976543", "https://google.com", null, "Fun notes fun notes fun notes fun notes", new ArrayList<>(
-                                List.of("restaurant","art"))
-
-        )))));
+                                "1234", expectedTimestamp,
+                                "Sushi Place",
+                                "GHSF4KIUHKJ",
+                                "34905480395232",
+                                "565774534",
+                                "Sample Street 2",
+                                "https://google.com",
+                                "04023457596",
+                                "https://google.com",
+                                "https://google.com",
+                                "Sample notes sample notes sample notes",
+                                new ArrayList<>(List.of("restaurant", "gallery")))
+                        )
+                ))
+        );
 
         Discovery expectedDiscovery = new Discovery(
-                "1234", expectedTimestamp, "Fun Discovery", "Fun address Str. 12, 20253 Hamburg",null, null, "345678976543", "https://google.com", null, "Fun notes fun notes fun notes fun notes", new ArrayList<>(
-                List.of("restaurant","art"))
+                "1234", expectedTimestamp,
+                "Sushi Place",
+                "GHSF4KIUHKJ",
+                "34905480395232",
+                "565774534",
+                "Sample Street 2",
+                "https://google.com",
+                "04023457596",
+                "https://google.com",
+                "https://google.com",
+                "Sample notes sample notes sample notes",
+                new ArrayList<>(List.of("restaurant", "gallery"))
         );
 
         //THEN
@@ -173,8 +282,18 @@ public void  getDiscoveriesTest(){
         //GIVEN
         String url = backendAccessLink() + "/123";
 
-        UpdateDiscoveryDto updatedDiscovery = new UpdateDiscoveryDto("123", "Pizza Place 99", "Sample Street 3", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                new ArrayList<>(List.of("nature", "art")));
+        UpdateDiscoveryDto updatedDiscovery = new UpdateDiscoveryDto("123","Bread Place 99",
+                "GHSF4KIUHKJ",
+                "34905480395232",
+                "565774534",
+                "Sample Street 2",
+                "https://google.com",
+                "04023457596",
+                "https://google.com",
+                "https://google.com",
+                "Sample notes sample notes sample notes",
+                new ArrayList<>(List.of("drinks", "nature"))
+        );
 
         //WHEN
         when(timestampUtils.generateTimestampEpochSeconds()).thenReturn(Instant.parse("2020-11-18T18:35:24.00Z"));
@@ -188,15 +307,42 @@ public void  getDiscoveriesTest(){
                 "heinz",
                 "$2a$10$0HZGmicEH786L.HeSIjhOuvIK3ixlYij4luVHBNAUtXqKus79t/FS",
                 new ArrayList<>(List.of(
-                        new Discovery("123", expectedTimestamp, "Pizza Place 99", "Sample Street 3", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                                new ArrayList<>(List.of("nature", "art"))),
-                        new Discovery("456", expectedTimestamp, "Sushi Place", "Sample Street 4", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                                new ArrayList<>(List.of("drink", "nature")))
+                        new Discovery("123", expectedTimestamp, "Bread Place 99",
+                                "GHSF4KIUHKJ",
+                                "34905480395232",
+                                "565774534",
+                                "Sample Street 2",
+                                "https://google.com",
+                                "04023457596",
+                                "https://google.com",
+                                "https://google.com",
+                                "Sample notes sample notes sample notes",
+                                new ArrayList<>(List.of("drinks", "nature"))),
+                        new Discovery("456", expectedTimestamp, "Burger Place",
+                                "GHSF1KIUHKJ",
+                                "34905480395232",
+                                "565774534",
+                                "Sample Street 1",
+                                "https://google.com",
+                                "04023457596",
+                                "https://google.com",
+                                "https://google.com",
+                                "Sample notes sample notes sample notes",
+                                new ArrayList<>(List.of("food", "art")))
                         ))));
 
         Discovery expectedDiscovery = new Discovery(
-                "123", expectedTimestamp, "Pizza Place 99", "Sample Street 3", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                new ArrayList<>(List.of("nature", "art"))
+                "123", expectedTimestamp, "Bread Place 99",
+                "GHSF4KIUHKJ",
+                "34905480395232",
+                "565774534",
+                "Sample Street 2",
+                "https://google.com",
+                "04023457596",
+                "https://google.com",
+                "https://google.com",
+                "Sample notes sample notes sample notes",
+                new ArrayList<>(List.of("drinks", "nature"))
         );
 
 
@@ -223,8 +369,17 @@ public void  getDiscoveriesTest(){
                 "heinz",
                 "$2a$10$0HZGmicEH786L.HeSIjhOuvIK3ixlYij4luVHBNAUtXqKus79t/FS",
                 new ArrayList<>(List.of(
-                        new Discovery("456", expectedTimestamp, "Sushi Place", "Sample Street 4", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                                new ArrayList<>(List.of("drink", "nature")))
+                        new Discovery("456", expectedTimestamp, "Burger Place",
+                                "GHSF1KIUHKJ",
+                                "34905480395232",
+                                "565774534",
+                                "Sample Street 1",
+                                "https://google.com",
+                                "04023457596",
+                                "https://google.com",
+                                "https://google.com",
+                                "Sample notes sample notes sample notes",
+                                new ArrayList<>(List.of("food", "art")))
                         ))));
 
         //THEN

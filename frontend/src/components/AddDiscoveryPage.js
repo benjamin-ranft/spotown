@@ -87,8 +87,8 @@ export default function AddDiscoveryPage() {
     }
 
     function handleSave(discovery){
-        const {name, address, webUrl, phoneNumber, notes, tags} = discovery;
-        create(name, address, webUrl, phoneNumber, notes, tags);
+        const {name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags} = discovery;
+        create(name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags);
         history.push("/discoveries");
     }
 
