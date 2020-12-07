@@ -34,7 +34,6 @@ export default function DiscoveryDetails(){
                 </AddressAndActionButtons>
                 <StyledTitleHoursSection>
                     <StyledDiscoveryName>{discovery.name}</StyledDiscoveryName>
-                    <StyledOpeningHours>{discovery.openingHours}</StyledOpeningHours>
                 </StyledTitleHoursSection>
                 <StyledNavLinks>
                     <a href={discovery.directions}>

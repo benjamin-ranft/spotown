@@ -1,8 +1,9 @@
-import React, {useCallback, useRef, useState} from "react";
+import React, {useCallback, useContext, useRef} from "react";
 import {GoogleMap, Marker, useLoadScript, InfoWindow} from "@react-google-maps/api";
 import MapStyles from "./MapStyles";
 import TimeAgo from "react-timeago/lib";
 import styled from "styled-components/macro";
+import DiscoveriesContext from "../../contexts/DiscoveriesContext";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -26,7 +27,7 @@ export default function DiscoveryMap(){
         libraries,
     });
 
-    const [markers, setMarkers] = useState([])
+    const {discoveries} = useContext(DiscoveriesContext);
     const [selected, setSelected] = React.useState(null);
 
     const mapRef = useRef();
@@ -46,12 +47,12 @@ export default function DiscoveryMap(){
                 options={options}
                 onLoad={onMapLoad}
             >
-                {markers.map((marker) => (
+                {discoveries.map((discovery) => (
                <Marker
-                   key={marker.time.toISOString()}
-                   position={{lat:marker.lat, lng: marker.lng}}
+                   key={discovery.id}
+                   position={{lat: discovery.lat, lng: discovery.lng}}
                    onClick={() => {
-                       setSelected(marker);
+                       setSelected(discovery);
                    }}
                />
                ))}
