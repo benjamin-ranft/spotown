@@ -1,7 +1,7 @@
 import React, {useCallback, useRef, useEffect} from "react";
 import {useHistory} from "react-router-dom";
 import {GoogleMap, Marker, useLoadScript} from "@react-google-maps/api";
-import MapStyles from "./MapStyles";
+import mapStyles from "./mapStyles";
 import styled from "styled-components/macro";
 import axios from "axios";
 import usePlacesAutocomplete, {
@@ -25,7 +25,7 @@ const mapContainerStyle = {
 };
 
 const options = {
-    styles: MapStyles,
+    styles: mapStyles,
     disableDefaultUI: true,
 }
 
@@ -35,7 +35,7 @@ export default function AddNewDiscoveryMap({center, setCenter, setPlaceId}){
     const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: key,
+        googleMapsApiKey: key, version:'3.42.9',
         libraries,
     });
 
@@ -166,8 +166,8 @@ function Search({panTo, center, history}) {
                 <ComboboxPopover>
                     <ComboboxList>
                         {status === "OK" &&
-                        data.map(({ description }) => (
-                            <ComboboxOption  value={description} />
+                        data.map(({ place_id, description }) => (
+                            <ComboboxOption key={place_id} value={description} />
                         ))}
                     </ComboboxList>
                 </ComboboxPopover>

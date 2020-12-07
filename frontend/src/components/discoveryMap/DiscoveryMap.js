@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useRef} from "react";
 import {GoogleMap, Marker, useLoadScript, InfoWindow} from "@react-google-maps/api";
-import MapStyles from "./MapStyles";
+import mapStyles from "./mapStyles";
 import TimeAgo from "react-timeago/lib";
 import styled from "styled-components/macro";
 import DiscoveriesContext from "../../contexts/DiscoveriesContext";
@@ -16,14 +16,15 @@ const center = {
 }
 
 const options = {
-    styles: MapStyles,
+    styles: mapStyles,
     disableDefaultUI: true,
 }
+const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 export default function DiscoveryMap(){
 
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        googleMapsApiKey: key, version:'3.42.9',
         libraries,
     });
 

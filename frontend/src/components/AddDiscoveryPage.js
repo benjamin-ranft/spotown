@@ -29,7 +29,7 @@ export default function AddDiscoveryPage() {
     const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
     const libraries = ["places"];
     const {isLoaded} = useLoadScript({
-        googleMapsApiKey: key,
+        googleMapsApiKey: key, version:'3.42.9',
         libraries,
     });
 

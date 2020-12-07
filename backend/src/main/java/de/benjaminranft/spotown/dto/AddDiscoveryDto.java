@@ -12,8 +12,8 @@ import java.util.List;
 public class AddDiscoveryDto {
     private String name;
     private String place_id;
-    private String lat;
-    private String lng;
+    private double lat;
+    private double lng;
     private String address;
     private String thumbnail;
     private String phoneNumber;
