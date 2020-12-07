@@ -1,28 +1,36 @@
-import React from "react";
+import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import AddNewDiscoveryMap from "./discoveryMap/AddNewDiscoveryMap";
 import styled from "styled-components/macro";
 import {MdAddLocation, MdKeyboardArrowLeft} from "react-icons/md";
 
+const centerHamburg = {
+    lat: 53.551086,
+    lng: 9.993682
+}
+
 export default function AddDiscoveryPreSelect(){
 
     const history = useHistory();
+    const [center, setCenter] = useState(centerHamburg);
+    const [placeId, setPlaceId] = useState("");
+    const manualAddLink = "/new/confirm/?manual_place_id="+placeId;
 
     return(
         <StyledDiscoveryPage>
             <StyledAddHeader>
                 <StyledBackButton onClick={handleGoBack}/>
-                <h1>NEAR YOU</h1>
+                <h1>SELECT</h1>
             </StyledAddHeader>
             <StyledMapContainer>
-                <AddNewDiscoveryMap/>
+                <AddNewDiscoveryMap center={center} setCenter={setCenter} setPlaceId={setPlaceId}/>
             </StyledMapContainer>
             <StyledOverlappingCard>
                 <StyledLocationSuggestions/>
-                <StyledManualAddButton href="/new/confirm">
+                <StyledManualAddButton href={manualAddLink}>
                     <ButtonLayout>
                         <StyledLocationPin/>
-                        <p>Add something new</p>
+                        <p>Add something here</p>
                     </ButtonLayout>
                 </StyledManualAddButton>
             </StyledOverlappingCard>
@@ -46,6 +54,7 @@ const StyledMapContainer = styled.div`
 grid-column-start: 1;
 grid-column-end: 4;
 grid-row: 3/5;
+height: 100%;
 `
 
 const StyledOverlappingCard = styled.div`
@@ -113,6 +122,6 @@ grid-row: 2;
 
 h1{
 justify-self: center;
-font-size: 20px;
+font-size: var(--size-xl);
 }
 `

@@ -1,12 +1,12 @@
-import React, {useCallback, useContext, useRef, useState} from "react";
+import React, {useCallback, useRef, useEffect} from "react";
 import {useHistory} from "react-router-dom";
 import {GoogleMap, Marker, useLoadScript} from "@react-google-maps/api";
 import MapStyles from "./MapStyles";
 import styled from "styled-components/macro";
+import axios from "axios";
 import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
-    getDetails,
 } from "use-places-autocomplete";
 import {
     Combobox,
@@ -17,55 +17,53 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 import {MdMyLocation} from "react-icons/all";
-import DiscoveriesContext from "../../contexts/DiscoveriesContext";
 
 const libraries = ["places"];
 const mapContainerStyle = {
     width: "100vw",
     height: "100%",
 };
-const centerHamburg = {
-    lat: 53.551086,
-    lng: 9.993682
-}
 
 const options = {
     styles: MapStyles,
     disableDefaultUI: true,
 }
 
-export default function AddNewDiscoveryMap(){
+export default function AddNewDiscoveryMap({center, setCenter, setPlaceId}){
 
-    const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
     const history = useHistory();
+    const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: key,
         libraries,
     });
 
-    const [center, setCenter] = useState(centerHamburg)
-    const {discoveries, setDiscoveries} = useContext(DiscoveriesContext);
-
 //Gets PlaceId from latLng
-    /*useEffect(() => {
-        const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${marker.lat},${marker.lng}&key=${key}`;
+    useEffect(() => {
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${center.lat},${center.lng}&key=${key}`;
         axios
             .get(url)
             .then((response) => response.data)
             .then((data) => {
-                const getPlaceId = data.results[0].formatted_address;
+                const getPlaceId = data.results[0].place_id;
                 setPlaceId(getPlaceId);
-                console.log(placeId);
+
             })
             .catch(console.error);
-    },[marker]);*/
+    },[center]);
 
 
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
         mapRef.current = map;
     }, [])
+
+    const handleDrag = (() => {
+        if(mapRef.current){
+        setCenter({lat: mapRef.current.center.lat(), lng: mapRef.current.center.lng()});
+        }
+    })
 
     const panTo = useCallback(({ lat, lng }) => {
         mapRef.current.panTo({ lat, lng });
@@ -77,7 +75,7 @@ export default function AddNewDiscoveryMap(){
 
     return(
         <>
-            <Search panTo={panTo} center={center} setCenter={setCenter} setDiscoveries={setDiscoveries} history={history}/>
+            <Search panTo={panTo} center={center} history={history}/>
             <Locate panTo={panTo} setCenter={setCenter} />
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
@@ -85,13 +83,13 @@ export default function AddNewDiscoveryMap(){
                 center={center}
                 options={options}
                 onLoad={onMapLoad}
+                onDragEnd={handleDrag}
             >
                 <Marker position={center}/>
             </GoogleMap>
         </>
     )
 }
-
 
 function Locate({ panTo, setCenter }) {
     return (
@@ -120,7 +118,7 @@ function Locate({ panTo, setCenter }) {
 }
 
 
-function Search({panTo, center, setCenter, setDiscoveries, history}) {
+function Search({panTo, center, history}) {
     const {
         ready,
         value,
@@ -146,12 +144,9 @@ function Search({panTo, center, setCenter, setDiscoveries, history}) {
         try {
             const results = await getGeocode({ address });
             const placeId = results[0].place_id;
-            const placeDetails = await getDetails({placeId: placeId, fields: ["name", "formatted_address", "photos", "website", "international_phone_number",]})
             const { lat, lng } = await getLatLng(results[0]);
             panTo({ lat, lng });
-            history.push("/new/confirm")
-
-            //console.log(placeDetails.photos[0].getUrl({maxWidth: 400, maxHeight: 400}));
+            history.push("/new/confirm?place_id=" + placeId)
 
         } catch (error) {
             console.log("Error: ", error);
@@ -162,7 +157,7 @@ function Search({panTo, center, setCenter, setDiscoveries, history}) {
         <StyledDiv>
         <ComboboxLayout>
             <Combobox onSelect={handleSelect}>
-                <ComboboxInput
+                <ComboboxInputStyled
                     value={value}
                     onChange={handleInput}
                     disabled={!ready}
@@ -185,12 +180,20 @@ function Search({panTo, center, setCenter, setDiscoveries, history}) {
 const StyledDiv = styled.div`
 display: grid;
 grid-template-columns: 23px 1fr 23px;
-margin: 15px 0;
+padding: 10px;
 `
 
 const ComboboxLayout = styled.div`
 grid-column: 2;
 justify-self: center;
+`
+
+const ComboboxInputStyled = styled(ComboboxInput)`
+border-radius: 20px;
+background-color: var(--light-grey);
+border-color: transparent;
+padding: 5px 10px;
+width: 70vw;
 `
 
 const LocateLayout = styled.div`
