@@ -102,9 +102,6 @@ flex-direction: column;
 const StyledDiscoveryName = styled.h2`
 `
 
-const StyledOpeningHours = styled.p`
-font-size: var(--size-m);
-`
 const AddressAndActionButtons = styled.div`
 grid-row: 1;
 display: grid;

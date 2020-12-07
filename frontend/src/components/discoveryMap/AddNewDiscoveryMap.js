@@ -39,7 +39,7 @@ export default function AddNewDiscoveryMap({center, setCenter, setPlaceId}){
         libraries,
     });
 
-//Gets PlaceId from latLng
+
     useEffect(() => {
         const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${center.lat},${center.lng}&key=${key}`;
         axios
@@ -51,7 +51,7 @@ export default function AddNewDiscoveryMap({center, setCenter, setPlaceId}){
 
             })
             .catch(console.error);
-    },[center]);
+    },[center, key, setPlaceId]);
 
 
     const mapRef = useRef();
