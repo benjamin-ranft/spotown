@@ -18,9 +18,11 @@ public class Discovery {
     private String id;
     private Instant timestamp;
     private String name;
+    private String place_id;
+    private String lat;
+    private String lng;
     private String address;
     private String thumbnail;
-    private String openingHours;
     private String phoneNumber;
     private String webUrl;
     private String directions;
