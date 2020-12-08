@@ -35,7 +35,7 @@ export default function DiscoveryDetails(){
                     <StyledActionButtons id={id}/>
                 </AddressAndActionButtons>
                 <StyledTitleHoursSection>
-                    <StyledDiscoveryName>{discovery.name}</StyledDiscoveryName>
+                    <StyledDiscoveryName>{discovery.name.substring(0, 50)}</StyledDiscoveryName>
                 </StyledTitleHoursSection>
                 <StyledNavLinks>
                     <a href={discovery.directions}>
@@ -103,6 +103,7 @@ display: flex;
 flex-direction: column;
 `
 const StyledDiscoveryName = styled.h2`
+font-size: var(--size-lplus);
 `
 
 const AddressAndActionButtons = styled.div`
@@ -115,7 +116,7 @@ align-items: center;
 const StyledAddressSection = styled.div`
 display: flex;
 flex-direction: row;
-
+align-items: center;
 `
 
 const StyledLocationIcon = styled(VscLocation)`

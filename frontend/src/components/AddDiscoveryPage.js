@@ -25,9 +25,10 @@ const initialState = {
     tags: [],
 }
 
+const libraries = ["places"];
+
 export default function AddDiscoveryPage() {
     const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-    const libraries = ["places"];
     const {isLoaded} = useLoadScript({
         googleMapsApiKey: key, version:'3.42.9',
         libraries,
@@ -55,6 +56,7 @@ export default function AddDiscoveryPage() {
                     webUrl: data.website,
                     directions: "https://www.google.com/maps/dir/?api=1&destination=" + data.geometry.location.lat() + "," + data.geometry.location.lng()}))
         }
+        // eslint-disable-next-line
     }, [placeId, isLoaded]);
 
     useEffect(() => {
@@ -67,6 +69,7 @@ export default function AddDiscoveryPage() {
                     address: data.formatted_address,
                     directions: "https://www.google.com/maps/dir/?api=1&destination=" + data.geometry.location.lat() + "," + data.geometry.location.lng()}))
         }
+        // eslint-disable-next-line
     }, [manualPlaceId, isLoaded]);
 
     return(

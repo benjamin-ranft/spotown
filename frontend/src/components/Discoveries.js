@@ -19,7 +19,6 @@ export default function Discoveries(){
     const searchedDiscoveries = discoveries.filter((term) =>
         (term.name.toLowerCase().includes(lowerCaseSearchTerm)) ||
         (term.address.toLowerCase().includes(lowerCaseSearchTerm)) ||
-        (term.phoneNumber.toLowerCase().includes(lowerCaseSearchTerm)) ||
         (term.notes.toLowerCase().includes(lowerCaseSearchTerm))
     )
 
