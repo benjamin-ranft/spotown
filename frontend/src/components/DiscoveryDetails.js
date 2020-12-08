@@ -15,13 +15,13 @@ export default function DiscoveryDetails(){
     const history = useHistory();
     const discovery = discoveries.find((discovery)=> discovery.id === id);
 
-
     return !discovery ? null : (
         <StyledDetailsPage>
             <StyledThumbnailSection thumbnail={discovery.thumbnail}>
                 <StyledDetailsHeader>
                     <StyledBackButton onClick={handleCancel}/>
-                    <LinkShareContainer href={"https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + discovery.place_id}>
+                    <LinkShareContainer href={"https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + discovery.place_id}
+                                        >
                         <StyledShareButton/>
                     </LinkShareContainer>
                 </StyledDetailsHeader>
