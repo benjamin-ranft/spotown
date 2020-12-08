@@ -102,6 +102,8 @@ display: block;
   border-style: solid;
   border-color: lightgrey;
   resize: none;
+  -webkit-appearance: none;
+
   :focus {
     outline: none;
 }

@@ -61,21 +61,17 @@ function handleSubmit(event) {
 
 const StyledLoginPage = styled.div`
 display: grid;
-column-gap: 5px;
-row-gap: 23px;
 grid-template-columns: 23px auto 23px;
-grid-template-rows: fit-content() auto;
+grid-template-rows: 23px min-content 23px 1fr 23px;
+height: 100vh;
 
 `
 const StyledForm = styled.form`
-grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 3;
-  grid-row-end: 3;
-  
+  grid-column: 2;
+  grid-row: 4;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  row-gap: 10px;
+  grid-auto-rows: min-content;
+  row-gap: 16px;
   
   button{
   display: block;
@@ -95,10 +91,11 @@ grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 2;
+  justify-self: center;
   
   img {
   border-radius: 10px;
   max-width: 100%;
-  max-height: content-box;
+ 
   }
 `

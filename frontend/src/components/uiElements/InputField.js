@@ -15,6 +15,8 @@ const InputFieldStyled = styled.input`
   border-width: thin;
   border-style: solid;
   border-color: lightgrey;
+  -webkit-appearance: none;
+
   :focus {
     outline: none;
 }
