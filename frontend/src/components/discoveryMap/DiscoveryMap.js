@@ -1,4 +1,5 @@
 import React, {useCallback, useContext, useRef} from "react";
+import {useHistory} from "react-router-dom";
 import {GoogleMap, Marker, useLoadScript, InfoWindow} from "@react-google-maps/api";
 import {mapStyles} from "./mapStyles";
 import TimeAgo from "react-timeago/lib";
@@ -32,6 +33,7 @@ export default function DiscoveryMap(){
 
     const {discoveries} = useContext(DiscoveriesContext);
     const [selected, setSelected] = React.useState(null);
+    const history = useHistory();
 
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
@@ -71,19 +73,22 @@ export default function DiscoveryMap(){
                ))}
 
                 {selected ? (
-                    <InfoWindow
+                    <StyledInfoWindow
                         position={{ lat: selected.lat, lng: selected.lng }}
                         onCloseClick={() => {
                             setSelected(null);
                         }}
                     >
-                        <div>
+
+                        <InfoWindowLayout onClick={() => {
+                            history.push("/discovery/" + selected.id)
+                        }}>
                             <StyledThumbnail>
                                 <img src={selected.thumbnail} alt={selected.name}/>
                             </StyledThumbnail>
                             <StyledDiscoveryContentShort>
                                 <NameAndAddress>
-                                    <h2>{selected.name}</h2>
+                                    <h2>{selected.name.substring(0,35)}</h2>
                                     <p>{selected.address}</p>
                                 </NameAndAddress>
                                 <CreationDate>
@@ -92,8 +97,8 @@ export default function DiscoveryMap(){
                                     </p>
                                 </CreationDate>
                             </StyledDiscoveryContentShort>
-                        </div>
-                    </InfoWindow>
+                        </InfoWindowLayout>
+                    </StyledInfoWindow>
                 ) : null}
             </GoogleMap>
         </>
@@ -138,12 +143,14 @@ const StyledMarker = styled(Marker)`
 
 `
 const StyledDiscoveryContentShort = styled.div`
+padding-top: 8px;
 display: grid;
+grid-template-rows: min-content min-content;
 grid-template-columns: 3fr 1fr;
-padding: 15px;
 
   h2{
-  font-size: var(--size-lplus);
+  font-size: var(--size-l);
+  padding-bottom: 5px;
   }
   
   p{
@@ -152,13 +159,31 @@ padding: 15px;
 `
 
 const NameAndAddress = styled.div`
+h2{
+grid-row: 1;
+grid-column: 1;
+}
+p{
+grid-row: 2;
+grid-column: 1/3;
+}
+`
+
+const StyledInfoWindow = styled(InfoWindow)`
+
+`
+
+const InfoWindowLayout = styled.div`
 
 `
 
 const CreationDate = styled.div`
+grid-row: 1;
 justify-self: right;
+grid-column: 2;
 p{
 font-size: var(--size-m);
+text-align: right;
 }
 `
 
