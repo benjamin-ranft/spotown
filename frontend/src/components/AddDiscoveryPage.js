@@ -55,7 +55,7 @@ export default function AddDiscoveryPage() {
                     webUrl: data.website,
                     directions: "https://www.google.com/maps/dir/?api=1&destination=" + data.geometry.location.lat() + "," + data.geometry.location.lng()}))
         }
-    }, [placeId, discoveryData, isLoaded]);
+    }, [placeId, isLoaded]);
 
     useEffect(() => {
         if(manualPlaceId && isLoaded){
@@ -67,7 +67,7 @@ export default function AddDiscoveryPage() {
                     address: data.formatted_address,
                     directions: "https://www.google.com/maps/dir/?api=1&destination=" + data.geometry.location.lat() + "," + data.geometry.location.lng()}))
         }
-    }, [manualPlaceId, discoveryData, isLoaded]);
+    }, [manualPlaceId, isLoaded]);
 
     return(
         <StyledDiscoveryPage>

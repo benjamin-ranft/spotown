@@ -4,6 +4,7 @@ import {mapStyles} from "./mapStyles";
 import TimeAgo from "react-timeago/lib";
 import styled from "styled-components/macro";
 import DiscoveriesContext from "../../contexts/DiscoveriesContext";
+import {MdMyLocation} from "react-icons/all";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -36,6 +37,11 @@ export default function DiscoveryMap(){
         mapRef.current = map;
     }, [])
 
+    const panTo = useCallback(({ lat, lng }) => {
+        mapRef.current.panTo({ lat, lng });
+        mapRef.current.setZoom(14);
+    }, []);
+
     if (loadError) return "Error loading map";
     if (!isLoaded) return "Loading Maps";
 
@@ -43,13 +49,14 @@ export default function DiscoveryMap(){
         <>
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
-                zoom={14}
+                zoom={12}
                 center={center}
                 options={options}
                 onLoad={onMapLoad}
             >
+            <Locate panTo={panTo}/>
                 {discoveries.map((discovery) => (
-               <Marker
+               <StyledMarker
                    key={discovery.id}
                    position={{lat: discovery.lat, lng: discovery.lng}}
                    onClick={() => {
@@ -88,6 +95,28 @@ export default function DiscoveryMap(){
     )
 }
 
+function Locate({ panTo }) {
+    return (
+        <LocateLayout>
+            <StyledButton
+                onClick={() => {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            panTo({
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            });
+                        },
+                        () => null
+                    );
+                }}
+            >
+                <StyledLocatorIcon/>
+            </StyledButton>
+        </LocateLayout>
+    );
+}
+
 const StyledThumbnail = styled.div`
 border-radius: 10px 10px 0 0;
 height: 140px;
@@ -100,6 +129,9 @@ width: 100%;
 }
 `
 
+const StyledMarker = styled(Marker)`
+
+`
 const StyledDiscoveryContentShort = styled.div`
 display: grid;
 grid-template-columns: 3fr 1fr;
@@ -123,4 +155,27 @@ justify-self: right;
 p{
 font-size: var(--size-m);
 }
+`
+
+const LocateLayout = styled.div`
+position: absolute;
+z-index: 10;
+right: 0;
+`
+
+const StyledButton = styled.button`
+background-color: transparent;
+border-color: transparent;
+`
+
+const StyledLocatorIcon = styled(MdMyLocation)`
+font-size: 40px;
+background-color: white;
+border-width: thin;
+border-color: var(--light-grey);
+border-style: solid;
+padding: 5px;
+color: var(--accent-red);
+border-radius: 100px;
+box-shadow: var(--center-box-shadow);
 `
