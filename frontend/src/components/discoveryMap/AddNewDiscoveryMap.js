@@ -1,7 +1,7 @@
 import React, {useCallback, useRef, useEffect} from "react";
 import {useHistory} from "react-router-dom";
 import {GoogleMap, Marker, useLoadScript} from "@react-google-maps/api";
-import mapStyles from "./mapStyles";
+import {mapStyles} from "./mapStyles";
 import styled from "styled-components/macro";
 import axios from "axios";
 import usePlacesAutocomplete, {

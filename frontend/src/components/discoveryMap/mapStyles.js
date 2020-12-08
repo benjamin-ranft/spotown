@@ -1,4 +1,4 @@
-export default [
+export const mapStyles = [
     {
         "featureType": "landscape.man_made",
         "elementType": "geometry",

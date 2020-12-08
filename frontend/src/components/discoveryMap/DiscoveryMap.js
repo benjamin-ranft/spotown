@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useRef} from "react";
 import {GoogleMap, Marker, useLoadScript, InfoWindow} from "@react-google-maps/api";
-import mapStyles from "./mapStyles";
+import {mapStyles} from "./mapStyles";
 import TimeAgo from "react-timeago/lib";
 import styled from "styled-components/macro";
 import DiscoveriesContext from "../../contexts/DiscoveriesContext";
