@@ -21,7 +21,9 @@ export default function DiscoveryDetails(){
             <StyledThumbnailSection thumbnail={discovery.thumbnail}>
                 <StyledDetailsHeader>
                     <StyledBackButton onClick={handleCancel}/>
-                    <StyledShareButton/>
+                    <LinkShareContainer href={"https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + discovery.place_id}>
+                        <StyledShareButton/>
+                    </LinkShareContainer>
                 </StyledDetailsHeader>
             </StyledThumbnailSection>
             <StyledDetailsCard>
@@ -39,7 +41,7 @@ export default function DiscoveryDetails(){
                     <a href={discovery.directions}>
                         <DirectionsButton/>
                     </a>
-                    <a href={discovery.phoneNumber}>
+                    <a href={"tel:" + discovery.phoneNumber}>
                         <CallButton/>
                     </a>
                     <a href={discovery.webUrl}>
@@ -80,6 +82,7 @@ background-image: url(${(props) => props.thumbnail});
 background-repeat: no-repeat;
 background-size: cover;
 margin-bottom: -20px;
+background-position: center;
 `
 
 const StyledDetailsCard = styled.div`
@@ -154,13 +157,14 @@ justify-self: left;
 grid-column: 2;
 grid-row: 2;
 `
-
+const LinkShareContainer = styled.a`
+grid-column: 3;
+grid-row: 2;
+justify-self: right;
+`
 const StyledShareButton = styled(MdShare)`
 color: var(--white);
 font-size: 32px;
-justify-self: right;
-grid-column: 3;
-grid-row: 2;
 `
 
 
