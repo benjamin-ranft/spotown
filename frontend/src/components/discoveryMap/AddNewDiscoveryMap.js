@@ -85,7 +85,13 @@ export default function AddNewDiscoveryMap({center, setCenter, setPlaceId}){
                 onLoad={onMapLoad}
                 onDragEnd={handleDrag}
             >
-                <Marker position={center}/>
+                <Marker
+                    position={center}
+                    icon={{
+                        url: "../images/spotown_map_marker_add.png",
+                        scaledSize: new window.google.maps.Size(39,63),
+                    }}
+                />
             </GoogleMap>
         </>
     )

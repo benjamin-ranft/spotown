@@ -7,6 +7,7 @@ import DiscoveriesContext from "../../contexts/DiscoveriesContext";
 import {MdMyLocation} from "react-icons/all";
 
 const libraries = ["places"];
+
 const mapContainerStyle = {
     width: "100vw",
     height: "100%",
@@ -59,6 +60,10 @@ export default function DiscoveryMap(){
                <StyledMarker
                    key={discovery.id}
                    position={{lat: discovery.lat, lng: discovery.lng}}
+                   icon={{
+                       url: "./images/spotown_map_marker.png",
+                       scaledSize: new window.google.maps.Size(32,52),
+                   }}
                    onClick={() => {
                        setSelected(discovery);
                    }}
