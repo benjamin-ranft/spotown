@@ -47,13 +47,13 @@ export default function AddDiscoveryPage() {
                 .then(data => setDiscoveryData({...discoveryData,
                     name: data.name,
                     place_id: data.place_id,
-                    lat: data.geometry.location.lat,
-                    lng: data.geometry.location.lng,
+                    lat: data.geometry.location.lat(),
+                    lng: data.geometry.location.lng(),
                     address: data.formatted_address,
                     thumbnail: data.photos[0].getUrl({maxWidth: 600, maxHeight: 600}),
                     phoneNumber: data.international_phone_number,
                     webUrl: data.website,
-                    directions: "https://www.google.com/maps/dir/?api=1&destination=" + data.geometry.location.lat + "," + data.geometry.location.lng}))
+                    directions: "https://www.google.com/maps/dir/?api=1&destination=" + data.geometry.location.lat() + "," + data.geometry.location.lng()}))
         }
     }, [placeId, discoveryData, isLoaded]);
 
@@ -62,10 +62,10 @@ export default function AddDiscoveryPage() {
             getDetails({placeId: manualPlaceId, fields: ["name", "place_id", "geometry.location", "formatted_address", "photos", "website", "international_phone_number",]})
                 .then(data => setDiscoveryData({...discoveryData,
                     place_id: data.place_id,
-                    lat: data.geometry.location.lat,
-                    lng: data.geometry.location.lng,
+                    lat: data.geometry.location.lat(),
+                    lng: data.geometry.location.lng(),
                     address: data.formatted_address,
-                    directions: "https://www.google.com/maps/dir/?api=1&destination=" + data.geometry.location.lat + "," + data.geometry.location.lng}))
+                    directions: "https://www.google.com/maps/dir/?api=1&destination=" + data.geometry.location.lat() + "," + data.geometry.location.lng()}))
         }
     }, [manualPlaceId, discoveryData, isLoaded]);
 
