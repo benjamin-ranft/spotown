@@ -17,12 +17,13 @@ function App() {
             <Switch>
                 <Route path="/login" component={LoginPage}/>
                 <ProtectedRoute path="/discoveries" component={Discoveries}/>
+                <ProtectedRoute path="/discoveries" component={Discoveries}/>
                 <ProtectedRoute path="/new/select" component={AddDiscoveryPreSelect}/>
                 <ProtectedRoute path="/new/confirm" component={AddDiscoveryPage}/>
                 <ProtectedRoute path="/discovery/:id" component={DiscoveryDetails}/>
                 <ProtectedRoute path="/edit/:id" component={UpdateDiscoveryPage}/>
                 <Route path="/">
-                    <Redirect to="/discoveries"/>
+                    <Redirect to="/discoveries?view=list"/>
                 </Route>
             </Switch>
         </DiscoveriesContextProvider>
