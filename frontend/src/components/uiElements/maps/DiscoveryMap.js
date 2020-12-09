@@ -173,6 +173,7 @@ const CreationDate = styled.div`
 grid-row: 1;
 justify-self: right;
 grid-column: 2;
+
 p{
 font-size: var(--size-m);
 text-align: right;
