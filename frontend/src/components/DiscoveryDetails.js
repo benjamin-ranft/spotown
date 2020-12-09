@@ -7,22 +7,26 @@ import ActionButtons from "./buttons/ActionButtons";
 import DirectionsButton from "./buttons/DirectionsButton";
 import CallButton from "./buttons/CallButton";
 import WebsiteButton from "./buttons/WebsiteButton";
-import {VscLocation} from "react-icons/all";
+import {VscLocation, RiCheckboxMultipleFill} from "react-icons/all";
+import useCopyToClipboard from "./utils/useCopyToClipboard";
+
 
 export default function DiscoveryDetails(){
     const {discoveries} = useContext(DiscoveriesContext);
     const {id} = useParams();
     const history = useHistory();
     const discovery = discoveries.find((discovery)=> discovery.id === id);
+    const [isCopied, handleCopy] = useCopyToClipboard(5000);
+    const sharingLink = "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + discovery.place_id;
 
     return !discovery ? null : (
         <StyledDetailsPage>
             <StyledThumbnailSection thumbnail={discovery.thumbnail}>
                 <StyledDetailsHeader>
                     <StyledBackButton onClick={handleCancel}/>
-                    <LinkShareContainer href={"https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + discovery.place_id}
-                                        >
-                        <StyledShareButton/>
+                    <LinkShareContainer
+                        onClick={() => handleCopy(sharingLink)}>
+                        {!isCopied ? <StyledShareButton/> : <StyledCopiedIcon/>}
                     </LinkShareContainer>
                 </StyledDetailsHeader>
             </StyledThumbnailSection>
@@ -164,6 +168,11 @@ grid-row: 2;
 justify-self: right;
 `
 const StyledShareButton = styled(MdShare)`
+color: var(--white);
+font-size: 32px;
+`
+
+const StyledCopiedIcon = styled(RiCheckboxMultipleFill)`
 color: var(--white);
 font-size: 32px;
 `
