@@ -10,7 +10,7 @@ export default function Header({headerAction, setHeaderAction, searchTerm, setSe
     return(
         <Layout>
             <InnerLayout>
-                <h1>Discoveries</h1>
+                <Title>DISCOVERIES</Title>
                 <Actions>
                     <SearchIcon onClick={handleSearchClick} className={headerAction}/>
                     <FilterIcon onClick={handleFilterClick} className={headerAction}/>
@@ -59,7 +59,7 @@ height: 50px;
 
 const InnerLayout = styled.section`
 justify-items: start;
-padding: 10px;
+padding: 10px 15px;
 grid-template-rows: 50px;
 background-color: var(--white);
 color: var(--darkest-grey);
@@ -67,6 +67,10 @@ font-weight: bold;
 display: grid;
 grid-template-columns: 55% 45%;
 align-items: center;
+`
+
+const Title = styled.h1`
+font-size: var(--size-xl);
 `
 
 const Actions = styled.aside`

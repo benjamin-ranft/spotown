@@ -24,7 +24,7 @@ export default function SearchBar({searchTerm, setSearchTerm, handleClose}){
 
 const Layout = styled.main`
 display: grid;
-grid-template-columns: 2% 1fr min-content 2%;
+grid-template-columns: 15px 1fr min-content 15px;
 grid-template-rows: 2% 1fr 4%;
 background-color: white;
 align-items: center;

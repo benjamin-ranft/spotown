@@ -17,6 +17,7 @@ const Layout = styled.main`
 display: grid;
 grid-template-columns:  1fr min-content 2%;
 align-items: center;
+padding: 0 8px;
 `
 
 const Filters = styled(FilterTags)`
