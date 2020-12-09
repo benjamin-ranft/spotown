@@ -23,7 +23,7 @@ function App() {
                 <ProtectedRoute path="/discovery/:id" component={DiscoveryDetails}/>
                 <ProtectedRoute path="/edit/:id" component={UpdateDiscoveryPage}/>
                 <Route path="/">
-                    <Redirect to="/discoveries"/>
+                    <Redirect to="/discoveries?view=list"/>
                 </Route>
             </Switch>
         </DiscoveriesContextProvider>
