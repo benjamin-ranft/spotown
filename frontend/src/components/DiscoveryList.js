@@ -12,7 +12,7 @@ export default function DiscoveryList({searchedDiscoveries, filters}) {
 
     return (
             <StyledList>
-                {filters? filteredDiscoveries?.map((discovery) => (
+                {filters.length > "0" ? filteredDiscoveries?.map((discovery) => (
                     <li key={discovery.id}>
                         <div onClick={() => history.push(`/discovery/${discovery.id}`)}>
                             <Discovery discovery={discovery}/>
