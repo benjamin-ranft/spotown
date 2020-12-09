@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components/macro";
 
 export default function InputField({ children, ...rest }) {
-    return <InputFieldStyled {...rest}>{children}</InputFieldStyled>;
+    return <Input {...rest}>{children}</Input>;
 }
 
-const InputFieldStyled = styled.input`
+const Input = styled.input`
   display: block;
   background-color: var(--light-grey);
   border-radius: 10px;

@@ -5,11 +5,11 @@ import TimeAgo from "react-timeago/lib";
 export default function Discovery({ discovery }) {
 
     return (
-        <DiscoveryStyled>
-            <StyledThumbnail>
+        <Layout>
+            <Thumbnail>
                 <img src={discovery.thumbnail} alt={discovery.name}/>
-            </StyledThumbnail>
-            <StyledDiscoveryContentShort>
+            </Thumbnail>
+            <DiscoveryPreview>
                 <NameAndAddress>
                     <h2>{discovery.name.substring(0,40)}</h2>
                     <p>{discovery.address}</p>
@@ -19,12 +19,12 @@ export default function Discovery({ discovery }) {
                         <TimeAgo date={discovery.timestamp}/>
                     </p>
                 </CreationDate>
-            </StyledDiscoveryContentShort>
-        </DiscoveryStyled>
+            </DiscoveryPreview>
+        </Layout>
     );
 }
 
-const DiscoveryStyled = styled.div`
+const Layout = styled.main`
 background-color: var(--white);
 box-shadow: var(--center-box-shadow);
 border-radius: 10px;
@@ -34,7 +34,7 @@ width: auto;
 height: auto;
 `
 
-const StyledThumbnail = styled.div`
+const Thumbnail = styled.aside`
 border-radius: 10px 10px 0 0;
 height: 140px;
 
@@ -46,26 +46,25 @@ width: 100%;
 }
 `
 
-const StyledDiscoveryContentShort = styled.div`
+const DiscoveryPreview = styled.section`
 display: grid;
 grid-template-columns: 3fr 1fr;
 padding: 15px;
 
- 
-  
   p{
   font-size: var(--size-m);
   }
 `
 
-const NameAndAddress = styled.div`
+const NameAndAddress = styled.aside`
 h2{
   font-size: var(--size-l);
   }
 `
 
-const CreationDate = styled.div`
+const CreationDate = styled.aside`
 justify-self: right;
+
 p{
 font-size: var(--size-m);
 justify-self: right;

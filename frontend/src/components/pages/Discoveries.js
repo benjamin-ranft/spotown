@@ -1,9 +1,9 @@
 import React, {useContext, useState} from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../uiElements/Header";
+import Footer from "../uiElements/Footer";
 import styled from "styled-components/macro";
-import DiscoveriesBody from "./DiscoveriesBody";
-import DiscoveriesContext from "../contexts/DiscoveriesContext";
+import DiscoveriesBody from "../uiElements/DiscoveriesBody";
+import DiscoveriesContext from "../../contexts/DiscoveriesContext";
 
 export default function Discoveries(){
 
@@ -22,15 +22,15 @@ export default function Discoveries(){
     )
 
     return(
-        <PageLayout>
+        <Layout>
             <Header headerAction={headerAction} setHeaderAction={setHeaderAction} searchTerm={searchTerm} setSearchTerm={setSearchTerm} setFilters={setFilters} filters={filters}/>
             <DiscoveriesBody searchedDiscoveries={searchedDiscoveries} searchTerm={searchTerm} filters={filters}/>
             <Footer/>
-        </PageLayout>
+        </Layout>
     )
 }
 
-const PageLayout = styled.div`
+const Layout = styled.main`
 display: grid;
 grid-template-rows: min-content 1fr min-content;
 height: 100vh;

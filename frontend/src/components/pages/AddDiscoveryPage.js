@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState} from "react";
 import {useHistory, useLocation} from "react-router-dom";
-import DiscoveriesContext from "../contexts/DiscoveriesContext";
+import DiscoveriesContext from "../../contexts/DiscoveriesContext";
 import {MdKeyboardArrowLeft} from "react-icons/md";
 import styled from "styled-components/macro";
-import DiscoveryForm from "./DiscoveryForm";
+import DiscoveryForm from "../uiElements/DiscoveryForm";
 import {getDetails} from "use-places-autocomplete";
 import {useLoadScript} from "@react-google-maps/api";
 
@@ -28,12 +28,12 @@ const initialState = {
 const libraries = ["places"];
 
 export default function AddDiscoveryPage() {
+
     const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
     const {isLoaded} = useLoadScript({
         googleMapsApiKey: key, version:'3.42.9',
         libraries,
     });
-
     const query = useQuery();
     const placeId = query.get("place_id");
     const manualPlaceId = query.get("manual_place_id");
@@ -73,16 +73,16 @@ export default function AddDiscoveryPage() {
     }, [manualPlaceId, isLoaded]);
 
     return(
-        <StyledDiscoveryPage>
+        <Layout>
             {discoveryData.thumbnail && <ThumbnailBackground thumbnail={discoveryData.thumbnail}/>}
-            <StyledAddHeader>
+            <Header>
                 {discoveryData.thumbnail !== placeholder&& <><WhiteBackButton onClick={handleGoBack}/> <WhiteAdd>ADD</WhiteAdd></>}
                 {discoveryData.thumbnail === placeholder && <><DarkBackButton onClick={handleGoBack}/> <DarkAdd>ADD</DarkAdd></>}
-            </StyledAddHeader>
-            <FormBackgroundCard>
+            </Header>
+            <FormBackground>
                 <DiscoveryForm onSave={handleSave} discovery={discoveryData} setDiscovery={setDiscoveryData}/>
-            </FormBackgroundCard>
-        </StyledDiscoveryPage>
+            </FormBackground>
+        </Layout>
     )
 
     function handleGoBack(){
@@ -92,12 +92,19 @@ export default function AddDiscoveryPage() {
     function handleSave(discovery){
         const {name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags} = discovery;
         create(name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags);
-        history.push("/discoveries");
+        history.push("/discoveries?view=list");
     }
 
 }
 
-const ThumbnailBackground = styled.div`
+const Layout = styled.main`
+display: grid;
+grid-template-rows: 23px min-content 1fr 1fr;
+height: 100vh;
+grid-template-columns: 23px auto 23px;
+`
+
+const ThumbnailBackground = styled.section`
 background-image: url(${(props) => props.thumbnail});
 background-repeat: no-repeat;
 background-size: cover;
@@ -106,23 +113,7 @@ grid-column: 1/4;
 grid-row: 1/4;
 `
 
-const WhiteBackButton = styled(MdKeyboardArrowLeft)`
-color: white;
-font-size: 40px;
-`
-const DarkBackButton = styled(MdKeyboardArrowLeft)`
-color: var(--darkest-grey);
-font-size: 40px;
-`
-
-const StyledDiscoveryPage = styled.div`
-display: grid;
-grid-template-rows: 23px min-content 1fr 1fr;
-height: 100vh;
-grid-template-columns: 23px auto 23px;
-`
-
-const FormBackgroundCard = styled.div`
+const FormBackground = styled.section`
 grid-column: 1/4;
 background-color: var(--white);
 box-shadow: var(--center-box-shadow);
@@ -130,10 +121,19 @@ padding: 23px;
 border-radius: 25px 25px 0 0;
 `
 
-const StyledAddHeader = styled.div`
+const WhiteBackButton = styled(MdKeyboardArrowLeft)`
+color: white;
+font-size: 40px;
+`
+
+const DarkBackButton = styled(MdKeyboardArrowLeft)`
+color: var(--darkest-grey);
+font-size: 40px;
+`
+
+const Header = styled.section`
 display:grid;
 grid-template-columns: 1fr 1fr 1fr;
-
 align-items: center;
 grid-column-start: 2;
   grid-column-end: 2;

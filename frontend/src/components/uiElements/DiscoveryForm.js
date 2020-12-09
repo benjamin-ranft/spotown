@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components/macro";
-import InputField from "./uiElements/InputField";
-import AddDiscoveryTags from "./AddDiscoveryTags";
+import InputField from "./InputField";
+import AddFilters from "./filters/AddFilters";
 
 
 export default function DiscoveryForm({onSave, discovery, setDiscovery}) {
 
     return(
-        <StyledForm onSubmit={handleSubmit}>
-            <AddDiscoveryTags tags={discovery.tags} setTags={(tags) => setDiscovery({...discovery, tags})}/>
+        <Form onSubmit={handleSubmit}>
+            <AddFilters tags={discovery.tags} setTags={(tags) => setDiscovery({...discovery, tags})}/>
             <label>
                 <InputField
                 name="name"
@@ -42,7 +42,7 @@ export default function DiscoveryForm({onSave, discovery, setDiscovery}) {
                     type="text"/>
             </label>
             <label>
-                <StyledTextArea
+                <NotesInput
                     name="notes"
                     placeholder="Notes"
                     value={discovery.notes}
@@ -50,7 +50,7 @@ export default function DiscoveryForm({onSave, discovery, setDiscovery}) {
                     />
             </label>
             <button>Save</button>
-        </StyledForm>
+        </Form>
 
     )
 
@@ -64,7 +64,7 @@ export default function DiscoveryForm({onSave, discovery, setDiscovery}) {
     }
 }
 
-const StyledForm = styled.form`
+const Form = styled.form`
   display: grid;
   grid-template-rows: repeat(7, min-content);
   row-gap: 10px;
@@ -72,7 +72,6 @@ const StyledForm = styled.form`
   grid-column-end: 2;
   grid-row-start: 4;
   grid-row-end: 4;
-  
   
   button{
   display: block;
@@ -91,7 +90,7 @@ const StyledForm = styled.form`
   }
 `
 
-const StyledTextArea = styled.textarea`
+const NotesInput = styled.textarea`
 display: block;
   background-color: var(--light-grey);
   border-radius: 10px;

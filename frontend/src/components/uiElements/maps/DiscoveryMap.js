@@ -4,8 +4,8 @@ import {GoogleMap, Marker, useLoadScript, InfoWindow} from "@react-google-maps/a
 import {mapStyles} from "./mapStyles";
 import TimeAgo from "react-timeago/lib";
 import styled from "styled-components/macro";
-import DiscoveriesContext from "../../contexts/DiscoveriesContext";
-import {MdMyLocation} from "react-icons/all";
+import DiscoveriesContext from "../../../contexts/DiscoveriesContext";
+import {MdMyLocation} from "react-icons/md";
 
 const libraries = ["places"];
 
@@ -59,7 +59,7 @@ export default function DiscoveryMap(){
             >
             <Locate panTo={panTo}/>
                 {discoveries.map((discovery) => (
-               <StyledMarker
+               <Marker
                    key={discovery.id}
                    position={{lat: discovery.lat, lng: discovery.lng}}
                    icon={{
@@ -73,20 +73,20 @@ export default function DiscoveryMap(){
                ))}
 
                 {selected ? (
-                    <StyledInfoWindow
+                    <InfoWindow
                         position={{ lat: selected.lat, lng: selected.lng }}
                         onCloseClick={() => {
                             setSelected(null);
                         }}
                     >
 
-                        <InfoWindowLayout onClick={() => {
+                        <InfoLayout onClick={() => {
                             history.push("/discovery/" + selected.id)
                         }}>
-                            <StyledThumbnail>
+                            <Thumbnail>
                                 <img src={selected.thumbnail} alt={selected.name}/>
-                            </StyledThumbnail>
-                            <StyledDiscoveryContentShort>
+                            </Thumbnail>
+                            <InfoContent>
                                 <NameAndAddress>
                                     <h2>{selected.name.substring(0,35)}</h2>
                                     <p>{selected.address}</p>
@@ -96,9 +96,9 @@ export default function DiscoveryMap(){
                                         <TimeAgo date={selected.timestamp}/>
                                     </p>
                                 </CreationDate>
-                            </StyledDiscoveryContentShort>
-                        </InfoWindowLayout>
-                    </StyledInfoWindow>
+                            </InfoContent>
+                        </InfoLayout>
+                    </InfoWindow>
                 ) : null}
             </GoogleMap>
         </>
@@ -108,7 +108,7 @@ export default function DiscoveryMap(){
 function Locate({ panTo }) {
     return (
         <LocateLayout>
-            <StyledButton
+            <LocateButton
                 onClick={() => {
                     navigator.geolocation.getCurrentPosition(
                         (position) => {
@@ -121,13 +121,13 @@ function Locate({ panTo }) {
                     );
                 }}
             >
-                <StyledLocatorIcon/>
-            </StyledButton>
+                <LocatorIcon/>
+            </LocateButton>
         </LocateLayout>
     );
 }
 
-const StyledThumbnail = styled.div`
+const Thumbnail = styled.aside`
 border-radius: 10px 10px 0 0;
 height: 140px;
 
@@ -139,10 +139,7 @@ width: 100%;
 }
 `
 
-const StyledMarker = styled(Marker)`
-
-`
-const StyledDiscoveryContentShort = styled.div`
+const InfoContent = styled.div`
 padding-top: 8px;
 display: grid;
 grid-template-rows: min-content min-content;
@@ -169,18 +166,14 @@ grid-column: 1/3;
 }
 `
 
-const StyledInfoWindow = styled(InfoWindow)`
-
-`
-
-const InfoWindowLayout = styled.div`
-
+const InfoLayout = styled.a`
 `
 
 const CreationDate = styled.div`
 grid-row: 1;
 justify-self: right;
 grid-column: 2;
+
 p{
 font-size: var(--size-m);
 text-align: right;
@@ -193,12 +186,12 @@ z-index: 10;
 right: 0;
 `
 
-const StyledButton = styled.button`
+const LocateButton = styled.button`
 background-color: transparent;
 border-color: transparent;
 `
 
-const StyledLocatorIcon = styled(MdMyLocation)`
+const LocatorIcon = styled(MdMyLocation)`
 font-size: 40px;
 background-color: white;
 border-width: thin;

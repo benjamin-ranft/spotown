@@ -11,7 +11,7 @@ export default function DiscoveryList({searchedDiscoveries, filters}) {
     const filteredDiscoveries = discoveries.filter(d => d.tags.some(t => tags.includes(t)))
 
     return (
-            <StyledList>
+            <List>
                 {filters.length > "0" ? filteredDiscoveries?.map((discovery) => (
                     <li key={discovery.id}>
                         <div onClick={() => history.push(`/discovery/${discovery.id}`)}>
@@ -25,23 +25,20 @@ export default function DiscoveryList({searchedDiscoveries, filters}) {
                             </div>
                         </li>
                     ))}
-            </StyledList>
+            </List>
         );
 }
 
-const StyledList = styled.ul`
+const List = styled.ul`
   overflow: scroll;
   padding: var(--size-l);
   width: 100%;
   flex-direction: row-reverse;
-
   list-style: none;
   marker: none;
-
   display: grid;
   grid-auto-rows: min-content;
   gap: var(--size-l);
-  
   margin: 0;
   
   li:last-child:after {
@@ -49,5 +46,4 @@ const StyledList = styled.ul`
   display: block;
   height: 40px;
 }
-
 `;

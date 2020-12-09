@@ -1,7 +1,7 @@
 import React from "react";
 import Chip from '@material-ui/core/Chip';
 
-export default function SelectableChipList({selectedChips, chips, setSelectedChips}){
+export default function FilterList({selectedChips, chips, setSelectedChips}){
 
     const handleClick = (value) => {
         if (selectedChips.includes(value)){

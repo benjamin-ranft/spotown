@@ -4,7 +4,7 @@ import {
     addDiscovery,
     updateDiscovery,
     removeDiscovery
-} from '../service/DiscoveryService';
+} from '../service/discoveryService';
 import UserContext from './UserContext';
 import DiscoveriesContext from "./DiscoveriesContext";
 

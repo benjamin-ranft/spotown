@@ -1,6 +1,6 @@
 import React from "react";
 import DiscoveryList from "./DiscoveryList";
-import DiscoveryMap from "./discoveryMap/DiscoveryMap";
+import DiscoveryMap from "./maps/DiscoveryMap";
 import {useLocation} from "react-router-dom";
 
 function useQuery (){
