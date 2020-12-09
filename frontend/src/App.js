@@ -1,14 +1,14 @@
 import React from "react";
-import LoginPage from "./components/LoginPage";
+import LoginPage from "./components/pages/LoginPage";
 import {Redirect , Route, Switch} from "react-router-dom";
 import ProtectedRoute from "./routing/ProtectedRoute";
 import UserContextProvider from "./contexts/UserContextProvider";
-import Discoveries from "./components/Discoveries";
+import Discoveries from "./components/pages/Discoveries";
 import DiscoveriesContextProvider from "./contexts/DiscoveriesContextProvider";
-import AddDiscoveryPage from "./components/AddDiscoveryPage";
-import DiscoveryDetails from "./components/DiscoveryDetails";
-import UpdateDiscoveryPage from "./components/updateDiscovery/UpdateDiscoveryPage";
-import AddDiscoveryPreSelect from "./components/AddDiscoveryPreSelect";
+import AddDiscoveryPage from "./components/pages/AddDiscoveryPage";
+import DiscoveryDetails from "./components/pages/DiscoveryDetails";
+import UpdateDiscoveryPage from "./components/pages/UpdateDiscoveryPage";
+import AddDiscoveryPreSelect from "./components/pages/AddDiscoveryPreSelect";
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
-import AddNewDiscoveryMap from "./discoveryMap/AddNewDiscoveryMap";
+import AddNewDiscoveryMap from "../uiElements/maps/AddNewDiscoveryMap";
 import styled from "styled-components/macro";
 import {MdAddLocation, MdKeyboardArrowLeft} from "react-icons/md";
 

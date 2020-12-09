@@ -2,7 +2,7 @@ import React from "react";
 import {useHistory, useLocation} from "react-router-dom";
 import {MdList, MdExplore} from "react-icons/all";
 import styled from "styled-components/macro";
-import AddIcon from "./icons/AddIcon";
+import AddIcon from "../icons/AddIcon";
 
 function useQuery (){
     return new URLSearchParams(useLocation().search)

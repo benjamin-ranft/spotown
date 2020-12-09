@@ -1,9 +1,9 @@
 import React from "react";
 import {FaSearch, BsFilter} from "react-icons/all";
 import styled from "styled-components/macro";
-import UserIcon from "./icons/UserIcon";
+import UserIcon from "../icons/UserIcon";
 import SearchBar from "./SearchBar";
-import FilterBar from "./FilterBar";
+import FilterBar from "./filters/FilterBar";
 
 export default function Header({headerAction, setHeaderAction, searchTerm, setSearchTerm, setFilters, filters}){
 

@@ -1,9 +1,9 @@
 import React, {useContext, useState} from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../uiElements/Header";
+import Footer from "../uiElements/Footer";
 import styled from "styled-components/macro";
-import DiscoveriesBody from "./DiscoveriesBody";
-import DiscoveriesContext from "../contexts/DiscoveriesContext";
+import DiscoveriesBody from "../uiElements/DiscoveriesBody";
+import DiscoveriesContext from "../../contexts/DiscoveriesContext";
 
 export default function Discoveries(){
 

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
-import InputField from "./uiElements/InputField";
-import AddDiscoveryTags from "./AddDiscoveryTags";
+import InputField from "./InputField";
+import AddDiscoveryTags from "./filters/AddDiscoveryTags";
 
 
 export default function DiscoveryForm({onSave, discovery, setDiscovery}) {

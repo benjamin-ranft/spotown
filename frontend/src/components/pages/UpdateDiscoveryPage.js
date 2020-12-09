@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import DiscoveriesContext from "../../contexts/DiscoveriesContext";
 import {useHistory, useParams} from "react-router-dom";
-import DiscoveryForm from "../DiscoveryForm";
+import DiscoveryForm from "../uiElements/DiscoveryForm";
 import styled from "styled-components/macro";
 import {MdKeyboardArrowLeft} from "react-icons/md";
 

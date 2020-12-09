@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import styled from "styled-components/macro";
-import UserContext from "../contexts/UserContext";
+import UserContext from "../../contexts/UserContext";
 import {useHistory} from "react-router-dom";
 import {MdClose} from "react-icons/all";
 

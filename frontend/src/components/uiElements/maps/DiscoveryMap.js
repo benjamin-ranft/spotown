@@ -4,7 +4,7 @@ import {GoogleMap, Marker, useLoadScript, InfoWindow} from "@react-google-maps/a
 import {mapStyles} from "./mapStyles";
 import TimeAgo from "react-timeago/lib";
 import styled from "styled-components/macro";
-import DiscoveriesContext from "../../contexts/DiscoveriesContext";
+import DiscoveriesContext from "../../../contexts/DiscoveriesContext";
 import {MdMyLocation} from "react-icons/all";
 
 const libraries = ["places"];

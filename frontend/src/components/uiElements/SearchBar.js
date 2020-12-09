@@ -1,5 +1,5 @@
 import React from "react";
-import InputField from "./uiElements/InputField";
+import InputField from "./InputField";
 import styled from "styled-components/macro";
 import {MdClose} from "react-icons/all";
 

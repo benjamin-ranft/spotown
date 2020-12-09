@@ -1,8 +1,8 @@
 import React, {useContext, useState} from "react";
-import UserContext from "../contexts/UserContext";
+import UserContext from "../../contexts/UserContext";
 import { useHistory } from 'react-router-dom';
 import styled from "styled-components/";
-import InputField from "./uiElements/InputField";
+import InputField from "../uiElements/InputField";
 
 const initialState = {
     username: "",

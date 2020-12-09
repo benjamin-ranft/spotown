@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styled from "styled-components/macro";
-import UserProfilePopup from "../UserProfilePopup";
+import UserProfilePopup from "../uiElements/UserProfilePopup";
 
 export default function UserIcon(){
 

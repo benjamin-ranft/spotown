@@ -1,24 +1,24 @@
 import React from "react";
 import styled from "styled-components/macro";
-import {VscGlobe} from "react-icons/all";
+import {VscGlobe} from "react-icons/vsc";
 
 export default function WebsiteButton(webUrl) {
     return(
-        <StyledWebsiteButton href={webUrl}>
-            <StyledWebsiteIcon/>
+        <Layout href={webUrl}>
+            <WebsiteIcon/>
             <p>Website</p>
-        </StyledWebsiteButton>
+        </Layout>
     )
 }
 
-const StyledWebsiteButton = styled.div`
+const Layout = styled.button`
 display: flex;
 flex-direction: column;
 align-items: center;
 font-size: 12px;
 `
 
-const StyledWebsiteIcon = styled(VscGlobe)`
+const WebsiteIcon = styled(VscGlobe)`
 color: var(--accent-green);
 font-size: 30px;
 `

@@ -2,13 +2,13 @@ import React, {useContext} from "react";
 import {useParams, useHistory} from "react-router-dom";
 import styled from "styled-components/macro";
 import {MdKeyboardArrowLeft, MdShare} from "react-icons/md";
-import DiscoveriesContext from "../contexts/DiscoveriesContext";
-import ActionButtons from "./buttons/ActionButtons";
-import DirectionsButton from "./buttons/DirectionsButton";
-import CallButton from "./buttons/CallButton";
-import WebsiteButton from "./buttons/WebsiteButton";
+import DiscoveriesContext from "../../contexts/DiscoveriesContext";
+import ActionButtons from "../buttons/ActionButtons";
+import DirectionsButton from "../buttons/DirectionsButton";
+import CallButton from "../buttons/CallButton";
+import WebsiteButton from "../buttons/WebsiteButton";
 import {VscLocation, RiCheckboxMultipleFill} from "react-icons/all";
-import useCopyToClipboard from "./utils/useCopyToClipboard";
+import useCopyToClipboard from "../utils/useCopyToClipboard";
 
 
 export default function DiscoveryDetails(){

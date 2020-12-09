@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState} from "react";
 import {useHistory, useLocation} from "react-router-dom";
-import DiscoveriesContext from "../contexts/DiscoveriesContext";
+import DiscoveriesContext from "../../contexts/DiscoveriesContext";
 import {MdKeyboardArrowLeft} from "react-icons/md";
 import styled from "styled-components/macro";
-import DiscoveryForm from "./DiscoveryForm";
+import DiscoveryForm from "../uiElements/DiscoveryForm";
 import {getDetails} from "use-places-autocomplete";
 import {useLoadScript} from "@react-google-maps/api";
 

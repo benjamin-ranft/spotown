@@ -1,24 +1,24 @@
 import React from "react";
-import {MdDirections} from "react-icons/all";
+import {MdDirections} from "react-icons/md";
 import styled from "styled-components/macro";
 
 export default function DirectionsButton(directionsUrl) {
     return(
-        <StyledDirectionsButton href={directionsUrl}>
-            <StyledDirectionsIcon/>
+        <Layout href={directionsUrl}>
+            <DirectionsIcon/>
             <p>Directions</p>
-        </StyledDirectionsButton>
+        </Layout>
     )
 }
 
-const StyledDirectionsButton = styled.div`
+const Layout = styled.button`
 display: flex;
 flex-direction: column;
 align-items: center;
 font-size: 12px;
 `
 
-const StyledDirectionsIcon = styled(MdDirections)`
+const DirectionsIcon = styled(MdDirections)`
 color: var(--accent-green);
 font-size: 30px;
 `
