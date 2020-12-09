@@ -16,7 +16,7 @@ import {
     ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
-import {MdMyLocation} from "react-icons/all";
+import {MdMyLocation} from "react-icons/md";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -100,7 +100,7 @@ export default function AddNewDiscoveryMap({center, setCenter, setPlaceId}){
 function Locate({ panTo, setCenter }) {
     return (
         <LocateLayout>
-            <StyledButton
+            <LocateButton
                 onClick={() => {
                     navigator.geolocation.getCurrentPosition(
                         (position) => {
@@ -117,8 +117,8 @@ function Locate({ panTo, setCenter }) {
                     );
                 }}
             >
-                <StyledLocatorIcon/>
-            </StyledButton>
+                <LocateIcon/>
+            </LocateButton>
         </LocateLayout>
     );
 }
@@ -160,10 +160,10 @@ function Search({panTo, center, history}) {
     };
 
     return (
-        <StyledDiv>
-        <ComboboxLayout>
+        <SearchLayout>
+        <SearchBox>
             <Combobox onSelect={handleSelect}>
-                <ComboboxInputStyled
+                <SearchInput
                     value={value}
                     onChange={handleInput}
                     disabled={!ready}
@@ -178,23 +178,23 @@ function Search({panTo, center, history}) {
                     </ComboboxList>
                 </ComboboxPopover>
             </Combobox>
-        </ComboboxLayout>
-        </StyledDiv>
+        </SearchBox>
+        </SearchLayout>
     );
 }
 
-const StyledDiv = styled.div`
+const SearchLayout = styled.section`
 display: grid;
 grid-template-columns: 23px 1fr 23px;
 padding: 10px;
 `
 
-const ComboboxLayout = styled.div`
+const SearchBox = styled.aside`
 grid-column: 2;
 justify-self: center;
 `
 
-const ComboboxInputStyled = styled(ComboboxInput)`
+const SearchInput = styled(ComboboxInput)`
 border-radius: 20px;
 background-color: var(--light-grey);
 border-color: transparent;
@@ -202,18 +202,18 @@ padding: 5px 10px;
 width: 70vw;
 `
 
-const LocateLayout = styled.div`
+const LocateLayout = styled.section`
 position: absolute;
 z-index: 10;
 right: 0;
 `
 
-const StyledButton = styled.button`
+const LocateButton = styled.button`
 background-color: transparent;
 border-color: transparent;
 `
 
-const StyledLocatorIcon = styled(MdMyLocation)`
+const LocateIcon = styled(MdMyLocation)`
 font-size: 40px;
 background-color: white;
 border-width: thin;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import SelectableChipList from "./SelectableChipList";
+import FilterList from "./FilterList";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,14 +20,14 @@ export default function FilterTags({filters, setFilters}) {
 
     return (
         <div className={classes.root}>
-            <SelectableChipList chips={[
+            <FilterList chips={[
                 {name:"Food",value:"food"},
                 {name:"Drinks", value:"drinks"},
                 {name:"Shops", value:"shops"},
                 {name:"Art", value:"art"},
                 {name:"Nature", value:"nature"}]}
-                                selectedChips={filters}
-                                setSelectedChips={setFilters}/>
+                        selectedChips={filters}
+                        setSelectedChips={setFilters}/>
         </div>
     );
 }

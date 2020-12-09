@@ -1,30 +1,28 @@
 import React from "react";
 import InputField from "./InputField";
 import styled from "styled-components/macro";
-import {MdClose} from "react-icons/all";
+import {MdClose} from "react-icons/md";
 
 export default function SearchBar({searchTerm, setSearchTerm, handleClose}){
     return(
-        <StyledDiv>
-        <StyledInputField
+        <Layout>
+        <Input
             name="search"
             placeholder="Search"
             value={searchTerm}
             onChange={handleChange}
             type="text"
         />
-           <StyledCloseIcon onClick={handleClose}/>
-        </StyledDiv>
-
+           <CloseIcon onClick={handleClose}/>
+        </Layout>
     )
 
     function handleChange (event){
         setSearchTerm(event.target.value)
     }
-
 }
 
-const StyledDiv = styled.div`
+const Layout = styled.main`
 display: grid;
 grid-template-columns: 2% 1fr min-content 2%;
 grid-template-rows: 2% 1fr 4%;
@@ -32,7 +30,7 @@ background-color: white;
 align-items: center;
 `
 
-const StyledCloseIcon = styled(MdClose)`
+const CloseIcon = styled(MdClose)`
   grid-row: 2;
   grid-column: 3;
   padding: 5px;
@@ -41,7 +39,7 @@ const StyledCloseIcon = styled(MdClose)`
   font-size: 30px;
 `
 
-const StyledInputField = styled(InputField)`
+const Input = styled(InputField)`
 grid-row: 2;
 grid-column: 2;
 border-radius: 100px;

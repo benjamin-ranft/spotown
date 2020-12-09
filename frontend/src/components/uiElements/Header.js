@@ -8,22 +8,22 @@ import FilterBar from "./filters/FilterBar";
 export default function Header({headerAction, setHeaderAction, searchTerm, setSearchTerm, setFilters, filters}){
 
     return(
-        <StyledHeaderLayout>
-            <StyledHeader>
+        <Layout>
+            <InnerLayout>
                 <h1>Discoveries</h1>
-                <StyledIcons>
+                <Actions>
                     <SearchIcon onClick={handleSearchClick} className={headerAction}/>
                     <FilterIcon onClick={handleFilterClick} className={headerAction}/>
                     <UserIcon/>
-                </StyledIcons>
-            </StyledHeader>
-            {headerAction === "search" && <StyledActionSection>
+                </Actions>
+            </InnerLayout>
+            {headerAction === "search" && <SubHeader>
                 <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleClose={handleSearchClick}/>
-            </StyledActionSection>}
-            {headerAction === "filter" && <StyledActionSection>
+            </SubHeader>}
+            {headerAction === "filter" && <SubHeader>
                 <FilterBar filters={filters} setFilters={setFilters} handleClose={handleFilterClick}/>
-            </StyledActionSection>}
-        </StyledHeaderLayout>
+            </SubHeader>}
+        </Layout>
     )
 
     function handleSearchClick(){
@@ -47,17 +47,17 @@ export default function Header({headerAction, setHeaderAction, searchTerm, setSe
     }
 }
 
-const StyledHeaderLayout = styled.div`
+const Layout = styled.main`
 display: grid;
 grid-template-rows: min-content min-content;
 box-shadow: 0px 1px 9px 0px rgba(0,0,0,0.37);
 `
 
-const StyledActionSection = styled.div`
+const SubHeader = styled.section`
 height: 50px;
 `
 
-const StyledHeader = styled.div`
+const InnerLayout = styled.section`
 justify-items: start;
 padding: 10px;
 grid-template-rows: 50px;
@@ -69,7 +69,7 @@ grid-template-columns: 55% 45%;
 align-items: center;
 `
 
-const StyledIcons = styled.div`
+const Actions = styled.aside`
 justify-items: end;
 width: 100%;
 display: grid;

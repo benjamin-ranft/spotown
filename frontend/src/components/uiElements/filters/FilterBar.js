@@ -1,30 +1,30 @@
 import React from "react";
 import FilterTags from "./FilterTags";
 import styled from "styled-components/macro";
-import {MdClose} from "react-icons/all";
+import {MdClose} from "react-icons/md";
 
 export default function FilterBar({filters, setFilters, handleClose}) {
 
     return(
-        <StyledFilterBar>
-            <StyledFilterTags filters={filters} setFilters={setFilters} handleClose={handleClose}/>
-            <StyledCloseIcon onClick={handleClose}/>
-        </StyledFilterBar>
+        <Layout>
+            <Filters filters={filters} setFilters={setFilters} handleClose={handleClose}/>
+            <CloseIcon onClick={handleClose}/>
+        </Layout>
     )
 }
 
-const StyledFilterBar = styled.div`
+const Layout = styled.main`
 display: grid;
 grid-template-columns:  1fr min-content 2%;
 align-items: center;
 `
 
-const StyledFilterTags = styled(FilterTags)`
+const Filters = styled(FilterTags)`
 grid-column: 2;
 display: inline-flex;
 `
 
-const StyledCloseIcon = styled(MdClose)`
+const CloseIcon = styled(MdClose)`
   grid-column: 2;
   padding: 5px;
   justify-self: end;
