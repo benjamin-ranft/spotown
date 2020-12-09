@@ -1,26 +1,35 @@
 import React from "react";
+import {useHistory, useLocation} from "react-router-dom";
 import {MdList, MdExplore} from "react-icons/all";
 import styled from "styled-components/macro";
 import AddIcon from "./icons/AddIcon";
 
-export default function Footer({footerAction, setFooterAction}){
+function useQuery (){
+    return new URLSearchParams(useLocation().search)
+}
+
+export default function Footer(){
+
+    const history = useHistory();
+    const query = useQuery();
+    const view = query.get("view");
 
     return(
         <StyledFooter>
-            <StyledListIcon onClick={handleListClick} className={footerAction}/>
+            <StyledListIcon onClick={handleListClick} view={view}/>
             <StyledDiv>
                 <AddIcon/>
             </StyledDiv>
-            <StyledMapIcon onClick={handleMapClick} className={footerAction}/>
+            <StyledMapIcon onClick={handleMapClick} view={view}/>
         </StyledFooter>
     )
 
     function handleListClick(){
-        setFooterAction("list")
+        history.push("/discoveries?view=list")
     }
 
     function handleMapClick(){
-        setFooterAction("map")
+        history.push("/discoveries?view=map")
     }
 }
 
@@ -39,11 +48,7 @@ box-shadow: 0px -1px 9px 0px rgba(0,0,0,0.37);
 
 const StyledListIcon = styled(MdList)`
 font-size: 35px;
-color: var(--dark-grey);
-
-&.list{
-color: var(--accent-red);
-}
+color: ${props => props.view === "list" ? "var(--accent-red)" : "var(--dark-grey)"};
 `
 
 const StyledDiv = styled.div`
@@ -55,9 +60,5 @@ right: auto;
 
 const StyledMapIcon = styled(MdExplore)`
 font-size: 35px;
-color: var(--dark-grey);
-
-&.map{
-color: var(--accent-red);
-}
+color: ${props => props.view === "map" ? "var(--accent-red)" : "var(--dark-grey)"};
 `

@@ -12,7 +12,6 @@ export default function Discoveries(){
     const [headerAction, setHeaderAction] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
     const [filters, setFilters] = useState("");
-    const [footerAction, setFooterAction] = useState("list");
 
     //Live Search Logic
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
@@ -25,8 +24,8 @@ export default function Discoveries(){
     return(
         <PageLayout>
             <Header headerAction={headerAction} setHeaderAction={setHeaderAction} searchTerm={searchTerm} setSearchTerm={setSearchTerm} setFilters={setFilters} filters={filters}/>
-            <DiscoveriesBody searchedDiscoveries={searchedDiscoveries} footerAction={footerAction} searchTerm={searchTerm} filters={filters}/>
-            <Footer footerAction={footerAction} setFooterAction={setFooterAction}/>
+            <DiscoveriesBody searchedDiscoveries={searchedDiscoveries} searchTerm={searchTerm} filters={filters}/>
+            <Footer/>
         </PageLayout>
     )
 }

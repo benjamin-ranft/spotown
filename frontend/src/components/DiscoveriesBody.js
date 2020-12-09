@@ -1,15 +1,23 @@
 import React from "react";
 import DiscoveryList from "./DiscoveryList";
 import DiscoveryMap from "./discoveryMap/DiscoveryMap";
+import {useLocation} from "react-router-dom";
 
-export default function DiscoveriesBody ({searchedDiscoveries, footerAction, searchTerm, filters}){
+function useQuery (){
+    return new URLSearchParams(useLocation().search)
+}
+
+export default function DiscoveriesBody ({searchedDiscoveries, searchTerm, filters}){
+
+    const query = useQuery();
+    const view = query.get("view");
 
     return (
         <>
-            {footerAction === "list" &&
+            {view === "list" &&
             <DiscoveryList searchedDiscoveries={searchedDiscoveries} filters={filters}/>
             }
-            {footerAction === "map" &&
+            {view === "map" &&
             <DiscoveryMap searchedDiscoveries={searchedDiscoveries} searchTerm={searchTerm} filters={filters}/>
             }
         </>
