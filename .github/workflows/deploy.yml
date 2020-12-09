@@ -25,6 +25,7 @@ jobs:
         with:
           name: frontend-build
           path: frontend/build/
+
   build-backend:
     runs-on: ubuntu-latest
     needs: build-frontend
@@ -44,6 +45,7 @@ jobs:
         with:
           name: backend-build.jar
           path: backend/target/spotown.jar
+
   deploy:
     name: deploy to heroku
     runs-on: ubuntu-latest
