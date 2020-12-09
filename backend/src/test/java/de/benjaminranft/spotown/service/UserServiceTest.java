@@ -44,11 +44,33 @@ class UserServiceTest {
                 "benjamin",
                 "password",
                 new ArrayList<>(List.of(
-                        new Discovery("5624", timestamp, "Pizza Place", "Sample Street 1", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                                new ArrayList<>(List.of("restaurant", "gallery"))
+                        new Discovery("5624", timestamp,
+                                "Pizza Place",
+                                "GHSF1KIUHKJ",
+                                349054803.95232,
+                                565774534,
+                                "Sample Street 1",
+                                "https://google.com",
+                                "04023457596",
+                                "https://google.com",
+                                "https://google.com",
+                                "Sample notes sample notes sample notes",
+                                List.of(
+                                        "food", "art")
                         ),
-                        new Discovery("5634", timestamp, "Pizza Place", "Sample Street 1", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                                new ArrayList<>(List.of("restaurant", "gallery"))
+                        new Discovery("2345", timestamp,
+                                "Sushi Place",
+                                "GHSF4KIUHKJ",
+                                349054803.95232,
+                                565774534,
+                                "Sample Street 2",
+                                "https://google.com",
+                                "04023457596",
+                                "https://google.com",
+                                "https://google.com",
+                                "Sample notes sample notes sample notes",
+                                List.of(
+                                        "drinks", "nature")
                         )))
         );
 
@@ -57,11 +79,33 @@ class UserServiceTest {
         List<Discovery> discoveryList = userService.getDiscoveries(principalName);
 
         List<Discovery> expectedList = new ArrayList<>(List.of(
-                new Discovery("5624", timestamp, "Pizza Place", "Sample Street 1", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                        new ArrayList<>(List.of("restaurant", "gallery"))
+                new Discovery("5624", timestamp,
+                        "Pizza Place",
+                        "GHSF1KIUHKJ",
+                        349054803.95232,
+                        565774534,
+                        "Sample Street 1",
+                        "https://google.com",
+                        "04023457596",
+                        "https://google.com",
+                        "https://google.com",
+                        "Sample notes sample notes sample notes",
+                        List.of(
+                                "food", "art")
                 ),
-                new Discovery("5634", timestamp, "Pizza Place", "Sample Street 1", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
-                        new ArrayList<>(List.of("restaurant", "gallery"))
+                new Discovery("2345", timestamp,
+                        "Sushi Place",
+                        "GHSF4KIUHKJ",
+                        349054803.95232,
+                        565774534,
+                        "Sample Street 2",
+                        "https://google.com",
+                        "04023457596",
+                        "https://google.com",
+                        "https://google.com",
+                        "Sample notes sample notes sample notes",
+                        List.of(
+                                "drinks", "nature")
                 )
         ));
 
@@ -83,8 +127,18 @@ class UserServiceTest {
         Update update = new Update();
 
         AddDiscoveryDto addDiscoveryDto = new AddDiscoveryDto(
-                "Pizza Place", "Sample Street 1", "https://google.com", "04023457596", "Sample notes sample notes sample notes",
-                new ArrayList<>(List.of("restaurant", "gallery"))
+                "Sushi Place",
+                "GHSF4KIUHKJ",
+                349054803.95232,
+                565774534,
+                "Sample Street 2",
+                "https://google.com",
+                "04023457596",
+                "https://google.com",
+                "https://google.com",
+                "Sample notes sample notes sample notes",
+                new ArrayList<>(List.of("drinks", "nature"))
+
         );
 
         //WHEN
@@ -92,8 +146,19 @@ class UserServiceTest {
         when(timestampUtils.generateTimestampEpochSeconds()).thenReturn(expectedTime);
 
         Discovery addedDiscovery = userService.add(addDiscoveryDto, principalName);
-        Discovery expectedDiscovery = new Discovery(expectedId, expectedTime, "Pizza Place", "Sample Street 1", null, null, "04023457596", "https://google.com", null, "Sample notes sample notes sample notes",
-                new ArrayList<>(List.of("restaurant", "gallery"))
+        Discovery expectedDiscovery = new Discovery(expectedId, expectedTime,"Sushi Place",
+                "GHSF4KIUHKJ",
+                349054803.95232,
+                565774534,
+                "Sample Street 2",
+                "https://google.com",
+                "04023457596",
+                "https://google.com",
+                "https://google.com",
+                "Sample notes sample notes sample notes",
+                List.of(
+                        "drinks", "nature")
+
         );
 
         //THEN
@@ -117,7 +182,16 @@ class UserServiceTest {
         Update update = new Update();
 
         UpdateDiscoveryDto updatedDiscoveryDto = new UpdateDiscoveryDto(
-                expectedId, "Pizza Place 99", "Sample Street 1", "https://google.com", "11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
+                expectedId, "Sushi Place",
+                "GHSF4KIUHKJ",
+                349054803.95232,
+                565774534,
+                "Sample Street 2",
+                "https://google.com",
+                "04023457596",
+                "https://google.com",
+                "https://google.com",
+                "Sample notes sample notes sample notes",
                 new ArrayList<>(List.of("restaurant", "gallery"))
         );
 
@@ -126,7 +200,16 @@ class UserServiceTest {
         when(timestampUtils.generateTimestampEpochSeconds()).thenReturn(expectedTime);
 
         Discovery updatedDiscovery = userService.update(updatedDiscoveryDto, principalName);
-        Discovery expectedDiscovery = new Discovery(expectedId, expectedTime, "Pizza Place 99", "Sample Street 1", "https://google.com","11:00 - 12:00", "04023457596", "https://google.com", "https://google.com", "Sample notes sample notes sample notes",
+        Discovery expectedDiscovery = new Discovery(expectedId, expectedTime, "Sushi Place",
+                "GHSF4KIUHKJ",
+                349054803.95232,
+                565774534,
+                "Sample Street 2",
+                "https://google.com",
+                "04023457596",
+                "https://google.com",
+                "https://google.com",
+                "Sample notes sample notes sample notes",
                 new ArrayList<>(List.of("restaurant", "gallery"))
         );
 

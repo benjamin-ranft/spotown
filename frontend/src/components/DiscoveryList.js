@@ -6,7 +6,7 @@ import Discovery from "./Discovery";
 export default function DiscoveryList({searchedDiscoveries, filters}) {
 
     const history = useHistory();
-    const discoveries = searchedDiscoveries;
+    const discoveries = searchedDiscoveries.map(discovery => discovery).reverse();
     const tags = filters;
     const filteredDiscoveries = discoveries.filter(d => d.tags.some(t => tags.includes(t)))
 
@@ -33,6 +33,7 @@ const StyledList = styled.ul`
   overflow: scroll;
   padding: var(--size-l);
   width: 100%;
+  flex-direction: row-reverse;
 
   list-style: none;
   marker: none;

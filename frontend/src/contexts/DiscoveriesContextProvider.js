@@ -16,12 +16,12 @@ export default function DiscoveriesContextProvider({ children }) {
         tokenIsValid() && getDiscoveries(token).then(data => setDiscoveries(data)).catch(console.log);
     }, [token, tokenIsValid]);
 
-    const create = (name, address, webUrl, phoneNumber, notes, tags) =>
-        addDiscovery(name, address, webUrl, phoneNumber, notes, tags, token)
+    const create = (name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags) =>
+        addDiscovery(name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags, token)
             .then((newDiscovery) => setDiscoveries([...discoveries, newDiscovery]))
 
-    const update = (id, timestamp, name, address, thumbnail, openingHours, phoneNumber, webUrl, directions, notes, tags) => {
-        updateDiscovery(id, timestamp, name, address, thumbnail, openingHours, phoneNumber, webUrl, directions, notes, tags, token)
+    const update = (id, timestamp, name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags) => {
+        updateDiscovery(id, timestamp, name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags, token)
             .then((updateDiscovery) => setDiscoveries([...discoveries.filter((discovery) => discovery.id !== updateDiscovery.id),updateDiscovery]));
     }
 
@@ -31,7 +31,7 @@ export default function DiscoveriesContextProvider({ children }) {
 
 
     return (
-        <DiscoveriesContext.Provider value={{discoveries,create, update, remove}}>
+        <DiscoveriesContext.Provider value={{discoveries, setDiscoveries, create, update, remove}}>
             {children}
         </DiscoveriesContext.Provider>
     );

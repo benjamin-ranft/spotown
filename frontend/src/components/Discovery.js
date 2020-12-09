@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import TimeAgo from "react-timeago/lib";
 
 export default function Discovery({ discovery }) {
+
     return (
         <DiscoveryStyled>
             <StyledThumbnail>
@@ -9,11 +11,13 @@ export default function Discovery({ discovery }) {
             </StyledThumbnail>
             <StyledDiscoveryContentShort>
                 <NameAndAddress>
-                    <h2>{discovery.name}</h2>
+                    <h2>{discovery.name.substring(0,40)}</h2>
                     <p>{discovery.address}</p>
                 </NameAndAddress>
                 <CreationDate>
-                    <p>3 days ago</p>
+                    <p>
+                        <TimeAgo date={discovery.timestamp}/>
+                    </p>
                 </CreationDate>
             </StyledDiscoveryContentShort>
         </DiscoveryStyled>
@@ -47,9 +51,7 @@ display: grid;
 grid-template-columns: 3fr 1fr;
 padding: 15px;
 
-  h2{
-  font-size: var(--size-lplus);
-  }
+ 
   
   p{
   font-size: var(--size-m);
@@ -57,12 +59,16 @@ padding: 15px;
 `
 
 const NameAndAddress = styled.div`
-
+h2{
+  font-size: var(--size-l);
+  }
 `
 
 const CreationDate = styled.div`
 justify-self: right;
 p{
 font-size: var(--size-m);
+justify-self: right;
+text-align: right;
 }
 `

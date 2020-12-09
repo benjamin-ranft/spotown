@@ -33,8 +33,8 @@ export default function UpdateDiscoveryPage() {
     }
 
     function handleSave(discovery){
-        const {id, timestamp, name, address, thumbnail, openingHours, phoneNumber, webUrl, directions, notes, tags} = discovery;
-        update(id, timestamp, name, address, thumbnail, openingHours, phoneNumber, webUrl, directions, notes, tags);
+        const {id, timestamp, name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags} = discovery;
+        update(id, timestamp, name, place_id, lat, lng, address, thumbnail, phoneNumber, webUrl, directions, notes, tags);
         history.goBack();
     }
 

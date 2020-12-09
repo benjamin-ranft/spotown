@@ -15,13 +15,15 @@ export default function DiscoveryDetails(){
     const history = useHistory();
     const discovery = discoveries.find((discovery)=> discovery.id === id);
 
-
     return !discovery ? null : (
         <StyledDetailsPage>
             <StyledThumbnailSection thumbnail={discovery.thumbnail}>
                 <StyledDetailsHeader>
                     <StyledBackButton onClick={handleCancel}/>
-                    <StyledShareButton/>
+                    <LinkShareContainer href={"https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + discovery.place_id}
+                                        >
+                        <StyledShareButton/>
+                    </LinkShareContainer>
                 </StyledDetailsHeader>
             </StyledThumbnailSection>
             <StyledDetailsCard>
@@ -33,14 +35,13 @@ export default function DiscoveryDetails(){
                     <StyledActionButtons id={id}/>
                 </AddressAndActionButtons>
                 <StyledTitleHoursSection>
-                    <StyledDiscoveryName>{discovery.name}</StyledDiscoveryName>
-                    <StyledOpeningHours>{discovery.openingHours}</StyledOpeningHours>
+                    <StyledDiscoveryName>{discovery.name.substring(0, 50)}</StyledDiscoveryName>
                 </StyledTitleHoursSection>
                 <StyledNavLinks>
                     <a href={discovery.directions}>
                         <DirectionsButton/>
                     </a>
-                    <a href={discovery.phoneNumber}>
+                    <a href={"tel:" + discovery.phoneNumber}>
                         <CallButton/>
                     </a>
                     <a href={discovery.webUrl}>
@@ -81,6 +82,7 @@ background-image: url(${(props) => props.thumbnail});
 background-repeat: no-repeat;
 background-size: cover;
 margin-bottom: -20px;
+background-position: center;
 `
 
 const StyledDetailsCard = styled.div`
@@ -101,11 +103,9 @@ display: flex;
 flex-direction: column;
 `
 const StyledDiscoveryName = styled.h2`
+font-size: var(--size-lplus);
 `
 
-const StyledOpeningHours = styled.p`
-font-size: var(--size-m);
-`
 const AddressAndActionButtons = styled.div`
 grid-row: 1;
 display: grid;
@@ -116,7 +116,7 @@ align-items: center;
 const StyledAddressSection = styled.div`
 display: flex;
 flex-direction: row;
-
+align-items: center;
 `
 
 const StyledLocationIcon = styled(VscLocation)`
@@ -158,13 +158,14 @@ justify-self: left;
 grid-column: 2;
 grid-row: 2;
 `
-
+const LinkShareContainer = styled.a`
+grid-column: 3;
+grid-row: 2;
+justify-self: right;
+`
 const StyledShareButton = styled(MdShare)`
 color: var(--white);
 font-size: 32px;
-justify-self: right;
-grid-column: 3;
-grid-row: 2;
 `
 
 

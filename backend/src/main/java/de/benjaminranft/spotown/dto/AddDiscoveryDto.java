@@ -11,9 +11,14 @@ import java.util.List;
 @AllArgsConstructor
 public class AddDiscoveryDto {
     private String name;
+    private String place_id;
+    private double lat;
+    private double lng;
     private String address;
-    private String webUrl;
+    private String thumbnail;
     private String phoneNumber;
+    private String webUrl;
+    private String directions;
     private String notes;
     private List<String> tags;
 }

@@ -34,7 +34,7 @@ justify-self: end;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
-gap: 8px;
+gap: 15px;
 `
 
 const StyledEditButton = styled(MdModeEdit)`

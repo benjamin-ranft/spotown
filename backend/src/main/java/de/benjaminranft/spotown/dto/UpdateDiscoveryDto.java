@@ -14,9 +14,11 @@ import java.util.List;
 public class UpdateDiscoveryDto {
     private String id;
     private String name;
+    private String place_id;
+    private double lat;
+    private double lng;
     private String address;
     private String thumbnail;
-    private String openingHours;
     private String phoneNumber;
     private String webUrl;
     private String directions;
