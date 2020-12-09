@@ -12,13 +12,13 @@ export default function UserIcon(){
 
     return(
         <>
-            <UserIconStyled placeholder={"/images/spotown_user_placeHolder_grey.png"} onClick={togglePopup}/>
+            <Icon placeholder={"/images/spotown_user_placeHolder_grey.png"} onClick={togglePopup}/>
             {isOpen && <UserProfilePopup handleClose={togglePopup}/>}
         </>
     )
 }
 
-const UserIconStyled = styled.div`
+const Icon = styled.div`
 background-image: url(${(props) => props.placeholder});
 background-repeat: no-repeat;
 background-size: cover;

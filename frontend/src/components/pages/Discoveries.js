@@ -22,15 +22,15 @@ export default function Discoveries(){
     )
 
     return(
-        <PageLayout>
+        <Layout>
             <Header headerAction={headerAction} setHeaderAction={setHeaderAction} searchTerm={searchTerm} setSearchTerm={setSearchTerm} setFilters={setFilters} filters={filters}/>
             <DiscoveriesBody searchedDiscoveries={searchedDiscoveries} searchTerm={searchTerm} filters={filters}/>
             <Footer/>
-        </PageLayout>
+        </Layout>
     )
 }
 
-const PageLayout = styled.div`
+const Layout = styled.main`
 display: grid;
 grid-template-rows: min-content 1fr min-content;
 height: 100vh;

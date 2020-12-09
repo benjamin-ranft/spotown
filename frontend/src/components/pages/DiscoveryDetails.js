@@ -20,44 +20,36 @@ export default function DiscoveryDetails(){
     const sharingLink = "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + discovery.place_id;
 
     return !discovery ? null : (
-        <StyledDetailsPage>
-            <StyledThumbnailSection thumbnail={discovery.thumbnail}>
-                <StyledDetailsHeader>
-                    <StyledBackButton onClick={handleCancel}/>
-                    <LinkShareContainer
+        <Layout>
+            <BackgroundImage thumbnail={discovery.thumbnail}>
+                <Header>
+                    <BackButton onClick={handleCancel}/>
+                    <ShareButton
                         onClick={() => handleCopy(sharingLink)}>
-                        {!isCopied ? <StyledShareButton/> : <StyledCopiedIcon/>}
-                    </LinkShareContainer>
-                </StyledDetailsHeader>
-            </StyledThumbnailSection>
-            <StyledDetailsCard>
-                <AddressAndActionButtons>
-                    <StyledAddressSection>
-                        <StyledLocationIcon/>
-                        <StyledAddress>{discovery.address}</StyledAddress>
-                    </StyledAddressSection>
-                    <StyledActionButtons id={id}/>
-                </AddressAndActionButtons>
-                <StyledTitleHoursSection>
-                    <StyledDiscoveryName>{discovery.name.substring(0, 50)}</StyledDiscoveryName>
-                </StyledTitleHoursSection>
-                <StyledNavLinks>
-                    <a href={discovery.directions}>
-                        <DirectionsButton/>
-                    </a>
-                    <a href={"tel:" + discovery.phoneNumber}>
-                        <CallButton/>
-                    </a>
-                    <a href={discovery.webUrl}>
-                        <WebsiteButton/>
-                    </a>
-                </StyledNavLinks>
-                <StyledNotesSection>
+                        {!isCopied ? <ShareIcon/> : <CopiedIcon/>}
+                    </ShareButton>
+                </Header>
+            </BackgroundImage>
+            <Details>
+                <AddressAndActions>
+                    <Address>
+                        <LocationIcon/>
+                        <p>{discovery.address}</p>
+                    </Address>
+                    <Actions id={id}/>
+                </AddressAndActions>
+                    <DiscoveryName>{discovery.name.substring(0, 50)}</DiscoveryName>
+                <ContactLinks>
+                    <DirectionsButton href={discovery.directions}/>
+                    <CallButton href={"tel:" + discovery.phoneNumber}/>
+                    <WebsiteButton href={discovery.webUrl}/>
+                </ContactLinks>
+                <Notes>
                     <h3>Notes</h3>
                     <p>{discovery.notes}</p>
-                </StyledNotesSection>
-            </StyledDetailsCard>
-        </StyledDetailsPage>
+                </Notes>
+            </Details>
+        </Layout>
     )
 
     function handleCancel(){
@@ -66,14 +58,14 @@ export default function DiscoveryDetails(){
 
 }
 
-const StyledDetailsPage = styled.div`
+const Layout = styled.main`
 display: grid;
 grid-template-rows: 1fr min-content;
 grid-template-columns: 100%;
 height: 100vh;
 
 `
-const StyledDetailsHeader = styled.div`
+const Header = styled.section`
 background-image: linear-gradient(rgba(0,0,0,0.8), transparent);
 grid-row: 1;
 display: grid;
@@ -81,7 +73,7 @@ grid-template-columns: 23px 1fr 1fr 23px;
 grid-template-rows: 23px 1fr;
 `
 
-const StyledThumbnailSection = styled.div`
+const BackgroundImage = styled.section`
 background-image: url(${(props) => props.thumbnail});
 background-repeat: no-repeat;
 background-size: cover;
@@ -89,7 +81,7 @@ margin-bottom: -20px;
 background-position: center;
 `
 
-const StyledDetailsCard = styled.div`
+const Details = styled.section`
 display: grid;
 grid-template-rows: repeat(4 1fr);
 grid-row-gap: 12px;
@@ -101,42 +93,40 @@ padding: 20px;
 min-height: 40vh;
 `
 
-const StyledTitleHoursSection = styled.div`
+const DiscoveryName = styled.h2`
+font-size: var(--size-lplus);
 grid-row: 2;
 display: flex;
 flex-direction: column;
 `
-const StyledDiscoveryName = styled.h2`
-font-size: var(--size-lplus);
-`
 
-const AddressAndActionButtons = styled.div`
+const AddressAndActions = styled.section`
 grid-row: 1;
 display: grid;
 grid-template-columns: 1fr 0.3fr;
 align-items: center;
 `
 
-const StyledAddressSection = styled.div`
+const Address = styled.aside`
 display: flex;
 flex-direction: row;
 align-items: center;
+
+p{
+font-size: var(--size-m);
+}
 `
 
-const StyledLocationIcon = styled(VscLocation)`
+const LocationIcon = styled(VscLocation)`
 font-size: 20px;
 color: var(--darkest-grey);
 `
 
-const StyledAddress = styled.p`
-font-size: var(--size-m);
-`
-
-const StyledActionButtons = styled(ActionButtons) `
+const Actions = styled(ActionButtons) `
 justify-self: right;
 `
 
-const StyledNavLinks = styled.div`
+const ContactLinks = styled.section`
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
@@ -148,31 +138,30 @@ a {
 }
 `
 
-const StyledNotesSection = styled.div`
+const Notes = styled.aside`
 display: block;
 grid-column: 1/2;
 grid-row: 4;
 `
 
-
-const StyledBackButton = styled(MdKeyboardArrowLeft)`
+const BackButton = styled(MdKeyboardArrowLeft)`
 color: var(--white);
 font-size: 40px;
 justify-self: left;
 grid-column: 2;
 grid-row: 2;
 `
-const LinkShareContainer = styled.a`
+const ShareButton = styled.a`
 grid-column: 3;
 grid-row: 2;
 justify-self: right;
 `
-const StyledShareButton = styled(MdShare)`
+const ShareIcon = styled(MdShare)`
 color: var(--white);
 font-size: 32px;
 `
 
-const StyledCopiedIcon = styled(RiCheckboxMultipleFill)`
+const CopiedIcon = styled(RiCheckboxMultipleFill)`
 color: var(--white);
 font-size: 32px;
 `

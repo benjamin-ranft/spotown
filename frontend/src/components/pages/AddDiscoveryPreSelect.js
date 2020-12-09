@@ -17,25 +17,25 @@ export default function AddDiscoveryPreSelect(){
     const manualAddLink = "/new/confirm/?manual_place_id="+placeId;
 
     return(
-        <StyledDiscoveryPage>
-            <StyledAddHeader>
+        <Layout>
+            <Header>
                 <StyledBackButton onClick={handleGoBack}/>
                 <h1>SELECT</h1>
-            </StyledAddHeader>
-            <StyledMapContainer>
+            </Header>
+            <MapLayout>
                 <AddNewDiscoveryMap center={center} setCenter={setCenter} setPlaceId={setPlaceId}/>
-            </StyledMapContainer>
-            <StyledOverlappingCard>
-                <StyledLocationSuggestions/>
-                <StyledManualAddButton href={manualAddLink}>
+            </MapLayout>
+            <BackgroundCard>
+                <LocationSuggestions/>
+                <ManualAddButton href={manualAddLink}>
                     <ButtonLayout>
                         <StyledLocationPin/>
                         <p>Add something here</p>
                     </ButtonLayout>
-                </StyledManualAddButton>
-            </StyledOverlappingCard>
+                </ManualAddButton>
+            </BackgroundCard>
 
-        </StyledDiscoveryPage>
+        </Layout>
     )
 
     function handleGoBack(){
@@ -43,21 +43,21 @@ export default function AddDiscoveryPreSelect(){
     }
 }
 
-const StyledDiscoveryPage = styled.div`
+const Layout = styled.main`
 display: grid;
 grid-template-rows: 23px min-content 1fr min-content 23px;
 height: 100vh;
 grid-template-columns: 23px 1fr 23px;
 `
 
-const StyledMapContainer = styled.div`
+const MapLayout = styled.section`
 grid-column-start: 1;
 grid-column-end: 4;
 grid-row: 3/5;
 height: 100%;
 `
 
-const StyledOverlappingCard = styled.div`
+const BackgroundCard = styled.section`
 grid-row-start: 4;
 grid-row-end: 6;
 grid-column-start: 1;
@@ -68,11 +68,11 @@ grid-template-rows: min-content min-content 23px;
 z-index: 10;
 `
 
-const StyledLocationSuggestions = styled.div`
+const LocationSuggestions = styled.aside`
 grid-row: 1;
 `
 
-const StyledManualAddButton = styled.a`
+const ManualAddButton = styled.a`
 grid-column: 2;
 grid-row: 2;
 justify-self: center;
@@ -112,7 +112,7 @@ color: var(--darkest-grey);
 font-size: 40px;
 `
 
-const StyledAddHeader = styled.div`
+const Header = styled.section`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
 

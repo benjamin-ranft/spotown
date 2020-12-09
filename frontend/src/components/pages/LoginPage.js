@@ -16,11 +16,11 @@ export default function LoginPage() {
     const history = useHistory();
 
     return (
-        <StyledLoginPage>
-            <StyledSplashSection>
+        <Layout>
+            <SplashLogo>
                 <img src="./images/spotown_logo_splash.jpg" alt="Spotown logo splash"/>
-            </StyledSplashSection>
-            <StyledForm onSubmit={handleSubmit}>
+            </SplashLogo>
+            <Form onSubmit={handleSubmit}>
                 <h2>Login</h2>
                 <label>
                     <InputField
@@ -42,8 +42,8 @@ export default function LoginPage() {
                 </label>
                 {error && <p>{error}</p>}
                 <button>Login</button>
-            </StyledForm>
-        </StyledLoginPage>
+            </Form>
+        </Layout>
     );
 
 function handleChange(event) {
@@ -59,14 +59,14 @@ function handleSubmit(event) {
 
 }
 
-const StyledLoginPage = styled.div`
+const Layout = styled.main`
 display: grid;
 grid-template-columns: 23px auto 23px;
 grid-template-rows: 23px min-content 23px 1fr 23px;
 height: 100vh;
 
 `
-const StyledForm = styled.form`
+const Form = styled.form`
   grid-column: 2;
   grid-row: 4;
   display: grid;
@@ -86,7 +86,7 @@ const StyledForm = styled.form`
   }
 `
 
-const StyledSplashSection = styled.div`
+const SplashLogo = styled.section`
 grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 2;
@@ -96,6 +96,5 @@ grid-column-start: 2;
   img {
   border-radius: 10px;
   max-width: 100%;
- 
   }
 `

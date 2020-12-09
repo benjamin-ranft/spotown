@@ -11,7 +11,7 @@ export default function WebsiteButton(webUrl) {
     )
 }
 
-const Layout = styled.button`
+const Layout = styled.a`
 display: flex;
 flex-direction: column;
 align-items: center;
