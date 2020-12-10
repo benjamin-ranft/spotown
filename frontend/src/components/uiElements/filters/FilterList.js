@@ -12,6 +12,16 @@ export default function FilterList({selectedChips, chips, setSelectedChips}){
         }
     };
 
+    const unselectedStyle = {
+        backgroundColor: "#EAEBEA",
+        color: "#001514",
+    }
+
+    const selectedStyle =  {
+        backgroundColor: "#00B17C",
+        color: "#fff",
+    }
+
     return(
         <>
             {chips?.map((chip) => (
@@ -19,7 +29,7 @@ export default function FilterList({selectedChips, chips, setSelectedChips}){
                     key={chip.value}
                     label={chip.name}
                     value={chip.value}
-                    color={selectedChips.includes(chip.value)?"primary":"secondary"}
+                    style={selectedChips.includes(chip.value)? selectedStyle : unselectedStyle}
                     onClick={()=>handleClick(chip.value)}/>
             ))}
         </>
