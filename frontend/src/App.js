@@ -10,15 +10,12 @@ import DiscoveryDetails from "./components/pages/DiscoveryDetails";
 import UpdateDiscoveryPage from "./components/pages/UpdateDiscoveryPage";
 import AddDiscoveryPreSelect from "./components/pages/AddDiscoveryPreSelect";
 
-const reload = () => window.location.reload();
-
 function App() {
   return (
     <UserContextProvider>
         <DiscoveriesContextProvider>
             <Switch>
                 <Route path="/login" component={LoginPage}/>
-                <Route path="/.well-known/acme-challenge/akqWF_BgpSl3lJ_g_7qkQ5NLzjRlqbBlA58qI0R7nVU" onEnter={reload}/>
                 <ProtectedRoute path="/discoveries" component={Discoveries}/>
                 <ProtectedRoute path="/discoveries" component={Discoveries}/>
                 <ProtectedRoute path="/new/select" component={AddDiscoveryPreSelect}/>
