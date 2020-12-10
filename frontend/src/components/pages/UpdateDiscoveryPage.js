@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import DiscoveriesContext from "../../contexts/DiscoveriesContext";
 import {useHistory, useParams} from "react-router-dom";
 import DiscoveryForm from "../uiElements/DiscoveryForm";
@@ -13,10 +13,18 @@ export default function UpdateDiscoveryPage() {
     const discovery = discoveries.find((discovery) => discovery.id === id)
     const [discoveryData, setDiscoveryData] = useState(discovery);
 
+    useEffect(()=>{
+        setDiscoveryData(discovery);
+    }, [discovery])
+
+    if(!discoveryData){
+        return "loading";
+    }
+
 
     return(
         <Layout>
-            <Thumbnail thumbnail={discovery.thumbnail}>
+            <Thumbnail thumbnail={discovery?.thumbnail}>
                     <Header>
                             <BackButton onClick={handleGoBack}/>
                             <h1>EDIT</h1>

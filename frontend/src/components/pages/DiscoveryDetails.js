@@ -10,14 +10,13 @@ import WebsiteButton from "../buttons/WebsiteButton";
 import {VscLocation, RiCheckboxMultipleFill} from "react-icons/all";
 import useCopyToClipboard from "../utils/useCopyToClipboard";
 
-
 export default function DiscoveryDetails(){
     const {discoveries} = useContext(DiscoveriesContext);
     const {id} = useParams();
     const history = useHistory();
     const discovery = discoveries.find((discovery)=> discovery.id === id);
     const [isCopied, handleCopy] = useCopyToClipboard(5000);
-    const sharingLink = "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + discovery.place_id;
+    const sharingLink = "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + discovery?.place_id;
 
     return !discovery ? null : (
         <Layout>
@@ -40,9 +39,9 @@ export default function DiscoveryDetails(){
                 </AddressAndActions>
                     <DiscoveryName>{discovery.name.substring(0, 50)}</DiscoveryName>
                 <ContactLinks>
-                    <DirectionsButton href={discovery.directions}/>
+                    <DirectionsButton onClick={()=> window.open(discovery.directions)}/>
                     <CallButton href={"tel:" + discovery.phoneNumber}/>
-                    <WebsiteButton href={discovery.webUrl}/>
+                    <WebsiteButton href={()=> window.open(discovery.webUrl)}/>
                 </ContactLinks>
                 <Notes>
                     <h3>Notes</h3>
