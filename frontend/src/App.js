@@ -16,7 +16,7 @@ function App() {
         <DiscoveriesContextProvider>
             <Switch>
                 <Route path="/login" component={LoginPage}/>
-                <Route path={"/.well-known/acme-challenge/6hNbdx3SvaZpvY7ZEHJXpo8lfqJVMBRQzBhT4WF__5o"}/>
+                <Route path="/.well-known/acme-challenge/RrIMsisnk92IPILP05bs02ompB0QVE4vXlqTUfNRjr8"/>
                 <ProtectedRoute path="/discoveries" component={Discoveries}/>
                 <ProtectedRoute path="/discoveries" component={Discoveries}/>
                 <ProtectedRoute path="/new/select" component={AddDiscoveryPreSelect}/>

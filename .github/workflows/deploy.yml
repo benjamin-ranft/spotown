@@ -17,6 +17,7 @@ jobs:
         run: |
           cd frontend
           npm install
+          echo "REACT_APP_GOOGLE_MAPS_API_KEY=${{ secrets.REACT_APP_GOOGLE_MAPS_API_KEY }}" > .env
       - name: run build
         run: |
           cd frontend
