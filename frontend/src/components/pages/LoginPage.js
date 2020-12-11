@@ -43,6 +43,10 @@ export default function LoginPage() {
                 {error && <p>{error}</p>}
                 <button>Login</button>
             </Form>
+            <LegalLinks>
+                <a href="/imprint">Imprint</a>
+                <a href="/privacy">Privacy</a>
+            </LegalLinks>
         </Layout>
     );
 
@@ -59,10 +63,26 @@ function handleSubmit(event) {
 
 }
 
+const LegalLinks = styled.section`
+display: grid;
+grid-template-columns: 1fr 1fr;
+align-items: center;
+grid-row: 6;
+grid-column: 2;
+justify-self: center;
+
+a{
+padding: 0 7px;
+text-decoration: none;
+color: var(--dark-grey);
+font-size: 14px;
+}
+`
+
 const Layout = styled.main`
 display: grid;
 grid-template-columns: 23px auto 23px;
-grid-template-rows: 23px min-content 23px 1fr 23px;
+grid-template-rows: 23px min-content 23px 1fr 10px min-content 23px;
 height: 100vh;
 
 `

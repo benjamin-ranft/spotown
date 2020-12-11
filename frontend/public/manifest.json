@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Spotown",
+  "name": "Your favourite spots in town",
   "icons": [
     {
       "src": "favicon.ico",
