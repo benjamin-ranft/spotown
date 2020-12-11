@@ -192,6 +192,7 @@ padding: 10px;
 const SearchBox = styled.aside`
 grid-column: 2;
 justify-self: center;
+outline: none;
 `
 
 const SearchInput = styled(ComboboxInput)`
@@ -200,6 +201,7 @@ background-color: var(--light-grey);
 border-color: transparent;
 padding: 5px 10px;
 width: 70vw;
+outline:none;
 `
 
 const LocateLayout = styled.section`
@@ -211,6 +213,7 @@ right: 0;
 const LocateButton = styled.button`
 background-color: transparent;
 border-color: transparent;
+outline:none;
 `
 
 const LocateIcon = styled(MdMyLocation)`

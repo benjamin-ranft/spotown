@@ -83,6 +83,7 @@ const Form = styled.form`
   border: none;
   font-weight: bold;
   font-size: var(--size-l); 
+  outline: none;
   }
   
   label{

@@ -189,6 +189,7 @@ right: 0;
 const LocateButton = styled.button`
 background-color: transparent;
 border-color: transparent;
+outline: none;
 `
 
 const LocatorIcon = styled(MdMyLocation)`
