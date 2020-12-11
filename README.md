@@ -5,7 +5,7 @@ Spotown is the all-in-one web app to save, organise and share your favourite loc
 
 ### Live Demo
 You can try out the app on: https://spotown.de (Test Username: "ben" / Password: "1234")
-![](https://benjaminranft.com/wp-content/uploads/2020/12/Spotown_Screenrecording_Final_Benjamin_Ranft.gif)
+![](Spotown_Screenrecording_Final_Benjamin_Ranft.gif)
 
 ### Tech Stack
 Java / Maven / Spring Web / Spring Security / JWT / JUnit / MongoDB / JavaScript / React / Styled-Components / Google Maps API / Docker / Git / Figma
