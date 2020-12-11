@@ -55,7 +55,7 @@ export default function Imprint (){
             </Content>
             </Layout>
         <ReturnButton onClick={handleGoBack}>
-            Return to Login
+            Go back
         </ReturnButton>
 </>
     )
