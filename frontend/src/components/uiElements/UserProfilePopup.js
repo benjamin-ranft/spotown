@@ -1,49 +1,48 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import styled from "styled-components/macro";
 import UserContext from "../../contexts/UserContext";
-import {useHistory} from "react-router-dom";
-import {MdClose} from "react-icons/md";
+import { useHistory } from "react-router-dom";
+import { MdClose } from "react-icons/md";
 
-export default function UserProfilePopup ({handleClose}){
+export default function UserProfilePopup({ handleClose }) {
+  const { userData, logout } = useContext(UserContext);
+  const history = useHistory();
 
-    const {userData, logout} = useContext(UserContext);
-    const history = useHistory();
+  return (
+    <PopupBackdrop onClick={handleClose}>
+      <Popup>
+        <CloseIcon onClick={handleClose} />
+        <ProfileImage profileImage="/images/spotown_user_placeHolder_red.png" />
+        <Username>{userData.sub}</Username>
+        <Logout onClick={handleLogout}>Log out</Logout>
+      </Popup>
+    </PopupBackdrop>
+  );
 
-    return(
-        <PopupBackdrop onClick={handleClose}>
-            <Popup>
-                <CloseIcon onClick={handleClose}/>
-                    <ProfileImage profileImage="/images/spotown_user_placeHolder_red.png"/>
-                    <Username>{userData.sub}</Username>
-                    <Logout onClick={handleLogout}>Log out</Logout>
-            </Popup>
-        </PopupBackdrop>
-    )
-
-    function handleLogout (){
-        logout();
-        history.push("/login")
-    }
+  function handleLogout() {
+    logout();
+    history.push("/login");
+  }
 }
 
 const ProfileImage = styled.aside`
-grid-column: 2;
-grid-row: 2;
-height: 200px;
-width: 200px;
-border-radius: 200px;
-background-image: url(${(props) => props.profileImage});
-background-repeat: no-repeat;
-background-size: cover;
-justify-self: center;
-`
+  grid-column: 2;
+  grid-row: 2;
+  height: 200px;
+  width: 200px;
+  border-radius: 200px;
+  background-image: url(${(props) => props.profileImage});
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-self: center;
+`;
 
 const Username = styled.h1`
-grid-column: 2;
-grid-row: 3;
-justify-self: center;
-font-size: var(--size-xl);
-`
+  grid-column: 2;
+  grid-row: 3;
+  justify-self: center;
+  font-size: var(--size-xl);
+`;
 
 const Logout = styled.button`
   grid-column: 2;
@@ -57,18 +56,18 @@ const Logout = styled.button`
   width: 100%;
   border: none;
   font-weight: bold;
-  font-size: var(--size-l); 
-`
+  font-size: var(--size-l);
+`;
 
 const PopupBackdrop = styled.section`
-position: fixed;
+  position: fixed;
   background: #00000050;
   width: 100%;
   height: 100vh;
   top: 0;
   left: 0;
   z-index: 97;
-`
+`;
 
 const Popup = styled.section`
   display: grid;
@@ -86,7 +85,7 @@ const Popup = styled.section`
   padding: 20px;
   overflow: auto;
   z-index: 98;
-`
+`;
 
 const CloseIcon = styled(MdClose)`
   grid-column: 3;
@@ -96,5 +95,4 @@ const CloseIcon = styled(MdClose)`
   color: var(--darkest-grey);
   font-size: 40px;
   z-index: 99;
-`
-
+`;

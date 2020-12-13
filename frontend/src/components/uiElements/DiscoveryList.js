@@ -1,32 +1,37 @@
-import React from 'react';
-import {useHistory} from "react-router-dom";
-import styled from 'styled-components/macro';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components/macro";
 import Discovery from "./Discovery";
 
-export default function DiscoveryList({searchedDiscoveries, filters}) {
+export default function DiscoveryList({ searchedDiscoveries, filters }) {
+  const history = useHistory();
+  const discoveries = searchedDiscoveries
+    .map((discovery) => discovery)
+    .reverse();
+  const tags = filters;
+  const filteredDiscoveries = discoveries.filter((d) =>
+    d.tags.some((t) => tags.includes(t))
+  );
 
-    const history = useHistory();
-    const discoveries = searchedDiscoveries.map(discovery => discovery).reverse();
-    const tags = filters;
-    const filteredDiscoveries = discoveries.filter(d => d.tags.some(t => tags.includes(t)))
-
-    return (
-            <List>
-                {filters.length > "0" ? filteredDiscoveries?.map((discovery) => (
-                    <li key={discovery.id}>
-                        <div onClick={() => history.push(`/discovery/${discovery.id}`)}>
-                            <Discovery discovery={discovery}/>
-                        </div>
-                    </li>
-                )) : discoveries?.map((discovery) => (
-                        <li key={discovery.id}>
-                            <div onClick={() => history.push(`/discovery/${discovery.id}`)}>
-                                <Discovery discovery={discovery}/>
-                            </div>
-                        </li>
-                    ))}
-            </List>
-        );
+  return (
+    <List>
+      {filters.length > "0"
+        ? filteredDiscoveries?.map((discovery) => (
+            <li key={discovery.id}>
+              <div onClick={() => history.push(`/discovery/${discovery.id}`)}>
+                <Discovery discovery={discovery} />
+              </div>
+            </li>
+          ))
+        : discoveries?.map((discovery) => (
+            <li key={discovery.id}>
+              <div onClick={() => history.push(`/discovery/${discovery.id}`)}>
+                <Discovery discovery={discovery} />
+              </div>
+            </li>
+          ))}
+    </List>
+  );
 }
 
 const List = styled.ul`
@@ -40,10 +45,10 @@ const List = styled.ul`
   grid-auto-rows: min-content;
   gap: var(--size-l);
   margin: 0;
-  
+
   li:last-child:after {
-  content: '';
-  display: block;
-  height: 40px;
-}
+    content: "";
+    display: block;
+    height: 40px;
+  }
 `;

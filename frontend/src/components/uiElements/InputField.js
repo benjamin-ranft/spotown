@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/macro";
 
 export default function InputField({ children, ...rest }) {
-    return <Input {...rest}>{children}</Input>;
+  return <Input {...rest}>{children}</Input>;
 }
 
 const Input = styled.input`
@@ -19,5 +19,5 @@ const Input = styled.input`
 
   :focus {
     outline: none;
-}
-`
+  }
+`;
