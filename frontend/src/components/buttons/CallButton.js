@@ -2,7 +2,7 @@ import React from "react";
 import {MdPhone} from "react-icons/md";
 import styled from "styled-components/macro";
 
-export default function CallButton(phoneNumber) {
+export default function CallButton({phoneNumber}) {
     return(
         <Layout href={phoneNumber}>
             <CallIcon/>

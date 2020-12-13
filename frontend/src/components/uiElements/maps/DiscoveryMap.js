@@ -1,10 +1,9 @@
-import React, {useCallback, useContext, useRef} from "react";
+import React, {useCallback, useRef} from "react";
 import {useHistory} from "react-router-dom";
 import {GoogleMap, Marker, useLoadScript, InfoWindow} from "@react-google-maps/api";
 import {mapStyles} from "./mapStyles";
 import TimeAgo from "react-timeago/lib";
 import styled from "styled-components/macro";
-import DiscoveriesContext from "../../../contexts/DiscoveriesContext";
 import {MdMyLocation} from "react-icons/md";
 
 const libraries = ["places"];
@@ -24,16 +23,18 @@ const options = {
 }
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-export default function DiscoveryMap(){
+export default function DiscoveryMap(searchedDiscoveries, filters){
 
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: key, version:'3.42.9',
         libraries,
     });
 
-    const {discoveries} = useContext(DiscoveriesContext);
-    const [selected, setSelected] = React.useState(null);
     const history = useHistory();
+    const discoveries = searchedDiscoveries.map(discovery => discovery).reverse();
+    const tags = filters;
+    const filteredDiscoveries = discoveries.filter(d => d.tags.some(t => tags.includes(t)))
+    const [selected, setSelected] = React.useState(null);
 
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
@@ -58,7 +59,7 @@ export default function DiscoveryMap(){
                 onLoad={onMapLoad}
             >
             <Locate panTo={panTo}/>
-                {discoveries.map((discovery) => (
+                {filters.length > "0" ? filteredDiscoveries.map((discovery) => (
                <Marker
                    key={discovery.id}
                    position={{lat: discovery.lat, lng: discovery.lng}}
@@ -70,7 +71,20 @@ export default function DiscoveryMap(){
                        setSelected(discovery);
                    }}
                />
-               ))}
+               )) : discoveries?.map((discovery) => (
+                    <Marker
+                        key={discovery.id}
+                        position={{lat: discovery.lat, lng: discovery.lng}}
+                        icon={{
+                            url: "./images/spotown_map_marker.png",
+                            scaledSize: new window.google.maps.Size(32,52),
+                        }}
+                        onClick={() => {
+                            setSelected(discovery);
+                        }}
+                    />
+                    ))
+                }
 
                 {selected ? (
                     <InfoWindow

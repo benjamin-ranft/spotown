@@ -7,6 +7,7 @@ import GlobalStyle from "./globalStyle";
 import theme from "./theme";
 import {ThemeProvider} from "@material-ui/core";
 
+
 ReactDOM.render(
   <React.StrictMode><ThemeProvider theme={theme}>
       <Router>

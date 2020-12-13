@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import styled from "styled-components/";
 import InputField from "../uiElements/InputField";
 
+
 const initialState = {
     username: "",
     password: "",
@@ -84,6 +85,7 @@ display: grid;
 grid-template-columns: 23px auto 23px;
 grid-template-rows: 23px min-content 23px 1fr 10px min-content 23px;
 height: 100vh;
+
 
 `
 const Form = styled.form`
