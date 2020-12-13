@@ -17,7 +17,7 @@ export default function DiscoveryDetails(){
     const discovery = discoveries.find((discovery)=> discovery.id === id);
     const [isCopied, handleCopy] = useCopyToClipboard(5000);
     const sharingLink = "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + discovery?.place_id;
-
+console.log(discovery);
     return !discovery ? null : (
         <Layout>
             <BackgroundImage thumbnail={discovery.thumbnail}>
@@ -40,8 +40,8 @@ export default function DiscoveryDetails(){
                     <DiscoveryName>{discovery.name.substring(0, 50)}</DiscoveryName>
                 <ContactLinks>
                     <DirectionsButton onClick={()=> window.open(discovery.directions)}/>
-                    <CallButton href={"tel:" + discovery.phoneNumber}/>
-                    <WebsiteButton href={()=> window.open(discovery.webUrl)}/>
+                    <CallButton phoneNumber={"tel:" + discovery.phoneNumber}/>
+                    <WebsiteButton onClick={()=> window.open(discovery.webUrl)}/>
                 </ContactLinks>
                 <Notes>
                     <h3>Notes</h3>

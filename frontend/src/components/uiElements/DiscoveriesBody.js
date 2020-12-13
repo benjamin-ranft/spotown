@@ -7,7 +7,7 @@ function useQuery (){
     return new URLSearchParams(useLocation().search)
 }
 
-export default function DiscoveriesBody ({searchedDiscoveries, searchTerm, filters}){
+export default function DiscoveriesBody ({searchedDiscoveries, filters}){
 
     const query = useQuery();
     const view = query.get("view");
@@ -18,7 +18,7 @@ export default function DiscoveriesBody ({searchedDiscoveries, searchTerm, filte
             <DiscoveryList searchedDiscoveries={searchedDiscoveries} filters={filters}/>
             }
             {view === "map" &&
-            <DiscoveryMap searchedDiscoveries={searchedDiscoveries} searchTerm={searchTerm} filters={filters}/>
+            <DiscoveryMap searchedDiscoveries={searchedDiscoveries} filters={filters}/>
             }
         </>
     )
