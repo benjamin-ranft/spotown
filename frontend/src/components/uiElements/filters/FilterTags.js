@@ -1,33 +1,35 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import FilterList from "./FilterList";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
 
-        '& > *': {
-            margin: theme.spacing(0.5),
-        },
+    "& > *": {
+      margin: theme.spacing(0.5),
     },
+  },
 }));
 
-export default function FilterTags({filters, setFilters}) {
+export default function FilterTags({ filters, setFilters }) {
+  const classes = useStyles();
 
-    const classes = useStyles();
-
-    return (
-        <div className={classes.root}>
-            <FilterList chips={[
-                {name:"Food",value:"food"},
-                {name:"Drinks", value:"drinks"},
-                {name:"Shops", value:"shops"},
-                {name:"Art", value:"art"},
-                {name:"Nature", value:"nature"}]}
-                        selectedChips={filters}
-                        setSelectedChips={setFilters}/>
-        </div>
-    );
+  return (
+    <div className={classes.root}>
+      <FilterList
+        chips={[
+          { name: "Food", value: "food" },
+          { name: "Drinks", value: "drinks" },
+          { name: "Shops", value: "shops" },
+          { name: "Art", value: "art" },
+          { name: "Nature", value: "nature" },
+        ]}
+        selectedChips={filters}
+        setSelectedChips={setFilters}
+      />
+    </div>
+  );
 }
