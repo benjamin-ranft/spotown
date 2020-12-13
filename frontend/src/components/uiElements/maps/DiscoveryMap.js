@@ -23,7 +23,7 @@ const options = {
 }
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-export default function DiscoveryMap(searchedDiscoveries, filters){
+export default function DiscoveryMap({searchedDiscoveries, filters}){
 
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: key, version:'3.42.9',
