@@ -395,7 +395,10 @@ const HeaderBar = styled.div`
 `;
 
 const Layout = styled.main`
-  height: 100vh;
+  height: 100%;
+  height: -moz-available; /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  height: fill-available;
   display: grid;
   grid-template-rows: 70px min-content;
   grid-template-columns: 23px 1fr 23px;

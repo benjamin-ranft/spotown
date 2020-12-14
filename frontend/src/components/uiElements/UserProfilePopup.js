@@ -66,7 +66,7 @@ const PopupBackdrop = styled.section`
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 97;
+  z-index: 200;
 `;
 
 const Popup = styled.section`
@@ -84,7 +84,7 @@ const Popup = styled.section`
   border-radius: 10px;
   padding: 20px;
   overflow: auto;
-  z-index: 98;
+  z-index: 201;
 `;
 
 const CloseIcon = styled(MdClose)`
@@ -94,5 +94,5 @@ const CloseIcon = styled(MdClose)`
   justify-self: center;
   color: var(--darkest-grey);
   font-size: 40px;
-  z-index: 99;
+  z-index: 202;
 `;

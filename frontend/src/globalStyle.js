@@ -34,8 +34,13 @@ export default createGlobalStyle`
  
   }
   
+  html{
+ 
+  }
+  
   body {
   background-color: white;
+ 
   }
    
   input, textarea {

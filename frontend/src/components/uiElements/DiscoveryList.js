@@ -44,7 +44,7 @@ const List = styled.ul`
   display: grid;
   grid-auto-rows: min-content;
   gap: var(--size-l);
-  margin: 0;
+  margin-top: 70px;
 
   li:last-child:after {
     content: "";

@@ -48,7 +48,10 @@ export default function AddDiscoveryPreSelect() {
 const Layout = styled.main`
   display: grid;
   grid-template-rows: 23px min-content 1fr min-content 23px;
-  height: 100vh;
+  height: 100%;
+  height: -moz-available; /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  height: fill-available;
   grid-template-columns: 23px 1fr 23px;
 `;
 
@@ -75,9 +78,6 @@ const LocationSuggestions = styled.aside`
 `;
 
 const ManualAddButton = styled.a`
-  grid-column: 2;
-  grid-row: 2;
-  justify-self: center;
   background-color: white;
   padding: 10px;
   border-color: var(--dark-grey);
@@ -88,19 +88,19 @@ const ManualAddButton = styled.a`
   text-decoration: none;
   color: var(--dark-grey);
   font-weight: bold;
-  align-items: center;
-  height: min-content;
-  width: 100%;
+
   display: grid;
-  grid-template-rows: 1fr;
+  position: fixed;
+  bottom: 23px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 80%;
 `;
 
 const ButtonLayout = styled.div`
-  display: grid;
-  grid-template-columns: 0.3fr 1fr;
-  grid-row: 1;
+  display: flex;
+  flex-direction: row;
   justify-self: center;
-  width: 80%;
   align-items: center;
 `;
 

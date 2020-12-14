@@ -67,10 +67,15 @@ const Layout = styled.main`
   display: grid;
   grid-template-rows: min-content min-content;
   box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.37);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 20;
 `;
 
 const SubHeader = styled.section`
   height: 50px;
+  background-color: white;
 `;
 
 const InnerLayout = styled.section`
