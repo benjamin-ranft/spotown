@@ -82,7 +82,10 @@ const Layout = styled.main`
   display: grid;
   grid-template-columns: 23px auto 23px;
   grid-template-rows: 23px min-content 23px 1fr 10px min-content 23px;
-  height: 100vh;
+  height: 100%;
+  height: -moz-available;          /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  height: fill-available;
 `;
 const Form = styled.form`
   grid-column: 2;
@@ -110,10 +113,11 @@ const SplashLogo = styled.section`
   grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 2;
-  justify-self: center;
 
   img {
     border-radius: 10px;
-    max-width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+    display: block;
   }
 `;

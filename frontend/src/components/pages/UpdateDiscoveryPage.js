@@ -90,7 +90,10 @@ const Layout = styled.main`
   display: grid;
   grid-template-rows: 1fr min-content;
   grid-template-columns: 100%;
-  height: 100vh;
+  height: 100%;
+  height: -moz-available;          /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  height: fill-available;
 `;
 
 const Thumbnail = styled.aside`

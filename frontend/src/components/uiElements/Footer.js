@@ -35,7 +35,9 @@ export default function Footer() {
 const Layout = styled.main`
   display: grid;
   grid-gap: 30px;
-  position: relative;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 50px;
   background-color: var(--white);
