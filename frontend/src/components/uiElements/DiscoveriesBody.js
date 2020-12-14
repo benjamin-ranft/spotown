@@ -30,6 +30,4 @@ export default function DiscoveriesBody({ searchedDiscoveries, filters }) {
   );
 }
 
-const Layout = styled.main`
-
-`
+const Layout = styled.main``;

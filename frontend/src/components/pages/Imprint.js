@@ -125,8 +125,8 @@ const ReturnButton = styled.a`
 
 const Layout = styled.main`
   height: 100%;
-  height: -moz-available;          /* WebKit-based browsers will ignore this. */
-  height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  height: -moz-available; /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
   height: fill-available;
   padding: 23px;
   display: grid;

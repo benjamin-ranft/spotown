@@ -83,8 +83,8 @@ const Layout = styled.main`
   grid-template-columns: 23px auto 23px;
   grid-template-rows: 23px min-content 23px 1fr 10px min-content 23px;
   height: 100%;
-  height: -moz-available;          /* WebKit-based browsers will ignore this. */
-  height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  height: -moz-available; /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
   height: fill-available;
 `;
 const Form = styled.form`

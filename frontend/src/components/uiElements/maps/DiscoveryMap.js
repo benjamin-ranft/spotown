@@ -153,14 +153,14 @@ function Locate({ panTo }) {
 }
 
 const Layout = styled.main`
- height: fill-available;
-  height: -moz-available;          /* WebKit-based browsers will ignore this. */
-  height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  height: fill-available;
+  height: -moz-available; /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
   top: 70px;
   height: calc(100vh - 120px);
   bottom: 70px;
   position: fixed;
-`
+`;
 
 const Thumbnail = styled.aside`
   border-radius: 10px 10px 0 0;

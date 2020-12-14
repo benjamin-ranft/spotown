@@ -91,8 +91,8 @@ const Layout = styled.main`
   grid-template-rows: 1fr min-content;
   grid-template-columns: 100%;
   height: 100%;
-  height: -moz-available;          /* WebKit-based browsers will ignore this. */
-  height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  height: -moz-available; /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
   height: fill-available;
 `;
 
