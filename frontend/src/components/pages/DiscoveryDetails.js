@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import styled from "styled-components/macro";
 import { MdKeyboardArrowLeft, MdShare } from "react-icons/md";
@@ -9,13 +9,12 @@ import CallButton from "../buttons/CallButton";
 import WebsiteButton from "../buttons/WebsiteButton";
 import { VscLocation, RiCheckboxMultipleFill } from "react-icons/all";
 import useCopyToClipboard from "../utils/useCopyToClipboard";
-import {useLoadScript} from "@react-google-maps/api";
-import {getDetails} from "use-places-autocomplete";
+import { useLoadScript } from "@react-google-maps/api";
+import { getDetails } from "use-places-autocomplete";
 
 const libraries = ["places"];
 
 export default function DiscoveryDetails() {
-
   const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: key,
@@ -30,35 +29,33 @@ export default function DiscoveryDetails() {
   const placeId = discovery?.place_id;
   const [isCopied, handleCopy] = useCopyToClipboard(5000);
 
-  function sharingLink(){
-    if (placeId === "manual_place_id"){
-      return "https://maps.google.com/?q=" +
-      discovery?.lat + "," + discovery?.lng;
+  function sharingLink() {
+    if (placeId === "manual_place_id") {
+      return (
+        "https://maps.google.com/?q=" + discovery?.lat + "," + discovery?.lng
+      );
     } else {
-      return "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + discovery.place_id;
+      return (
+        "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" +
+        discovery.place_id
+      );
     }
   }
 
-  const [thumbnail, setThumbnail] = useState("../images/discovery_placeholder.png");
+  const [thumbnail, setThumbnail] = useState(
+    "../images/discovery_placeholder.png"
+  );
 
   useEffect(() => {
-    if (placeId === "manual_place_id" && isLoaded){
-      setThumbnail("/images/discovery_placeholder.png")
-    }
-    else if (placeId && placeId !== "manual_place_id" && isLoaded) {
-      getDetails({placeId: placeId,
-        fields:[
-          "photos",
-        ],
-      }).then((data) =>
-          setThumbnail(
-              data.photos[0].getUrl({ maxWidth: 600, maxHeight: 600 })
-          )
-      )
+    if (placeId === "manual_place_id" && isLoaded) {
+      setThumbnail("/images/discovery_placeholder.png");
+    } else if (placeId && placeId !== "manual_place_id" && isLoaded) {
+      getDetails({ placeId: placeId, fields: ["photos"] }).then((data) =>
+        setThumbnail(data.photos[0].getUrl({ maxWidth: 600, maxHeight: 600 }))
+      );
     }
     // eslint-disable-next-line
   }, [placeId, isLoaded]);
-
 
   return !discovery ? null : (
     <Layout>
@@ -80,12 +77,17 @@ export default function DiscoveryDetails() {
         </AddressAndActions>
         <DiscoveryName>{discovery.name.substring(0, 50)}</DiscoveryName>
         <ContactLinks>
-          {discovery.directions &&
-          <DirectionsButton onClick={() => window.open(discovery.directions)} />}
-          {discovery.phoneNumber &&
-          <CallButton phoneNumber={"tel:" + discovery.phoneNumber} />}
-          {discovery.webUrl &&
-          <WebsiteButton onClick={() => window.open(discovery.webUrl)} />}
+          {discovery.directions && (
+            <DirectionsButton
+              onClick={() => window.open(discovery.directions)}
+            />
+          )}
+          {discovery.phoneNumber && (
+            <CallButton phoneNumber={"tel:" + discovery.phoneNumber} />
+          )}
+          {discovery.webUrl && (
+            <WebsiteButton onClick={() => window.open(discovery.webUrl)} />
+          )}
         </ContactLinks>
         <Notes>
           <h3>Notes</h3>

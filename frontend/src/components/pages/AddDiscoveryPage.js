@@ -17,8 +17,7 @@ const initialState = {
   lat: "",
   lng: "",
   address: "",
-  thumbnail:
-      "/images/discovery_placeholder.png",
+  thumbnail: "/images/discovery_placeholder.png",
   phoneNumber: "",
   webUrl: "",
   directions: "",

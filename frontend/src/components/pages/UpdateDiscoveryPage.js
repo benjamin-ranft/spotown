@@ -4,13 +4,12 @@ import { useHistory, useParams } from "react-router-dom";
 import DiscoveryForm from "../uiElements/DiscoveryForm";
 import styled from "styled-components/macro";
 import { MdKeyboardArrowLeft } from "react-icons/md";
-import {getDetails} from "use-places-autocomplete";
-import {useLoadScript} from "@react-google-maps/api";
+import { getDetails } from "use-places-autocomplete";
+import { useLoadScript } from "@react-google-maps/api";
 
 const libraries = ["places"];
 
 export default function UpdateDiscoveryPage() {
-
   const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: key,
@@ -23,32 +22,26 @@ export default function UpdateDiscoveryPage() {
   const { id } = useParams();
   const [discovery, setDiscovery] = useState();
   const placeId = discovery?.place_id;
-  const [thumbnail, setThumbnail] = useState("../images/discovery_placeholder.png");
-
-  useEffect(()=>{
-  setDiscovery(discoveries.find((discovery) => discovery.id === id));
-  },[discoveries, setDiscovery, id])
+  const [thumbnail, setThumbnail] = useState(
+    "../images/discovery_placeholder.png"
+  );
 
   useEffect(() => {
-    if (placeId === "manual_place_id" && isLoaded){
-      setThumbnail("/images/discovery_placeholder.png")
-    }
-    else if (placeId && placeId !== "manual_place_id" && isLoaded) {
-      getDetails({placeId: placeId,
-        fields:[
-          "photos",
-        ],
-      }).then((data) =>
-          setThumbnail(
-              data.photos[0].getUrl({ maxWidth: 600, maxHeight: 600 })
-          )
-      )
+    setDiscovery(discoveries.find((discovery) => discovery.id === id));
+  }, [discoveries, setDiscovery, id]);
+
+  useEffect(() => {
+    if (placeId === "manual_place_id" && isLoaded) {
+      setThumbnail("/images/discovery_placeholder.png");
+    } else if (placeId && placeId !== "manual_place_id" && isLoaded) {
+      getDetails({ placeId: placeId, fields: ["photos"] }).then((data) =>
+        setThumbnail(data.photos[0].getUrl({ maxWidth: 600, maxHeight: 600 }))
+      );
     }
     // eslint-disable-next-line
   }, [placeId, isLoaded]);
 
-
-  return !discovery ? null :(
+  return !discovery ? null : (
     <Layout>
       <Thumbnail thumbnail={thumbnail}>
         <Header>
@@ -101,7 +94,7 @@ export default function UpdateDiscoveryPage() {
       notes,
       tags
     );
-history.goBack();
+    history.goBack();
   }
 }
 
