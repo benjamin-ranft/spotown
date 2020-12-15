@@ -15,7 +15,7 @@ export default function DiscoveryList({ searchedDiscoveries, filters }) {
 
   return (
     <List>
-      {filters.length > "0"
+      {filters.length > 0
         ? filteredDiscoveries?.map((discovery) => (
             <li key={discovery.id}>
               <div onClick={() => history.push(`/discovery/${discovery.id}`)}>

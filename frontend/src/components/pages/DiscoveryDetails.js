@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { useParams, useHistory } from "react-router-dom";
 import styled from "styled-components/macro";
 import { MdKeyboardArrowLeft, MdShare } from "react-icons/md";
@@ -9,20 +9,50 @@ import CallButton from "../buttons/CallButton";
 import WebsiteButton from "../buttons/WebsiteButton";
 import { VscLocation, RiCheckboxMultipleFill } from "react-icons/all";
 import useCopyToClipboard from "../utils/useCopyToClipboard";
+import {useLoadScript} from "@react-google-maps/api";
+import {getDetails} from "use-places-autocomplete";
+
+const libraries = ["places"];
 
 export default function DiscoveryDetails() {
+
+  const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: key,
+    version: "3.42.9",
+    libraries,
+  });
+
   const { discoveries } = useContext(DiscoveriesContext);
   const { id } = useParams();
   const history = useHistory();
   const discovery = discoveries.find((discovery) => discovery.id === id);
+  const placeId = discovery?.place_id;
   const [isCopied, handleCopy] = useCopyToClipboard(5000);
   const sharingLink =
     "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" +
     discovery?.place_id;
-  console.log(discovery);
+  const [thumbnail, setThumbnail] = useState();
+
+  useEffect(() => {
+    if (placeId && isLoaded) {
+      getDetails({placeId: placeId,
+        fields:[
+          "photos",
+        ],
+      }).then((data) =>
+          setThumbnail(
+              data.photos[0].getUrl({ maxWidth: 600, maxHeight: 600 })
+          )
+      )
+    }
+    // eslint-disable-next-line
+  }, [placeId, isLoaded]);
+
+
   return !discovery ? null : (
     <Layout>
-      <BackgroundImage thumbnail={discovery.thumbnail}>
+      <BackgroundImage thumbnail={thumbnail}>
         <Header>
           <BackButton onClick={handleCancel} />
           <ShareButton onClick={() => handleCopy(sharingLink)}>

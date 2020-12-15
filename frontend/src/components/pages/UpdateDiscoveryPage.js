@@ -4,25 +4,46 @@ import { useHistory, useParams } from "react-router-dom";
 import DiscoveryForm from "../uiElements/DiscoveryForm";
 import styled from "styled-components/macro";
 import { MdKeyboardArrowLeft } from "react-icons/md";
+import {getDetails} from "use-places-autocomplete";
+import {useLoadScript} from "@react-google-maps/api";
+
+const libraries = ["places"];
 
 export default function UpdateDiscoveryPage() {
+
+  const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: key,
+    version: "3.42.9",
+    libraries,
+  });
+
   const { discoveries, update } = useContext(DiscoveriesContext);
   const history = useHistory();
   const { id } = useParams();
-  const discovery = discoveries.find((discovery) => discovery.id === id);
-  const [discoveryData, setDiscoveryData] = useState(discovery);
+  const [discovery, setDiscovery] = useState(discoveries.find((discovery) => discovery.id === id));
+  const placeId = discovery?.place_id;
+  const [thumbnail, setThumbnail] = useState();
 
   useEffect(() => {
-    setDiscoveryData(discovery);
-  }, [discovery]);
+    if (placeId && isLoaded) {
+      getDetails({placeId: placeId,
+        fields:[
+          "photos",
+        ],
+      }).then((data) =>
+          setThumbnail(
+              data.photos[0].getUrl({ maxWidth: 600, maxHeight: 600 })
+          )
+      )
+    }
+    // eslint-disable-next-line
+  }, [placeId, isLoaded]);
 
-  if (!discoveryData) {
-    return "loading";
-  }
 
-  return (
+  return !discovery ? null :(
     <Layout>
-      <Thumbnail thumbnail={discovery?.thumbnail}>
+      <Thumbnail thumbnail={thumbnail}>
         <Header>
           <BackButton onClick={handleGoBack} />
           <h1>EDIT</h1>
@@ -31,8 +52,8 @@ export default function UpdateDiscoveryPage() {
       <Form>
         <DiscoveryForm
           onSave={handleSave}
-          discovery={discoveryData}
-          setDiscovery={setDiscoveryData}
+          discovery={discovery}
+          setDiscovery={setDiscovery}
         />
       </Form>
     </Layout>
@@ -90,10 +111,7 @@ const Layout = styled.main`
   display: grid;
   grid-template-rows: 1fr min-content;
   grid-template-columns: 100%;
-  height: 100%;
-  height: -moz-available; /* WebKit-based browsers will ignore this. */
-  height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
-  height: fill-available;
+  height: 100vh;
 `;
 
 const Thumbnail = styled.aside`

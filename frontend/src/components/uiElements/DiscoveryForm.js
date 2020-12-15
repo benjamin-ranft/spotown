@@ -68,7 +68,7 @@ export default function DiscoveryForm({ onSave, discovery, setDiscovery }) {
   }
 }
 
-const Form = styled.form`
+const Form = styled.div`
   display: grid;
   grid-template-rows: repeat(7, min-content);
   row-gap: 10px;
