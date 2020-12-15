@@ -21,10 +21,13 @@ export default function UpdateDiscoveryPage() {
   const { discoveries, update } = useContext(DiscoveriesContext);
   const history = useHistory();
   const { id } = useParams();
-  const [discovery, setDiscovery] = useState(discoveries.find((discovery) => discovery.id === id));
+  const [discovery, setDiscovery] = useState();
   const placeId = discovery?.place_id;
   const [thumbnail, setThumbnail] = useState("../images/discovery_placeholder.png");
 
+  useEffect(()=>{
+  setDiscovery(discoveries.find((discovery) => discovery.id === id));
+  },[discoveries, setDiscovery, id])
 
   useEffect(() => {
     if (placeId && isLoaded) {
@@ -50,13 +53,13 @@ export default function UpdateDiscoveryPage() {
           <h1>EDIT</h1>
         </Header>
       </Thumbnail>
-      <Form>
+      <FormSection>
         <DiscoveryForm
           onSave={handleSave}
           discovery={discovery}
           setDiscovery={setDiscovery}
         />
-      </Form>
+      </FormSection>
     </Layout>
   );
 
@@ -95,7 +98,7 @@ export default function UpdateDiscoveryPage() {
       notes,
       tags
     );
-    history.goBack();
+history.goBack();
   }
 }
 
@@ -122,7 +125,7 @@ const Thumbnail = styled.aside`
   margin-bottom: -20px;
 `;
 
-const Form = styled.form`
+const FormSection = styled.section`
   background-color: var(--white);
   border-radius: 25px 25px 0 0;
   box-shadow: var(--center-box-shadow);

@@ -32,7 +32,7 @@ export default function DiscoveryDetails() {
   const sharingLink =
     "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" +
     discovery?.place_id;
-  const [thumbnail, setThumbnail] = useState();
+  const [thumbnail, setThumbnail] = useState("../images/discovery_placeholder.png");
 
   useEffect(() => {
     if (placeId && isLoaded) {
@@ -179,6 +179,7 @@ const BackButton = styled(MdKeyboardArrowLeft)`
   grid-column: 2;
   grid-row: 2;
 `;
+
 const ShareButton = styled.a`
   grid-column: 3;
   grid-row: 2;
