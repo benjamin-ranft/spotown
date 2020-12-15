@@ -18,7 +18,10 @@ export default function Discovery({ discovery }) {
     const [thumbnail, setThumbnail] = useState("/images/discovery_placeholder.png");
 
     useEffect(() => {
-        if (placeId && isLoaded) {
+        if (placeId === "manual_place_id" && isLoaded){
+            setThumbnail("/images/discovery_placeholder.png")
+        }
+        else if (placeId && placeId !== "manual_place_id" && isLoaded) {
             getDetails({placeId: placeId,
                 fields:[
                     "photos",

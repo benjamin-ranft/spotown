@@ -1,4 +1,4 @@
-import React, {useCallback, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import { useHistory } from "react-router-dom";
 import {
   GoogleMap,
@@ -10,6 +10,7 @@ import { mapStyles } from "./mapStyles";
 import TimeAgo from "react-timeago/lib";
 import styled from "styled-components/macro";
 import { MdMyLocation } from "react-icons/md";
+import {getDetails} from "use-places-autocomplete";
 
 const libraries = ["places"];
 
@@ -44,6 +45,8 @@ export default function DiscoveryMap({ searchedDiscoveries, filters }) {
     d.tags.some((t) => tags.includes(t))
   );
   const [selected, setSelected] = useState(null);
+  const placeId = selected?.place_id;
+  const [thumbnail, setThumbnail] = useState("../images/discovery_placeholder.png");
 
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
@@ -54,6 +57,24 @@ export default function DiscoveryMap({ searchedDiscoveries, filters }) {
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(14);
   }, []);
+
+  useEffect(() => {
+    if (placeId === "manual_place_id" && isLoaded){
+      setThumbnail("/images/discovery_placeholder.png")
+    }
+    else if (placeId && placeId !== "manual_place_id" && isLoaded) {
+      getDetails({placeId: placeId,
+        fields:[
+          "photos",
+        ],
+      }).then((data) =>
+          setThumbnail(
+              data.photos[0].getUrl({ maxWidth: 600, maxHeight: 600 })
+          )
+      )
+    }
+    // eslint-disable-next-line
+  }, [placeId, isLoaded]);
 
   if (loadError) return "Error loading map";
   if (!isLoaded) return "Loading Maps";
@@ -109,7 +130,7 @@ export default function DiscoveryMap({ searchedDiscoveries, filters }) {
               }}
             >
               <Thumbnail>
-                <img src={selected.thumbnail} alt={selected.name} />
+                <img src={thumbnail} alt={selected.name} />
               </Thumbnail>
               <InfoContent>
                 <NameAndAddress>

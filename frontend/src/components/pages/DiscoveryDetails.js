@@ -29,13 +29,23 @@ export default function DiscoveryDetails() {
   const discovery = discoveries.find((discovery) => discovery.id === id);
   const placeId = discovery?.place_id;
   const [isCopied, handleCopy] = useCopyToClipboard(5000);
-  const sharingLink =
-    "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" +
-    discovery?.place_id;
+
+  function sharingLink(){
+    if (placeId === "manual_place_id"){
+      return "https://maps.google.com/?q=" +
+      discovery?.lat + "," + discovery?.lng;
+    } else {
+      return "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=" + discovery.place_id;
+    }
+  }
+
   const [thumbnail, setThumbnail] = useState("../images/discovery_placeholder.png");
 
   useEffect(() => {
-    if (placeId && isLoaded) {
+    if (placeId === "manual_place_id" && isLoaded){
+      setThumbnail("/images/discovery_placeholder.png")
+    }
+    else if (placeId && placeId !== "manual_place_id" && isLoaded) {
       getDetails({placeId: placeId,
         fields:[
           "photos",
@@ -55,7 +65,7 @@ export default function DiscoveryDetails() {
       <BackgroundImage thumbnail={thumbnail}>
         <Header>
           <BackButton onClick={handleCancel} />
-          <ShareButton onClick={() => handleCopy(sharingLink)}>
+          <ShareButton onClick={() => handleCopy(sharingLink())}>
             {!isCopied ? <ShareIcon /> : <CopiedIcon />}
           </ShareButton>
         </Header>
@@ -70,9 +80,12 @@ export default function DiscoveryDetails() {
         </AddressAndActions>
         <DiscoveryName>{discovery.name.substring(0, 50)}</DiscoveryName>
         <ContactLinks>
-          <DirectionsButton onClick={() => window.open(discovery.directions)} />
-          <CallButton phoneNumber={"tel:" + discovery.phoneNumber} />
-          <WebsiteButton onClick={() => window.open(discovery.webUrl)} />
+          {discovery.directions &&
+          <DirectionsButton onClick={() => window.open(discovery.directions)} />}
+          {discovery.phoneNumber &&
+          <CallButton phoneNumber={"tel:" + discovery.phoneNumber} />}
+          {discovery.webUrl &&
+          <WebsiteButton onClick={() => window.open(discovery.webUrl)} />}
         </ContactLinks>
         <Notes>
           <h3>Notes</h3>

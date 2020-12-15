@@ -30,7 +30,10 @@ export default function UpdateDiscoveryPage() {
   },[discoveries, setDiscovery, id])
 
   useEffect(() => {
-    if (placeId && isLoaded) {
+    if (placeId === "manual_place_id" && isLoaded){
+      setThumbnail("/images/discovery_placeholder.png")
+    }
+    else if (placeId && placeId !== "manual_place_id" && isLoaded) {
       getDetails({placeId: placeId,
         fields:[
           "photos",
