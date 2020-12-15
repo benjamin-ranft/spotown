@@ -136,7 +136,7 @@ public class DiscoveryControllerIntegrationTest {
 }
 
 @Test
-@DisplayName("The getDiscoveries method should return the correct discovery list")
+@DisplayName("The getDiscoveries method should return the correct discoveryList")
 public void  getDiscoveriesTest(){
 
         //GIVEN
