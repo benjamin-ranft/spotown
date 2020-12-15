@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import TimeAgo from "react-timeago/lib";
+import { useLoadScript } from "@react-google-maps/api";
+import { getDetails } from "use-places-autocomplete";
+
+const libraries = ["places"];
 
 export default function Discovery({ discovery }) {
-  return (
+  const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: key,
+    version: "3.42.9",
+    libraries,
+  });
+  const placeId = discovery?.place_id;
+  const [thumbnail, setThumbnail] = useState(
+    "/images/discovery_placeholder.png"
+  );
+
+  useEffect(() => {
+    if (placeId === "manual_place_id" && isLoaded) {
+      setThumbnail("/images/discovery_placeholder.png");
+    } else if (placeId && placeId !== "manual_place_id" && isLoaded) {
+      getDetails({ placeId: placeId, fields: ["photos"] }).then((data) =>
+        setThumbnail(data.photos[0].getUrl({ maxWidth: 600, maxHeight: 600 }))
+      );
+    }
+    // eslint-disable-next-line
+  }, [placeId, isLoaded]);
+
+  return !discovery ? null : (
     <Layout>
       <Thumbnail>
-        <img src={discovery.thumbnail} alt={discovery.name} />
+        <img src={thumbnail} alt={discovery.name} />
       </Thumbnail>
       <DiscoveryPreview>
         <NameAndAddress>

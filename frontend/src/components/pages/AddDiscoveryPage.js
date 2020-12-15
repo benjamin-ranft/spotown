@@ -17,8 +17,7 @@ const initialState = {
   lat: "",
   lng: "",
   address: "",
-  thumbnail:
-    "https://benjaminranft.com/wp-content/uploads/2020/12/discovery_placeholder.png",
+  thumbnail: "/images/discovery_placeholder.png",
   phoneNumber: "",
   webUrl: "",
   directions: "",
@@ -41,8 +40,7 @@ export default function AddDiscoveryPage() {
   const { create } = useContext(DiscoveriesContext);
   const history = useHistory();
   const [discoveryData, setDiscoveryData] = useState(initialState);
-  const placeholder =
-    "https://benjaminranft.com/wp-content/uploads/2020/12/discovery_placeholder.png";
+  const placeholder = "/images/discovery_placeholder.png";
 
   useEffect(() => {
     if (placeId && isLoaded) {
@@ -85,7 +83,6 @@ export default function AddDiscoveryPage() {
         placeId: manualPlaceId,
         fields: [
           "name",
-          "place_id",
           "geometry.location",
           "formatted_address",
           "photos",
@@ -95,7 +92,7 @@ export default function AddDiscoveryPage() {
       }).then((data) =>
         setDiscoveryData({
           ...discoveryData,
-          place_id: data.place_id,
+          place_id: "manual_place_id",
           lat: data.geometry.location.lat(),
           lng: data.geometry.location.lng(),
           address: data.formatted_address,
