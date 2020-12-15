@@ -23,7 +23,8 @@ export default function UpdateDiscoveryPage() {
   const { id } = useParams();
   const [discovery, setDiscovery] = useState(discoveries.find((discovery) => discovery.id === id));
   const placeId = discovery?.place_id;
-  const [thumbnail, setThumbnail] = useState();
+  const [thumbnail, setThumbnail] = useState("../images/discovery_placeholder.png");
+
 
   useEffect(() => {
     if (placeId && isLoaded) {

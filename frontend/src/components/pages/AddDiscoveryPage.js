@@ -18,7 +18,7 @@ const initialState = {
   lng: "",
   address: "",
   thumbnail:
-    "https://benjaminranft.com/wp-content/uploads/2020/12/discovery_placeholder.png",
+      "/images/discovery_placeholder.png",
   phoneNumber: "",
   webUrl: "",
   directions: "",
@@ -41,8 +41,7 @@ export default function AddDiscoveryPage() {
   const { create } = useContext(DiscoveriesContext);
   const history = useHistory();
   const [discoveryData, setDiscoveryData] = useState(initialState);
-  const placeholder =
-    "https://benjaminranft.com/wp-content/uploads/2020/12/discovery_placeholder.png";
+  const placeholder = "/images/discovery_placeholder.png";
 
   useEffect(() => {
     if (placeId && isLoaded) {

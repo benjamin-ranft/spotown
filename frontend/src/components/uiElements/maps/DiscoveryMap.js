@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React, {useCallback, useRef, useState} from "react";
 import { useHistory } from "react-router-dom";
 import {
   GoogleMap,
@@ -43,7 +43,7 @@ export default function DiscoveryMap({ searchedDiscoveries, filters }) {
   const filteredDiscoveries = discoveries.filter((d) =>
     d.tags.some((t) => tags.includes(t))
   );
-  const [selected, setSelected] = React.useState(null);
+  const [selected, setSelected] = useState(null);
 
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
